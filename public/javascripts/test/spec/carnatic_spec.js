@@ -4,20 +4,43 @@ Screw.Unit(function() {
     var editor;
 
     before(function() {
+      $('editor').update();
       editor = new CarnaticEditor('editor', talam);
     });
 
-    it('should display the specified aksharams as textboxes', function() {
-      var textboxes = $('editor').select('input[type="text"]');
-      expect(8).to(equal, textboxes.length);
+    describe('Layout', function() {
+
+      it('should display the specified aksharams as textboxes', function() {
+        var akshrams = $('editor').select('input[type="text"]');
+        expect(talam).to(have_sum, 8);
+      });
+
+      it('aksharam textbox max lenght should be 1 by default', function() {
+        var akshrams = $('editor').select('input[type="text"]');
+        akshrams.each(function(akshram) {
+          expect(akshram).to(have_max_length, 1);
+        });
+      });
+
+      it('should correctly group the akshram based on lagu and drutham', function() {
+        var oneCompleteTalam = $('editor').select('div:nth-child(1)');
+        var laguAndDrutham = $('editor').select('div:nth-child(1) > span');
+        expect(talam.length).to(equal, laguAndDrutham.length);
+        for(var index = 0; index < laguAndDrutham.length; index++) {
+          var akshrams = laguAndDrutham[index].select('input[type="text"]');
+          expect(talam[index]).to(equal, akshrams.length);
+        }
+      });
+
     });
 
-    it('aksharam textbox max lenght should be 1', function() {
-      var textboxes = $('editor').select('input[type="text"]');
-      textboxes.each(function(textbox) {
-        expect(textbox).to(have_max_length_of, 1);
+    describe('Focus', function() {
+
+      it('next akshram only when char key is pressed', function() {
+        expect('').to(equal, 'pending');
       });
     });
+
 
   });
 });
