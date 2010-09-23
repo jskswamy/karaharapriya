@@ -33,9 +33,28 @@ var CarnaticEditor = Class.create({
   _focusNext: function(e) {
     if (e.charCode !=0 ) {
       var currentAkshram = e.element();
-      var nextAkshram = currentAkshram.next('input[type="text"]');
-      if(nextAkshram)
+      var nextAkshram = this._getNextAkshram(currentAkshram);
+
+      if(nextAkshram) {
         nextAkshram.focus();
+      }
     }
-  }
+  },
+
+  _getNextLaguOrDrutham: function(akshram) {
+    return akshram.up('span').next('span');
+  },
+
+  _getNextAkshram: function(akshram) {
+    var nextAkshram = akshram.next('input[type="text"]');
+
+    if(!nextAkshram) {
+      var nextLaguOrDrutham = this._getNextLaguOrDrutham(akshram)
+      if (nextLaguOrDrutham)
+        nextAkshram = nextLaguOrDrutham.select('input[type="text"]:first-child');
+    }
+
+    return nextAkshram;
+  },
+
 });
