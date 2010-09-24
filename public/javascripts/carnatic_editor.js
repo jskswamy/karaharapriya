@@ -6,7 +6,7 @@ var Carnatic = {
       this.domNode = $(target);
       this.talam = talam;
       this.talamLines = [];
-      this._createNewTalamLine();
+      this._focusNextTalamLine();
     },
 
     _createNewTalamLine: function() {
@@ -110,7 +110,8 @@ var Carnatic = {
     },
 
     focus: function() {
-      this.domNode.down('span > input[type="text]:first-child').focus();
+      var akshram = this.domNode.down('span > input[type="text"]:first-child');
+      akshram.focus();
     }
 
   })

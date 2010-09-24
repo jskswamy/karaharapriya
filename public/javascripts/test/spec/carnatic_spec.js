@@ -71,6 +71,15 @@ Screw.Unit(function() {
           expect(secondAkshram).to_not(equal, document.activeElement);
         });
 
+        it('should focus akshram in next lagu or drutham when the last akshram in lagu or drutham is enterted', function() {
+          var lastAkshramInFirstDrutham = editorDom.select('div:firt-child > span:first-child > input[type="text"]:last-child')[0];
+          var firstAkshramInFirstLagu = editorDom.select('div:first-child > span:nth-child(2) > input[type="text"]:first-child')[0];
+
+          var keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstDrutham);
+          keyEvent.perform(0, 65);
+          expect(firstAkshramInFirstLagu).to(equal, document.activeElement);
+        });
+
       });
 
     });
@@ -111,13 +120,12 @@ Screw.Unit(function() {
           expect(firstAkshram).to(equal, document.activeElement);
         });
 
-        it('should focus akshram in next lagu or drutham when the last akshram in lagu or drutham is enterted', function() {
-          var lastAkshramInFirstDrutham = editorDom.select('div:firt-child > span:first-child > input[type="text"]:last-child')[0];
-          var firstAkshramInFirstLagu = editorDom.select('div:first-child > span:nth-child(2) > input[type="text"]:first-child')[0];
-
-          var keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstDrutham);
+        it('show focus the first akshram of next talam line when the last akshram in the current talam line is entered', function() {
+          var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+          keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
           keyEvent.perform(0, 65);
-          expect(firstAkshramInFirstLagu).to(equal, document.activeElement);
+          var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+          expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
         });
 
       });
