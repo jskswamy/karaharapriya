@@ -12,11 +12,11 @@ Screw.Unit(function() {
 
     describe('Talam', function() {
 
-      var talamDom;
+      var talamDom = $('editor');
       var sampleTalam;
 
       before(function() {
-        talamDom = $('editor');
+        talamDom.update();
         talam = SampleTalams.Adi;
         sampleTalam = new Music.Talam(talamDom, talam);
       });
@@ -35,7 +35,7 @@ Screw.Unit(function() {
           var akshrams = talamDom.select('input[type="text"]');
           akshrams.each(function(akshram) {
             expect(akshram).to(have_max_length, 1);
-          });
+         });
         });
 
         it('should correctly group the akshram based on lagu and drutham', function() {
@@ -80,6 +80,28 @@ Screw.Unit(function() {
           var keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstDrutham);
           keyEvent.perform(0, 65);
           expect(firstAkshramInFirstLagu).to(equal, document.activeElement);
+        });
+
+      });
+
+      describe('Callback', function() {
+
+        var lastAkshramCalled = false;
+
+        before(function() {
+          talamDom.update();
+          sampleTalam = new Music.Talam(talamDom, talam, {
+            onLastAkshram: function() {
+              lastAkshramCalled = true;
+            }
+          });
+        });
+
+        it('should callback when the last akshram is entered', function() {
+          var lastAkshram = talamDom.select('div:first-child > span:last-child > input[type="text"]:last-child')[0];
+          var keyEvent = new SimulateKeyboardEvent(lastAkshram);
+          keyEvent.perform(0, 65);
+          expect(lastAkshramCalled).to(equal, true);
         });
 
       });
