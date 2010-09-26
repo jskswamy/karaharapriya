@@ -1,4 +1,4 @@
-var Carnatic = {
+var Music = {
 
   Editor: Class.create({
 
@@ -10,7 +10,7 @@ var Carnatic = {
     },
 
     _createNewTalamLine: function() {
-      var talamLine = new Carnatic.Talam(this.talam, {
+      var talamLine = new Music.Talam(this.talam, {
         onLastAksrham: this._focusNextTalamLine.bindAsEventListener(this)
       });
       this.domNode.appendChild(talamLine.domNode);
@@ -20,8 +20,9 @@ var Carnatic = {
 
     _getNextTalamLine: function(current) {
 
-      if (!current)
+      if (!current) {
         return;
+      }
 
       var nextTalamDomNode = current.domNode.next();
       var nextTalamLine;
@@ -39,11 +40,12 @@ var Carnatic = {
     },
 
     _focusNextTalamLine: function(current) {
-      nextTalamLine = this._getNextTalamLine(current);
-      if (!nextTalamLine)
+      var nextTalamLine = this._getNextTalamLine(current);
+      if (!nextTalamLine) {
         nextTalamLine = this._createNewTalamLine();
+      }
       nextTalamLine.focus();
-    },
+    }
 
   }),
 
@@ -84,7 +86,7 @@ var Carnatic = {
       var nextAkshram = akshram.next('input[type="text"]');
 
       if(!nextAkshram) {
-        var nextLaguOrDrutham = this._getNextLaguOrDrutham(akshram)
+        var nextLaguOrDrutham = this._getNextLaguOrDrutham(akshram);
         if (nextLaguOrDrutham) {
           nextAkshram = nextLaguOrDrutham.down('input[type="text"]:first-child');
         }
@@ -99,7 +101,7 @@ var Carnatic = {
     },
 
     _focusNext: function(e) {
-      if (e.charCode !=0 ) {
+      if (e.charCode !== 0 ) {
         var currentAkshram = e.element();
         var nextAkshram = this._getNextAkshram(currentAkshram);
 

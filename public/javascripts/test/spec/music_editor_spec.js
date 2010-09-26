@@ -4,7 +4,7 @@ Screw.Unit(function() {
     Adi: [4,2,2],
     Rupagam: [2,4],
     TisraJathiSutha: [3]
-  }
+  };
   var talam;
   var editor;
   var editorDom = $('editor');
@@ -12,10 +12,10 @@ Screw.Unit(function() {
   before(function() {
     editorDom.update();
     talam = SampleTalams.Adi;
-    editor = new Carnatic.Editor('editor', talam);
+    editor = new Music.Editor('editor', talam);
   });
 
-  describe('Carnatic', function() {
+  describe('Music', function() {
 
     describe('Talam', function() {
 
