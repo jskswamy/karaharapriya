@@ -5,23 +5,25 @@ Screw.Unit(function() {
     Rupagam: [2,4],
     TisraJathiSutha: [3]
   };
-  var talam;
-  var editor;
-  var editorDom = $('editor');
 
-  before(function() {
-    editorDom.update();
-    talam = SampleTalams.Adi;
-    editor = new Music.Editor('editor', talam);
-  });
+  var talam;
 
   describe('Music', function() {
 
     describe('Talam', function() {
 
+      var talamDom;
+      var sampleTalam;
+
+      before(function() {
+        talamDom = $('editor');
+        talam = SampleTalams.Adi;
+        sampleTalam = new Music.Talam(talamDom, talam);
+      });
+
       describe('Layout', function() {
-        it('should display the specified aksharams as textboxes', function() {
-          var akshrams = editorDom.select('input[type="text"]');
+        it('should display the specified akshrams as textboxes', function() {
+          var akshrams = talamDom.select('input[type="text"]');
           var sum = 0;
           talam.each(function(value) {
             sum += value;
@@ -30,15 +32,15 @@ Screw.Unit(function() {
         });
 
         it('aksharam textbox max lenght should be 1 by default', function() {
-          var akshrams = editorDom.select('input[type="text"]');
+          var akshrams = talamDom.select('input[type="text"]');
           akshrams.each(function(akshram) {
             expect(akshram).to(have_max_length, 1);
           });
         });
 
         it('should correctly group the akshram based on lagu and drutham', function() {
-          var oneCompleteTalam = editorDom.select('div:first-child');
-          var laguAndDrutham = editorDom.select('div:first-child > span');
+          var oneCompleteTalam = talamDom.select('div:first-child');
+          var laguAndDrutham = talamDom.select('div:first-child > span');
           expect(talam.length).to(equal, laguAndDrutham.length);
           for(var index = 0; index < laguAndDrutham.length; index++) {
             var akshrams = laguAndDrutham[index].select('input[type="text"]');
@@ -53,7 +55,7 @@ Screw.Unit(function() {
         var secondAkshram;
 
         before(function() {
-          akshrams = editorDom.select('div:first-child > span:first-child > input[type="text"]');
+          akshrams = talamDom.select('div:first-child > span:first-child > input[type="text"]');
           firstAkshram = akshrams[0];
           secondAkshram = akshrams[1];
         });
@@ -72,8 +74,8 @@ Screw.Unit(function() {
         });
 
         it('should focus akshram in next lagu or drutham when the last akshram in lagu or drutham is enterted', function() {
-          var lastAkshramInFirstDrutham = editorDom.select('div:firt-child > span:first-child > input[type="text"]:last-child')[0];
-          var firstAkshramInFirstLagu = editorDom.select('div:first-child > span:nth-child(2) > input[type="text"]:first-child')[0];
+          var lastAkshramInFirstDrutham = talamDom.select('div:firt-child > span:first-child > input[type="text"]:last-child')[0];
+          var firstAkshramInFirstLagu = talamDom.select('div:first-child > span:nth-child(2) > input[type="text"]:first-child')[0];
 
           var keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstDrutham);
           keyEvent.perform(0, 65);
@@ -85,6 +87,15 @@ Screw.Unit(function() {
     });
 
     describe('Editor', function() {
+
+      var editor;
+      var editorDom = $('editor');
+
+      before(function() {
+        editorDom.update();
+        talam = SampleTalams.Adi;
+        editor = new Music.Editor('editor', talam);
+      });
 
       describe('Layout', function() {
         var lastAkshramInFirstTalamLine;
@@ -100,7 +111,7 @@ Screw.Unit(function() {
           var talamLines = editorDom.select('div');
           var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
           expect(talamLines.length).to(equal, 2);
-          expect(firstAkshramInSecondTalamLine).to_not(equal, undefined);
+          expect(firstAkshramInSecondTalamLine).to_not(be_undefined);
         });
 
         it('should not create new talam line if the talam line is already available when the last akshram in previous talam line is entered', function() {

@@ -10,10 +10,9 @@ var Music = {
     },
 
     _createNewTalamLine: function() {
-      var talamLine = new Music.Talam(this.talam, {
+      var talamLine = new Music.Talam(this.domNode, this.talam, {
         onLastAksrham: this._focusNextTalamLine.bindAsEventListener(this)
       });
-      this.domNode.appendChild(talamLine.domNode);
       this.talamLines.push(talamLine);
       return talamLine;
     },
@@ -51,7 +50,8 @@ var Music = {
 
   Talam: Class.create({
 
-    initialize: function(talam, options) {
+    initialize: function(target, talam, options) {
+      this.target = target;
       this.talam = talam;
       this.domNode = new Element('div');
       this.akshramLength = 1;
@@ -76,6 +76,7 @@ var Music = {
         }
         this.domNode.appendChild(akshram);
       }.bind(this));
+      this.target.appendChild(this.domNode);
     },
 
     _getNextLaguOrDrutham: function(akshram) {
