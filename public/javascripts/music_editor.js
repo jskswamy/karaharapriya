@@ -11,7 +11,8 @@ var Music = {
 
     _createNewTalamLine: function() {
       var talamLine = new Music.Talam(this.domNode, this.talam, {
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this)
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this),
+        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this)
       });
       this.talamLines.push(talamLine);
       return talamLine;
@@ -38,12 +39,35 @@ var Music = {
       return nextTalamLine;
     },
 
+    _getPreviousTalamLine: function(current) {
+      var previousTalamDomNode = current.domNode.previous();
+      var previousTalamLine;
+
+      if(previousTalamDomNode) {
+        this.talamLines.each(function(talamLine) {
+          if (talamLine.domNode == previousTalamDomNode) {
+            previousTalamLine = talamLine;
+            throw $break;
+          }
+        });
+      }
+
+      return previousTalamLine;
+    },
+
     _focusNextTalamLine: function(current) {
       var nextTalamLine = this._getNextTalamLine(current);
       if (!nextTalamLine) {
         nextTalamLine = this._createNewTalamLine();
       }
       nextTalamLine.focus();
+    },
+
+    _focusPreviousTalamLine: function(current) {
+      var previousTalamLine = this._getPreviousTalamLine(current);
+      if (previousTalamLine) {
+        previousTalamLine.focusLast();
+      }
     }
 
   }),
@@ -56,7 +80,8 @@ var Music = {
       this.domNode = new Element('div');
       this.akshramLength = 1;
       this.options = {
-        onLastAkshram: Prototype.emptyFunction
+        onLastAkshram: Prototype.emptyFunction,
+        onFirstAkshram: Prototype.emptyFunction
       };
       Object.extend(this.options, options);
       this._render();
@@ -71,7 +96,7 @@ var Music = {
             maxlength: this.akshramLength
           });
 
-          inputForAkshram.observe('keypress', this._focusNext.bindAsEventListener(this));
+          inputForAkshram.observe('keypress', this._onKeyPressHook.bindAsEventListener(this));
           akshram.appendChild(inputForAkshram);
         }
         this.domNode.appendChild(akshram);
@@ -79,15 +104,29 @@ var Music = {
       this.target.appendChild(this.domNode);
     },
 
-    _getNextLaguOrDrutham: function(akshram) {
-      return akshram.up('span').next('span');
+    _onKeyPressHook: function(e) {
+      var currentAkshram = e.element();
+      if (e.charCode !== 0 ) {
+        this._focusNext(currentAkshram);
+      } else if(e.keyCode == 8) {
+        this._focusPrevious(currentAkshram);
+      }
+
     },
 
-    _getNextAkshram: function(akshram) {
-      var nextAkshram = akshram.next('input[type="text"]');
+    _getNextLaguOrDrutham: function(currentAkshram) {
+      return currentAkshram.up('span').next('span');
+    },
+
+    _getPreviousLaguOrDrutham: function(currentAkshram) {
+      return currentAkshram.up('span').previous('span');
+    },
+
+    _getNextAkshram: function(currentAkshram) {
+      var nextAkshram = currentAkshram.next('input[type="text"]');
 
       if(!nextAkshram) {
-        var nextLaguOrDrutham = this._getNextLaguOrDrutham(akshram);
+        var nextLaguOrDrutham = this._getNextLaguOrDrutham(currentAkshram);
         if (nextLaguOrDrutham) {
           nextAkshram = nextLaguOrDrutham.down('input[type="text"]:first-child');
         }
@@ -101,19 +140,46 @@ var Music = {
       }
     },
 
-    _focusNext: function(e) {
-      if (e.charCode !== 0 ) {
-        var currentAkshram = e.element();
-        var nextAkshram = this._getNextAkshram(currentAkshram);
+    _getPreviousAkshram: function(currentAkshram) {
+      var previousAkshram = currentAkshram.previous('input[type="text"]');
 
-        if(nextAkshram) {
-          nextAkshram.focus();
+      if (!previousAkshram) {
+        var previousLaguOrDrutham = this._getPreviousLaguOrDrutham(currentAkshram);
+        if (previousLaguOrDrutham) {
+          previousAkshram = previousLaguOrDrutham.down('input[type="text"]:last-child');
         }
+      }
+
+      if (previousAkshram) {
+        return previousAkshram;
+      } else {
+        this.options.onFirstAkshram.apply(this, [this]);
+      }
+
+    },
+
+    _focusNext: function(currentAkshram) {
+      var nextAkshram = this._getNextAkshram(currentAkshram);
+
+      if(nextAkshram) {
+        nextAkshram.focus();
+      }
+    },
+
+    _focusPrevious: function(currentAkshram) {
+      var previousAkshram = this._getPreviousAkshram(currentAkshram);
+      if (previousAkshram) {
+        previousAkshram.focus();
       }
     },
 
     focus: function() {
       var akshram = this.domNode.down('span > input[type="text"]:first-child');
+      akshram.focus();
+    },
+
+    focusLast: function() {
+      var akshram = this.domNode.down('span:last-child > input[type="text"]:last-child');
       akshram.focus();
     }
 
