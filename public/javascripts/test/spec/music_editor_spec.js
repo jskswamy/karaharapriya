@@ -18,7 +18,7 @@ Screw.Unit(function() {
       before(function() {
         talamDom.update();
         talam = SampleTalams.Adi;
-        sampleTalam = new Music.Talam(talamDom, talam);
+        sampleTalam = new Music.TalamLine(talamDom, talam);
       });
 
       describe('Layout', function() {
@@ -46,6 +46,15 @@ Screw.Unit(function() {
             var akshrams = laguAndDrutham[index].select('input[type="text"]');
             expect(talam[index]).to(equal, akshrams.length);
           }
+        });
+
+        it('should use the custom classname', function() {
+          talamDom.update();
+          sampleTalam = new Music.TalamLine(talamDom, talam, {
+            className: 'sample'
+          });
+          var line = talamDom.down('.sample');
+          expect(line.hasClassName('sample')).to(equal, true);
         });
       });
 
@@ -115,7 +124,6 @@ Screw.Unit(function() {
           expect(lastAkshram).to(equal, document.activeElement);
         });
 
-
       });
 
       describe('Callback', function() {
@@ -127,7 +135,7 @@ Screw.Unit(function() {
           talamDom.update();
           lastAkshramCalled = false;
           firstAkshramCalled = false;
-          sampleTalam = new Music.Talam(talamDom, talam, {
+          sampleTalam = new Music.TalamLine(talamDom, talam, {
             onLastAkshram: function() {
               lastAkshramCalled = true;
             },
@@ -163,7 +171,6 @@ Screw.Unit(function() {
     });
 
     describe('Editor', function() {
-
       var editor;
       var editorDom = $('editor');
 
@@ -196,6 +203,17 @@ Screw.Unit(function() {
           keyEvent.perform(0, 66);
           var talamLines = editorDom.select('div');
           expect(talamLines.length).to(equal, 2);
+        });
+
+        it ('should use custom classname', function() {
+          editorDom.update();
+          editor = new Music.Editor('editor', talam, {
+            className: {
+              swaramLine: 'swaram'
+            }
+          });
+          var talamLines = editorDom.down('div.swaram');
+          expect(talamLines.hasClassName('swaram')).to(equal, true);
         });
 
       });
