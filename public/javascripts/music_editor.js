@@ -18,41 +18,29 @@ var Music = {
       return talamLine;
     },
 
-    _getNextTalamLine: function(current) {
-
-      if (!current) {
-        return;
-      }
-
-      var nextTalamDomNode = current.domNode.next();
+    _getTalamLine: function(talamDomNode) {
       var nextTalamLine;
-
-      if (nextTalamDomNode) {
+      if (talamDomNode) {
         this.talamLines.each(function(talamLine) {
-          if (talamLine.domNode == nextTalamDomNode) {
+          if (talamLine.domNode == talamDomNode) {
             nextTalamLine = talamLine;
             throw $break;
           }
         });
       }
-
       return nextTalamLine;
     },
 
-    _getPreviousTalamLine: function(current) {
-      var previousTalamDomNode = current.domNode.previous();
-      var previousTalamLine;
-
-      if(previousTalamDomNode) {
-        this.talamLines.each(function(talamLine) {
-          if (talamLine.domNode == previousTalamDomNode) {
-            previousTalamLine = talamLine;
-            throw $break;
-          }
-        });
+    _getNextTalamLine: function(current) {
+      if (current) {
+        return this._getTalamLine(current.domNode.next());
       }
+    },
 
-      return previousTalamLine;
+    _getPreviousTalamLine: function(current) {
+      if (current) {
+        return this._getTalamLine(current.domNode.previous());
+      }
     },
 
     _focusNextTalamLine: function(current) {
@@ -134,8 +122,7 @@ var Music = {
 
       if (nextAkshram) {
         return nextAkshram;
-      }
-      else {
+      } else {
         this.options.onLastAkshram.apply(this, [this]);
       }
     },
