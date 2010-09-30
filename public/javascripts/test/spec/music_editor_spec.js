@@ -120,7 +120,7 @@ Screw.Unit(function() {
         it('should focus the last akshram when the focusLast method is invoked', function() {
           var lastAkshram = talamDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
 
-          sampleTalam.focusLast();
+          sampleTalam.focusLastAkshram();
           expect(lastAkshram).to(equal, document.activeElement);
         });
 

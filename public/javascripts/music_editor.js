@@ -18,7 +18,7 @@ var Music = {
     _createNewTalamLine: function() {
       var talamLine = new Music.TalamLine(this.domNode, this.talam, {
         className: this.options.className.swaramLine,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.swaramLine, this._createNewTalamLine),
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.swaramLine),
         onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.className.swaramLine)
       });
       this.swaramLines.push(talamLine);
@@ -50,18 +50,18 @@ var Music = {
       }
     },
 
-    _focusNextTalamLine: function(current, selector, newTalamDelegate) {
+    _focusNextTalamLine: function(current, selector) {
       var nextTalamLine = this._getNextTalamLine(current, selector);
       if (!nextTalamLine) {
         nextTalamLine = this._createNewTalamLine();
       }
-      nextTalamLine.focus();
+      nextTalamLine.focusFirstAkshram();
     },
 
     _focusPreviousTalamLine: function(current, selector) {
       var previousTalamLine = this._getPreviousTalamLine(current, selector);
       if (previousTalamLine) {
-        previousTalamLine.focusLast();
+        previousTalamLine.focusLastAkshram();
       }
     }
 
@@ -105,11 +105,10 @@ var Music = {
     _onKeyPressHook: function(e) {
       var currentAkshram = e.element();
       if (e.charCode !== 0 ) {
-        this._focusNext(currentAkshram);
+        this._focus(currentAkshram, this._getNextAkshram.bindAsEventListener(this));
       } else if(e.keyCode == 8) {
-        this._focusPrevious(currentAkshram);
+        this._focus(currentAkshram, this._getPreviousAkshram.bindAsEventListener(this));
       }
-
     },
 
     _getNextLaguOrDrutham: function(currentAkshram) {
@@ -155,29 +154,24 @@ var Music = {
 
     },
 
-    _focusNext: function(currentAkshram) {
-      var nextAkshram = this._getNextAkshram(currentAkshram);
-
-      if(nextAkshram) {
-        nextAkshram.focus();
+    _focus: function(currentAkshram, fn) {
+      var akshram = fn(currentAkshram);
+      if(akshram) {
+        akshram.focus();
       }
     },
 
-    _focusPrevious: function(currentAkshram) {
-      var previousAkshram = this._getPreviousAkshram(currentAkshram);
-      if (previousAkshram) {
-        previousAkshram.focus();
-      }
-    },
-
-    focus: function() {
-      var akshram = this.domNode.down('span > input[type="text"]:first-child');
+    _focusAkshram: function(selector) {
+      var akshram = this.domNode.down(selector);
       akshram.focus();
     },
 
-    focusLast: function() {
-      var akshram = this.domNode.down('span:last-child > input[type="text"]:last-child');
-      akshram.focus();
+    focusFirstAkshram: function() {
+      this._focusAkshram('span > input[type="text"]:first-child');
+    },
+
+    focusLastAkshram: function() {
+      this._focusAkshram('span:last-child > input[type="text"]:last-child');
     }
 
   })
