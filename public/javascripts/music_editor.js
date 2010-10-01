@@ -105,53 +105,26 @@ var Music = {
     _onKeyPressHook: function(e) {
       var currentAkshram = e.element();
       if (e.charCode !== 0 ) {
-        this._focus(currentAkshram, this._getNextAkshram.bindAsEventListener(this));
+        this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.next, 'input[type="text"]:first-child', this.options.onLastAkshram));
       } else if(e.keyCode == 8) {
-        this._focus(currentAkshram, this._getPreviousAkshram.bindAsEventListener(this));
+        this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.previous, 'input[type="text"]:last-child', this.options.onFirstAkshram));
       }
     },
 
-    _getNextLaguOrDrutham: function(currentAkshram) {
-      return currentAkshram.up('span').next('span');
-    },
-
-    _getPreviousLaguOrDrutham: function(currentAkshram) {
-      return currentAkshram.up('span').previous('span');
-    },
-
-    _getNextAkshram: function(currentAkshram) {
-      var nextAkshram = currentAkshram.next('input[type="text"]');
-
-      if(!nextAkshram) {
-        var nextLaguOrDrutham = this._getNextLaguOrDrutham(currentAkshram);
-        if (nextLaguOrDrutham) {
-          nextAkshram = nextLaguOrDrutham.down('input[type="text"]:first-child');
+    _getAdjacentAkshram: function(akshram, adjFn, childSelector, callbackFn) {
+      var adjacentAkshram = adjFn(akshram, 'input[type="text"]');
+      if (!adjacentAkshram) {
+        var adjacentLaguOrDrutham = adjFn(akshram.up('span'), 'span');
+        if (adjacentLaguOrDrutham) {
+          adjacentAkshram = adjacentLaguOrDrutham.down(childSelector);
         }
       }
 
-      if (nextAkshram) {
-        return nextAkshram;
+      if(adjacentAkshram) {
+        return adjacentAkshram;
       } else {
-        this.options.onLastAkshram.apply(this, [this]);
+        callbackFn.apply(this, [this]);
       }
-    },
-
-    _getPreviousAkshram: function(currentAkshram) {
-      var previousAkshram = currentAkshram.previous('input[type="text"]');
-
-      if (!previousAkshram) {
-        var previousLaguOrDrutham = this._getPreviousLaguOrDrutham(currentAkshram);
-        if (previousLaguOrDrutham) {
-          previousAkshram = previousLaguOrDrutham.down('input[type="text"]:last-child');
-        }
-      }
-
-      if (previousAkshram) {
-        return previousAkshram;
-      } else {
-        this.options.onFirstAkshram.apply(this, [this]);
-      }
-
     },
 
     _focus: function(currentAkshram, fn) {
