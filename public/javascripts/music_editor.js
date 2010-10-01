@@ -108,10 +108,10 @@ var Music = {
 
     _onKeyPressHook: function(e) {
       var currentAkshram = e.element();
-      if (e.charCode !== 0 ) {
-        this._focus(currentAkshram, this._isFull.bindAsEventListener(this), this._getAdjacentAkshram.bindAsEventListener(this, Element.next, 'input[type="text"]:first-child', this.options.onLastAkshram));
-      } else if(e.keyCode == 8) {
-        this._focus(currentAkshram, this._isEmpty.bindAsEventListener(this), this._getAdjacentAkshram.bindAsEventListener(this, Element.previous, 'input[type="text"]:last-child', this.options.onFirstAkshram));
+      if (e.charCode !== 0 && this._isFull) {
+        this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.next, 'input[type="text"]:first-child', this.options.onLastAkshram));
+      } else if(e.keyCode == 8 && this._isFull) {
+        this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.previous, 'input[type="text"]:last-child', this.options.onFirstAkshram));
       }
     },
 
@@ -141,13 +141,11 @@ var Music = {
       }
     },
 
-    _focus: function(currentAkshram, continueFn, adjAkshramfn) {
-      if(continueFn(currentAkshram)) {
+    _focus: function(currentAkshram, adjAkshramfn) {
         var akshram = adjAkshramfn(currentAkshram);
         if(akshram) {
           akshram.focus();
         }
-      }
     },
 
     _focusAkshram: function(selector) {
