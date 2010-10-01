@@ -7,6 +7,9 @@ var Music = {
       this.talam = talam;
       this.swaramLines = [];
       this.options = {
+        akshramLength: {
+          swaramLine: 1
+        },
         className: {
           swaramLine: 'swaram'
         }
@@ -17,6 +20,7 @@ var Music = {
 
     _createNewTalamLine: function() {
       var talamLine = new Music.TalamLine(this.domNode, this.talam, {
+        akshramLength: this.options.akshramLength.swaramLine,
         className: this.options.className.swaramLine,
         onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.swaramLine),
         onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.className.swaramLine)
@@ -72,8 +76,8 @@ var Music = {
     initialize: function(target, talam, options) {
       this.target = target;
       this.talam = talam;
-      this.akshramLength = 1;
       this.options = {
+        akshramLength: 1,
         className: 'talam',
         onLastAkshram: Prototype.emptyFunction,
         onFirstAkshram: Prototype.emptyFunction
@@ -91,7 +95,7 @@ var Music = {
         for (index = 0; index < noOfAkshram; index++) {
           var inputForAkshram = new Element('input', {
             type: 'text',
-            maxlength: this.akshramLength
+            maxlength: this.options.akshramLength
           });
 
           inputForAkshram.observe('keypress', this._onKeyPressHook.bindAsEventListener(this));
@@ -105,10 +109,20 @@ var Music = {
     _onKeyPressHook: function(e) {
       var currentAkshram = e.element();
       if (e.charCode !== 0 ) {
-        this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.next, 'input[type="text"]:first-child', this.options.onLastAkshram));
+        this._focus(currentAkshram, this._isFull.bindAsEventListener(this), this._getAdjacentAkshram.bindAsEventListener(this, Element.next, 'input[type="text"]:first-child', this.options.onLastAkshram));
       } else if(e.keyCode == 8) {
-        this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.previous, 'input[type="text"]:last-child', this.options.onFirstAkshram));
+        this._focus(currentAkshram, this._isEmpty.bindAsEventListener(this), this._getAdjacentAkshram.bindAsEventListener(this, Element.previous, 'input[type="text"]:last-child', this.options.onFirstAkshram));
       }
+    },
+
+    _isEmpty: function(akshram) {
+      //consider the current key stroke for computing length
+      return (akshram.value.length - 1) <= 0 ? true: false;
+    },
+
+    _isFull: function(akshram) {
+      //consider the current key stroke for computing length
+      return (akshram.value.length + 1) >= this.options.akshramLength ? true: false;
     },
 
     _getAdjacentAkshram: function(akshram, adjFn, childSelector, callbackFn) {
@@ -127,10 +141,12 @@ var Music = {
       }
     },
 
-    _focus: function(currentAkshram, fn) {
-      var akshram = fn(currentAkshram);
-      if(akshram) {
-        akshram.focus();
+    _focus: function(currentAkshram, continueFn, adjAkshramfn) {
+      if(continueFn(currentAkshram)) {
+        var akshram = adjAkshramfn(currentAkshram);
+        if(akshram) {
+          akshram.focus();
+        }
       }
     },
 

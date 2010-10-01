@@ -6,7 +6,7 @@ Screw.Matchers["have_max_length"] = {
   failure_message: function(expected, actual, not) {
     return 'expected textbox max length' + (not ? 'not' : '') + ' to be ' + jQuery.print(expected);
   }
-}
+};
 
 Screw.Matchers["have_sum"] = {
   match: function(expected, actual) {
@@ -18,4 +18,4 @@ Screw.Matchers["have_sum"] = {
   failure_message: function(expected, actual, not) {
     return 'expected sum of ' + jQuery.print(actual) + (not ? 'not' : '') + ' to be ' + jQuery.print(expected);
   }
-}
+};

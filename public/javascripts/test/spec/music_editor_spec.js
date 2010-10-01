@@ -35,7 +35,7 @@ Screw.Unit(function() {
           var akshrams = talamDom.select('input[type="text"]');
           akshrams.each(function(akshram) {
             expect(akshram).to(have_max_length, 1);
-         });
+          });
         });
 
         it('should correctly group the akshram based on lagu and drutham', function() {
@@ -56,12 +56,32 @@ Screw.Unit(function() {
           var line = talamDom.down('.sample');
           expect(line.hasClassName('sample')).to(equal, true);
         });
+
+        describe('Multiple Characters', function() {
+
+          before(function() {
+            talamDom.update();
+            sampleTalam = new Music.TalamLine(talamDom, talam, {
+              akshramLength: 2
+            });
+          });
+
+          it('should be able to override the default maxlength of an akshram', function() {
+            var akshrams = talamDom.select('input[type="text"]');
+            akshrams.each(function(akshram) {
+              expect(akshram).to(have_max_length, 2);
+            });
+          });
+
+        });
+
       });
 
       describe('Focus', function() {
         var akshrams;
         var firstAkshram;
         var secondAkshram;
+        var keyEvent;
 
         before(function() {
           akshrams = talamDom.select('div:first-child > span:first-child > input[type="text"]');
@@ -70,13 +90,13 @@ Screw.Unit(function() {
         });
 
         it('should focus next akshram only when char key is pressed', function() {
-          var keyEvent = new SimulateKeyboardEvent(firstAkshram);
+          keyEvent = new SimulateKeyboardEvent(firstAkshram);
           keyEvent.perform(0, 65);
           expect(secondAkshram).to(equal, document.activeElement);
         });
 
         it('should not focus next akshram if char key is not pressed', function() {
-          var keyEvent = new SimulateKeyboardEvent(firstAkshram);
+          keyEvent = new SimulateKeyboardEvent(firstAkshram);
           keyEvent.perform(8, 0);
           expect(firstAkshram).to(equal, document.activeElement);
           expect(secondAkshram).to_not(equal, document.activeElement);
@@ -86,7 +106,7 @@ Screw.Unit(function() {
           var lastAkshramInFirstDrutham = talamDom.select('div:firt-child > span:first-child > input[type="text"]:last-child')[0];
           var firstAkshramInFirstLagu = talamDom.select('div:first-child > span:nth-child(2) > input[type="text"]:first-child')[0];
 
-          var keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstDrutham);
+          keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstDrutham);
           keyEvent.perform(0, 65);
           expect(firstAkshramInFirstLagu).to(equal, document.activeElement);
         });
@@ -98,7 +118,7 @@ Screw.Unit(function() {
         });
 
         it('should clear the current akshram and focus the previous one on backspace', function() {
-          var keyEvent = new SimulateKeyboardEvent(secondAkshram);
+          keyEvent = new SimulateKeyboardEvent(secondAkshram);
           keyEvent.perform(0, 65);
 
           keyEvent = new SimulateKeyboardEvent(secondAkshram);
@@ -111,7 +131,7 @@ Screw.Unit(function() {
         it('should focus akshram in previous lagu or drutham on backspace from the first akshram in lagu or drutham', function() {
           var lastAkshramInFirstDrutham = talamDom.select('div:firt-child > span:first-child > input[type="text"]:last-child')[0];
           var firstAkshramInFirstLagu = talamDom.select('div:first-child > span:nth-child(2) > input[type="text"]:first-child')[0];
-          var keyEvent = new SimulateKeyboardEvent(firstAkshramInFirstLagu);
+          keyEvent = new SimulateKeyboardEvent(firstAkshramInFirstLagu);
 
           keyEvent.perform(8, 0);
           expect(lastAkshramInFirstDrutham).to(equal, document.activeElement);
@@ -122,6 +142,41 @@ Screw.Unit(function() {
 
           sampleTalam.focusLastAkshram();
           expect(lastAkshram).to(equal, document.activeElement);
+        });
+
+        describe('Multiple Characters', function() {
+
+          before(function() {
+            talamDom.update();
+            sampleTalam = new Music.TalamLine(talamDom, talam, {
+              akshramLength: 2
+            });
+            akshrams = talamDom.select('div:first-child > span:first-child > input[type="text"]');
+            firstAkshram = akshrams[0];
+            secondAkshram = akshrams[1];
+          });
+
+          it('should not focus next akshram until maxlength is reached on current akshram', function() {
+            keyEvent = new SimulateKeyboardEvent(firstAkshram);
+            keyEvent.perform(0, 65);
+            expect(firstAkshram).to(equal, document.activeElement);
+            keyEvent.perform(0, 65);
+            expect(secondAkshram).to(equal, document.activeElement);
+          });
+
+          it('should not focus previous akshram until the current akshram is cleared out on backspace', function() {
+            keyEvent = new SimulateKeyboardEvent(secondAkshram);
+            keyEvent.perform(0, 65);
+            keyEvent.perform(0, 65);
+            secondAkshram.focus();
+
+            keyEvent.perform(8, 0);
+            expect(secondAkshram).to(equal, document.activeElement);
+
+            keyEvent.perform(8, 0);
+            expect(firstAkshram).to(equal, document.activeElement);
+          });
+
         });
 
       });
@@ -216,6 +271,25 @@ Screw.Unit(function() {
           expect(talamLines.hasClassName('swaram')).to(equal, true);
         });
 
+        describe('Multiple Characters', function() {
+
+          before(function() {
+            editorDom.update();
+            editor = new Music.Editor('editor', talam, {
+              akshramLength: {
+                swaramLine: 2
+              }
+            });
+          });
+
+          it('should override the default akshram length for swaram line', function() {
+            var akshrams = editorDom.select('input[type="text"]');
+            akshrams.each(function(akshram) {
+              expect(akshram).to(have_max_length, 2);
+            });
+          });
+        });
+
       });
 
       describe('Focus', function() {
@@ -244,6 +318,61 @@ Screw.Unit(function() {
           keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
           keyEvent.perform(8, 0);
           expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
+        });
+
+        describe('Multiple Characters', function() {
+
+          before(function() {
+            editorDom.update();
+            editor = new Music.Editor('editor', talam, {
+              akshramLength: {
+                swaramLine: 3
+              }
+            });
+          });
+
+          it('should focus first akshram of next talam line only when the last akshram of current line is filled', function() {
+
+          var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+          lastAkshramInFirstTalamLine.focus();
+          keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
+
+          for(var index = 0; index < editor.options.akshramLength.swaramLine; index++) {
+            expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
+            keyEvent.perform(0, 65);
+          }
+
+          var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+          expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
+
+          });
+
+          it('should focus the last akshram of previous talam line only when the first akshram is cleared out on backspace', function() {
+            var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+            lastAkshramInFirstTalamLine.focus();
+            keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
+            var eventCountIndex;
+
+            for(eventCountIndex = 0; eventCountIndex < editor.options.akshramLength.swaramLine; eventCountIndex++) {
+              expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
+              keyEvent.perform(0, 65);
+            }
+
+            var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+            keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
+            for(eventCountIndex = 0; eventCountIndex < editor.options.akshramLength.swaramLine; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
+            firstAkshramInSecondTalamLine.focus();
+
+            for(eventCountIndex = 0; eventCountIndex < editor.options.akshramLength.swaramLine; eventCountIndex++) {
+              expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
+              keyEvent.perform(8, 0);
+            }
+
+            expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
+          });
+
         });
 
       });
