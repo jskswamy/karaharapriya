@@ -1,3 +1,4 @@
+//Todo: Create seperate test suite for TalamLine and Editor.
 Screw.Unit(function() {
   var SampleTalams = {
     SangeernaJathiBhuvana: [9,2,9,9],
@@ -10,7 +11,7 @@ Screw.Unit(function() {
 
   describe('Music', function() {
 
-    describe('Talam', function() {
+    describe('TalamLine', function() {
 
       var talamDom = $('editor');
       var sampleTalam;
@@ -59,17 +60,29 @@ Screw.Unit(function() {
 
         describe('Multiple Characters', function() {
 
+          var akshramLength = 2;
+
           before(function() {
             talamDom.update();
             sampleTalam = new Music.TalamLine(talamDom, talam, {
-              akshramLength: 2
+              akshramLength: akshramLength
             });
           });
 
           it('should be able to override the default maxlength of an akshram', function() {
             var akshrams = talamDom.select('input[type="text"]');
             akshrams.each(function(akshram) {
-              expect(akshram).to(have_max_length, 2);
+              expect(akshram).to(have_max_length, akshramLength);
+            });
+          });
+
+          it('should be able to updated the default maxlength of akshram at anytime', function() {
+            sampleTalam.update({
+              akshramLength: akshramLength
+            });
+            var akshrams = talamDom.select('input[type="text"]');
+            akshrams.each(function(akshram) {
+              expect(akshram).to(have_max_length, akshramLength);
             });
           });
 
@@ -146,10 +159,12 @@ Screw.Unit(function() {
 
         describe('Multiple Characters', function() {
 
+          var akshramLength = 2;
+
           before(function() {
             talamDom.update();
             sampleTalam = new Music.TalamLine(talamDom, talam, {
-              akshramLength: 2
+              akshramLength: akshramLength
             });
             akshrams = talamDom.select('div:first-child > span:first-child > input[type="text"]');
             firstAkshram = akshrams[0];
@@ -157,23 +172,62 @@ Screw.Unit(function() {
           });
 
           it('should not focus next akshram until maxlength is reached on current akshram', function() {
+            var eventCountIndex;
             keyEvent = new SimulateKeyboardEvent(firstAkshram);
-            keyEvent.perform(0, 65);
-            expect(firstAkshram).to(equal, document.activeElement);
-            keyEvent.perform(0, 65);
+            firstAkshram.focus();
+
+            for(eventCountIndex = 0; eventCountIndex < akshramLength; eventCountIndex++) {
+              expect(firstAkshram).to(equal, document.activeElement);
+              keyEvent.perform(0, 65);
+            }
+
             expect(secondAkshram).to(equal, document.activeElement);
           });
 
           it('should not focus previous akshram until the current akshram is cleared out on backspace', function() {
             keyEvent = new SimulateKeyboardEvent(secondAkshram);
-            keyEvent.perform(0, 65);
-            keyEvent.perform(0, 65);
+            for(eventCountIndex = 0; eventCountIndex < akshramLength; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
             secondAkshram.focus();
 
-            keyEvent.perform(8, 0);
-            expect(secondAkshram).to(equal, document.activeElement);
+            for(eventCountIndex = 0; eventCountIndex < akshramLength; eventCountIndex++) {
+              expect(secondAkshram).to(equal, document.activeElement);
+              keyEvent.perform(8, 0);
+            }
+            expect(firstAkshram).to(equal, document.activeElement);
+          });
 
-            keyEvent.perform(8, 0);
+          it('should respect the new akshram length and focus the next akshram when the new maxlength is reached', function() {
+            var newAkshramLength = 4;
+            keyEvent = new SimulateKeyboardEvent(firstAkshram);
+            sampleTalam.update({
+              akshramLength: newAkshramLength
+            });
+
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
+            expect(secondAkshram).to(equal, document.activeElement);
+          });
+
+          it('should respect the new akshram length and focus the previous talam after clearing out on backspace', function() {
+            var newAkshramLength = 4;
+            keyEvent = new SimulateKeyboardEvent(secondAkshram);
+
+            sampleTalam.update({
+              akshramLength: newAkshramLength
+            });
+            secondAkshram.focus();
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
+
+            secondAkshram.focus();
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(8, 0);
+            }
+
             expect(firstAkshram).to(equal, document.activeElement);
           });
 
@@ -288,6 +342,21 @@ Screw.Unit(function() {
               expect(akshram).to(have_max_length, 2);
             });
           });
+
+          it('shoud use the new akshram length', function() {
+            var newAkshramLength = 4;
+            editor.update({
+              akshramLength: {
+                swaramLine: newAkshramLength
+              }
+            });
+
+            var akshrams = editorDom.select('input[type="text"]');
+            akshrams.each(function(akshram) {
+              expect(akshram).to(have_max_length, newAkshramLength);
+            });
+          });
+
         });
 
       });
@@ -322,11 +391,13 @@ Screw.Unit(function() {
 
         describe('Multiple Characters', function() {
 
+          var akshramLength = 3;
+
           before(function() {
             editorDom.update();
             editor = new Music.Editor('editor', talam, {
               akshramLength: {
-                swaramLine: 3
+                swaramLine: akshramLength
               }
             });
           });
@@ -337,7 +408,7 @@ Screw.Unit(function() {
           lastAkshramInFirstTalamLine.focus();
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
 
-          for(var index = 0; index < editor.options.akshramLength.swaramLine; index++) {
+          for(var index = 0; index < akshramLength; index++) {
             expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
             keyEvent.perform(0, 65);
           }
@@ -353,14 +424,14 @@ Screw.Unit(function() {
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
             var eventCountIndex;
 
-            for(eventCountIndex = 0; eventCountIndex < editor.options.akshramLength.swaramLine; eventCountIndex++) {
+            for(eventCountIndex = 0; eventCountIndex < akshramLength; eventCountIndex++) {
               expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
               keyEvent.perform(0, 65);
             }
 
             var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
             keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
-            for(eventCountIndex = 0; eventCountIndex < editor.options.akshramLength.swaramLine; eventCountIndex++) {
+            for(eventCountIndex = 0; eventCountIndex < akshramLength; eventCountIndex++) {
               keyEvent.perform(0, 65);
             }
             firstAkshramInSecondTalamLine.focus();
@@ -371,6 +442,57 @@ Screw.Unit(function() {
             }
 
             expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
+          });
+
+          it('should respect the new akshram length and focus the first akshram in the next talam line when the last akshram in current line is filled', function() {
+            var newAkshramLength = 4;
+            editor.update({
+              akshramLength: {
+                swaramLine: newAkshramLength
+              }
+            });
+
+            var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+            keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
+            var eventCountIndex;
+
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
+
+            var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+            expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
+
+          });
+
+          it('should respect the new akshram lengh and focus the last akshram in the previous talam line when the first akshram is cleared out on backspace', function() {
+            var newAkshramLength = 4;
+            editor.update({
+              akshramLength: {
+                swaramLine: newAkshramLength
+              }
+            });
+
+            var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+            keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
+            var eventCountIndex;
+
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
+
+            var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+            keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(0, 65);
+            }
+
+            firstAkshramInSecondTalamLine.focus();
+            for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
+              keyEvent.perform(8, 0);
+            }
+            expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
+
           });
 
         });

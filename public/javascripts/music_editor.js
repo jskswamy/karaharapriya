@@ -67,6 +67,19 @@ var Music = {
       if (previousTalamLine) {
         previousTalamLine.focusLastAkshram();
       }
+    },
+
+    _reAssignAkshramLength: function() {
+      this.swaramLines.each(function(talamLine) {
+        talamLine.update({
+          akshramLength: this.options.akshramLength.swaramLine
+        });
+      }.bind(this));
+    },
+
+    update: function(options) {
+      Object.extend(this.options, options);
+      this._reAssignAkshramLength();
     }
 
   }),
@@ -153,12 +166,24 @@ var Music = {
       akshram.focus();
     },
 
+    _reAssignAkshramLength: function() {
+      var akshrams = this.domNode.select('input[type="text"]');
+      akshrams.each(function(akshram) {
+        akshram.writeAttribute('maxlength', this.options.akshramLength);
+      }.bind(this));
+    },
+
     focusFirstAkshram: function() {
       this._focusAkshram('span > input[type="text"]:first-child');
     },
 
     focusLastAkshram: function() {
       this._focusAkshram('span:last-child > input[type="text"]:last-child');
+    },
+
+    update: function(options) {
+      Object.extend(this.options, options);
+      this._reAssignAkshramLength();
     }
 
   })
