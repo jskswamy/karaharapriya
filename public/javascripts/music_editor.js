@@ -108,9 +108,9 @@ var Music = {
 
     _onKeyPressHook: function(e) {
       var currentAkshram = e.element();
-      if (e.charCode !== 0 && this._isFull) {
+      if (e.charCode !== 0 && this._isFull(currentAkshram)) {
         this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.next, 'input[type="text"]:first-child', this.options.onLastAkshram));
-      } else if(e.keyCode == 8 && this._isFull) {
+      } else if(e.keyCode == 8 && this._isEmpty(currentAkshram)) {
         this._focus(currentAkshram, this._getAdjacentAkshram.bindAsEventListener(this, Element.previous, 'input[type="text"]:last-child', this.options.onFirstAkshram));
       }
     },
