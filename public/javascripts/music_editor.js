@@ -1,32 +1,46 @@
 var Music = {
 
-  Editor: Class.create({
+  TalamBlock: Class.create({
 
     initialize: function(target, talam, options) {
       this.domNode = $(target);
       this.talam = talam;
       this.swaramLines = [];
+      this.sahidyamLines = [];
       this.options = {
         akshramLength: {
-          swaramLine: 1
+          swaramLine: 1,
+          sahidyamLine: 1
         },
         className: {
-          swaramLine: 'swaram'
+          swaramLine: 'swaram',
+          sahidyamLine: 'sahidyam'
         }
       };
       Object.extend(this.options, options);
       this._focusNextTalamLine();
     },
 
-    _createNewTalamLine: function() {
-      var talamLine = new Music.TalamLine(this.domNode, this.talam, {
+    _createSwaramLine: function() {
+      var swaramLine = new Music.TalamLine(this.domNode, this.talam, {
         akshramLength: this.options.akshramLength.swaramLine,
         className: this.options.className.swaramLine,
         onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.swaramLine),
         onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.className.swaramLine)
       });
-      this.swaramLines.push(talamLine);
-      return talamLine;
+      this.swaramLines.push(swaramLine);
+      return swaramLine;
+    },
+
+    _createSahidyamLine: function() {
+      var sahidyamLine = new Music.TalamLine(this.domNode, this.talam, {
+        akshramLength: this.options.akshramLength.sahidyamLine,
+        className: this.options.className.sahidyamLine,
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.sahidyamLine),
+        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.className.sahidyamLine)
+      });
+      this.sahidyamLines.push(sahidyamLine);
+      return sahidyamLine;
     },
 
     _getTalamLine: function(talamDomNode) {
@@ -57,7 +71,7 @@ var Music = {
     _focusNextTalamLine: function(current, selector) {
       var nextTalamLine = this._getNextTalamLine(current, selector);
       if (!nextTalamLine) {
-        nextTalamLine = this._createNewTalamLine();
+        nextTalamLine = this._createSwaramLine();
       }
       nextTalamLine.focusFirstAkshram();
     },

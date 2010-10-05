@@ -279,14 +279,14 @@ Screw.Unit(function() {
 
     });
 
-    describe('Editor', function() {
+    describe('TalamBlock', function() {
       var editor;
       var editorDom = $('editor');
 
       before(function() {
         editorDom.update();
         talam = SampleTalams.Adi;
-        editor = new Music.Editor('editor', talam);
+        editor = new Music.TalamBlock('editor', talam);
       });
 
       describe('Layout', function() {
@@ -316,7 +316,7 @@ Screw.Unit(function() {
 
         it ('should use custom classname', function() {
           editorDom.update();
-          editor = new Music.Editor('editor', talam, {
+          editor = new Music.TalamBlock('editor', talam, {
             className: {
               swaramLine: 'swaram'
             }
@@ -329,7 +329,7 @@ Screw.Unit(function() {
 
           before(function() {
             editorDom.update();
-            editor = new Music.Editor('editor', talam, {
+            editor = new Music.TalamBlock('editor', talam, {
               akshramLength: {
                 swaramLine: 2
               }
@@ -395,7 +395,7 @@ Screw.Unit(function() {
 
           before(function() {
             editorDom.update();
-            editor = new Music.Editor('editor', talam, {
+            editor = new Music.TalamBlock('editor', talam, {
               akshramLength: {
                 swaramLine: akshramLength
               }
