@@ -25,8 +25,8 @@ var Music = {
       var swaramLine = new Music.TalamLine(this.domNode, this.talam, {
         akshramLength: this.options.swaramLine.akshramLength,
         className: this.options.swaramLine.className,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.swaramLine.className),
-        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.swaramLine.className)
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.swaramLines, this.options.swaramLine.className),
+        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.swaramLines, this.options.swaramLine.className)
       });
       this.swaramLines.push(swaramLine);
       return swaramLine;
@@ -34,19 +34,19 @@ var Music = {
 
     _createSahidyamLine: function() {
       var sahidyamLine = new Music.TalamLine(this.domNode, this.talam, {
-        akshramLength: this.options.akshramLength.sahidyamLine,
+        akshramLength: this.options.sahidyamLine.akshramLength,
         className: this.options.sahidyamLine.className,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.sahidyamLine.className),
-        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.sahidyamLine.className)
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.sahidyamLines, this.options.sahidyamLine.className),
+        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.sahidyamLines, this.options.sahidyamLine.className)
       });
       this.sahidyamLines.push(sahidyamLine);
       return sahidyamLine;
     },
 
-    _getTalamLine: function(talamDomNode) {
+    _getTalamLine: function(talamLines, talamDomNode) {
       var nextTalamLine;
       if (talamDomNode) {
-        this.swaramLines.each(function(talamLine) {
+        talamLines.each(function(talamLine) {
           if (talamLine.domNode == talamDomNode) {
             nextTalamLine = talamLine;
             throw $break;
@@ -56,28 +56,28 @@ var Music = {
       return nextTalamLine;
     },
 
-    _getNextTalamLine: function(current, selector) {
+    _getNextTalamLine: function(current, talamLines, selector) {
       if (current) {
-        return this._getTalamLine(current.domNode.next("div." + selector));
+        return this._getTalamLine(talamLines, current.domNode.next("div." + selector));
       }
     },
 
-    _getPreviousTalamLine: function(current, selector) {
+    _getPreviousTalamLine: function(current, talamLines, selector) {
       if (current) {
-        return this._getTalamLine(current.domNode.previous("div." + selector));
+        return this._getTalamLine(talamLines, current.domNode.previous("div." + selector));
       }
     },
 
-    _focusNextTalamLine: function(current, selector) {
-      var nextTalamLine = this._getNextTalamLine(current, selector);
+    _focusNextTalamLine: function(current, talamLines, selector) {
+      var nextTalamLine = this._getNextTalamLine(current, talamLines, selector);
       if (!nextTalamLine) {
         nextTalamLine = this._createSwaramLine();
       }
       nextTalamLine.focusFirstAkshram();
     },
 
-    _focusPreviousTalamLine: function(current, selector) {
-      var previousTalamLine = this._getPreviousTalamLine(current, selector);
+    _focusPreviousTalamLine: function(current, talamLines, selector) {
+      var previousTalamLine = this._getPreviousTalamLine(current, talamLines, selector);
       if (previousTalamLine) {
         previousTalamLine.focusLastAkshram();
       }

@@ -300,8 +300,9 @@ Screw.Unit(function() {
 
         it('should create new talam line when the last akshram in previous talam line is entered', function() {
           keyEvent.perform(0, 65);
-          var talamLines = editorDom.select('div');
-          var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+          var talamLines = editorDom.select('div.swaram');
+          var firstAkshramInSecondTalamLine = talamLines[1].down('span:first-child > input[type="text"]:first-child');
+          console.log(firstAkshramInSecondTalamLine);
           expect(talamLines.length).to(equal, 2);
           expect(firstAkshramInSecondTalamLine).to_not(be_undefined);
         });
@@ -310,7 +311,7 @@ Screw.Unit(function() {
           keyEvent.perform(0, 65);
           lastAkshramInFirstTalamLine.value = "";
           keyEvent.perform(0, 66);
-          var talamLines = editorDom.select('div');
+          var talamLines = editorDom.select('div.swaram');
           expect(talamLines.length).to(equal, 2);
         });
 
@@ -337,7 +338,7 @@ Screw.Unit(function() {
           });
 
           it('should override the default akshram length for swaram line', function() {
-            var akshrams = editorDom.select('input[type="text"]');
+            var akshrams = editorDom.select('div.swaram > input[type="text"]');
             akshrams.each(function(akshram) {
               expect(akshram).to(have_max_length, 2);
             });
@@ -370,20 +371,24 @@ Screw.Unit(function() {
         });
 
         it('should focus the first akshram of next talam line when the last akshram in the current talam line is entered', function() {
-          var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+          var swaramLines = editorDom.select('div.swaram');
+          var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
           keyEvent.perform(0, 65);
 
-          var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+          swaramLines = editorDom.select('div.swaram');
+          var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
           expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
         });
 
         it('should focus the last akshram of previous talam line when backspaced from first akshram in the current talam line', function() {
-          var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+          var swaramLines = editorDom.select('div.swaram');
+          var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
           keyEvent.perform(0, 65);
 
-          var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+          swaramLines = editorDom.select('div.swaram');
+          var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
           keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
           keyEvent.perform(8, 0);
           expect(lastAkshramInFirstTalamLine).to(equal, document.activeElement);
@@ -405,7 +410,8 @@ Screw.Unit(function() {
 
           it('should focus first akshram of next talam line only when the last akshram of current line is filled', function() {
 
-          var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+          var swaramLines = editorDom.select('div.swaram');
+          var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
           lastAkshramInFirstTalamLine.focus();
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
 
@@ -414,13 +420,15 @@ Screw.Unit(function() {
             keyEvent.perform(0, 65);
           }
 
-          var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+          swaramLines = editorDom.select('div.swaram');
+          var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
           expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
 
           });
 
           it('should focus the last akshram of previous talam line only when the first akshram is cleared out on backspace', function() {
-            var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+            var swaramLines = editorDom.select('div.swaram');
+            var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
             lastAkshramInFirstTalamLine.focus();
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
             var eventCountIndex;
@@ -430,7 +438,9 @@ Screw.Unit(function() {
               keyEvent.perform(0, 65);
             }
 
-            var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+            swaramLines = editorDom.select('div.swaram');
+            var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
+
             keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
             for(eventCountIndex = 0; eventCountIndex < akshramLength; eventCountIndex++) {
               keyEvent.perform(0, 65);
@@ -454,7 +464,8 @@ Screw.Unit(function() {
               }
             });
 
-            var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+            var swaramLines = editorDom.select('div.swaram');
+            var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
             var eventCountIndex;
 
@@ -462,7 +473,8 @@ Screw.Unit(function() {
               keyEvent.perform(0, 65);
             }
 
-            var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+            swaramLines = editorDom.select('div.swaram');
+            var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
             expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
 
           });
@@ -476,7 +488,8 @@ Screw.Unit(function() {
               }
             });
 
-            var lastAkshramInFirstTalamLine = editorDom.select('div:firt-child > span:last-child > input[type="text"]:last-child')[0];
+            var swaramLines = editorDom.select('div.swaram');
+            var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
             var eventCountIndex;
 
@@ -484,7 +497,8 @@ Screw.Unit(function() {
               keyEvent.perform(0, 65);
             }
 
-            var firstAkshramInSecondTalamLine = editorDom.select('div:nth-child(2) > span:first-child > input[type="text"]:first-child')[0];
+            swaramLines = editorDom.select('div.swaram');
+            var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
             keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
             for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
               keyEvent.perform(0, 65);
