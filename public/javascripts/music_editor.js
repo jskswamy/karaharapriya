@@ -1,5 +1,27 @@
 var Music = {
 
+  TalamBlockType: {
+  },
+
+  Editor: Class.create({
+
+    initialize: function(target, talam) {
+      this.target = $(target);
+      this.options = { className: 'editor' }
+      this.domNode = new Element('div', { 'class': this.options.className });
+      this.talamBlocks = [];
+      this.target.appendChild(this.domNode);
+      this.talam = talam;
+    },
+
+    addTalamBlock: function(talamBlockOption, className) {
+      var blockDom = new Element('div', {'class' : className ? className : ''});
+      var talamBlock = new Music.TalamBlock(blockDom, this.talam, talamBlockOption);
+      this.domNode.appendChild(blockDom);
+    }
+
+  }),
+
   TalamBlock: Class.create({
 
     initialize: function(target, talam, options) {
@@ -55,6 +77,7 @@ var Music = {
       return nextTalamLine;
     },
 
+    //TODO: Merge _getNextTalamLine and _getPreviousTalamLine into one.
     _getNextTalamLine: function(current, talamLines, selector) {
       if (current) {
         return this._getTalamLine(talamLines, current.domNode.next("div." + selector));

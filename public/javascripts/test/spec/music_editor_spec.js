@@ -281,10 +281,10 @@ Screw.Unit(function() {
 
     describe('TalamBlock', function() {
       var talamBlock;
-      var editorDom = $('editor');
+      var talamBlockDom = $('editor');
 
       before(function() {
-        editorDom.update();
+        talamBlockDom.update();
         talam = SampleTalams.Adi;
         talamBlock = new Music.TalamBlock('editor', talam);
       });
@@ -294,13 +294,13 @@ Screw.Unit(function() {
         var keyEvent;
 
         before(function() {
-          lastAkshramInFirstTalamLine = editorDom.select('div:first-child > span:last-child > input[type="text"]:last-child')[0];
+          lastAkshramInFirstTalamLine = talamBlockDom.select('div:first-child > span:last-child > input[type="text"]:last-child')[0];
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
         });
 
         it('should create new talam line when the last akshram in previous talam line is entered', function() {
           keyEvent.perform(0, 65);
-          var talamLines = editorDom.select('div.swaram');
+          var talamLines = talamBlockDom.select('div.swaram');
           var firstAkshramInSecondTalamLine = talamLines[1].down('span:first-child > input[type="text"]:first-child');
           expect(talamLines.length).to(equal, 2);
           expect(firstAkshramInSecondTalamLine).to_not(be_undefined);
@@ -310,34 +310,34 @@ Screw.Unit(function() {
           keyEvent.perform(0, 65);
           lastAkshramInFirstTalamLine.value = "";
           keyEvent.perform(0, 66);
-          var talamLines = editorDom.select('div.swaram');
+          var talamLines = talamBlockDom.select('div.swaram');
           expect(talamLines.length).to(equal, 2);
         });
 
         it('should use custom classname', function() {
-          editorDom.update();
+          talamBlockDom.update();
           talamBlock = new Music.TalamBlock('editor', talam, {
             className: {
               swaramLine: 'swaram'
             }
           });
-          var talamLines = editorDom.down('div.swaram');
+          var talamLines = talamBlockDom.down('div.swaram');
           expect(talamLines.hasClassName('swaram')).to(equal, true);
         });
 
         it('should not create swaram line if disabled', function() {
-          editorDom.update();
+          talamBlockDom.update();
           TalamBlock = new Music.TalamBlock('editor', talam, {
             swaramLine: {
               disabled: true
             }
           });
-          var talamLines = editorDom.select('div.swaram');
+          var talamLines = talamBlockDom.select('div.swaram');
           expect(talamLines.length).to(equal, 0);
         });
 
         it('should create sahidyam line if enabled', function() {
-          editorDom.update();
+          talamBlockDom.update();
           TalamBlock = new Music.TalamBlock('editor', talam, {
             sahidyamLine: {
               akshramLength: 1,
@@ -346,12 +346,12 @@ Screw.Unit(function() {
             }
           });
 
-          var sahidyamLines = editorDom.select('div.sahidyam');
+          var sahidyamLines = talamBlockDom.select('div.sahidyam');
           expect(sahidyamLines.length).to(equal, 1);
         });
 
         it('should be able to create talam block only with sahidyam line', function() {
-          editorDom.update();
+          talamBlockDom.update();
           TalamBlock = new Music.TalamBlock('editor', talam, {
             sahidyamLine: {
               akshramLength: 1,
@@ -365,14 +365,14 @@ Screw.Unit(function() {
             }
           });
 
-          var sahidyamLines = editorDom.select('div.sahidyam');
-          var swaramLines = editorDom.select('div.swaram');
+          var sahidyamLines = talamBlockDom.select('div.sahidyam');
+          var swaramLines = talamBlockDom.select('div.swaram');
           expect(sahidyamLines.length).to(equal, 1);
           expect(swaramLines.length).to(equal, 0);
         });
 
         it('should be able to create talam block only with swaram line', function() {
-          editorDom.update();
+          talamBlockDom.update();
           TalamBlock = new Music.TalamBlock('editor', talam, {
             sahidyamLine: {
               akshramLength: 1,
@@ -386,8 +386,8 @@ Screw.Unit(function() {
             }
           });
 
-          var sahidyamLines = editorDom.select('div.sahidyam');
-          var swaramLines = editorDom.select('div.swaram');
+          var sahidyamLines = talamBlockDom.select('div.sahidyam');
+          var swaramLines = talamBlockDom.select('div.swaram');
           expect(sahidyamLines.length).to(equal, 0);
           expect(swaramLines.length).to(equal, 1);
         });
@@ -395,7 +395,7 @@ Screw.Unit(function() {
         describe('Multiple Characters', function() {
 
           before(function() {
-            editorDom.update();
+            talamBlockDom.update();
             talamBlock = new Music.TalamBlock('editor', talam, {
               swaramLine: {
                 akshramLength: 2,
@@ -405,13 +405,13 @@ Screw.Unit(function() {
           });
 
           it('should override the default akshram length for swaram line', function() {
-            var akshrams = editorDom.select('div.swaram > input[type="text"]');
+            var akshrams = talamBlockDom.select('div.swaram > input[type="text"]');
             akshrams.each(function(akshram) {
               expect(akshram).to(have_max_length, 2);
             });
           });
 
-          it('shoud use the new akshram length', function() {
+          it('should use the new akshram length', function() {
             var newAkshramLength = 4;
             talamBlock.update({
               swaramLine: {
@@ -420,7 +420,7 @@ Screw.Unit(function() {
               }
             });
 
-            var akshrams = editorDom.select('input[type="text"]');
+            var akshrams = talamBlockDom.select('input[type="text"]');
             akshrams.each(function(akshram) {
               expect(akshram).to(have_max_length, newAkshramLength);
             });
@@ -434,28 +434,28 @@ Screw.Unit(function() {
         var keyEvent;
 
         it('should focus the first akshram when the editor is loaded', function() {
-          var firstAkshram = editorDom.select('div:firt-child > span:first-child > input[type="text"]:first-child')[0];
+          var firstAkshram = talamBlockDom.select('div:firt-child > span:first-child > input[type="text"]:first-child')[0];
           expect(firstAkshram).to(equal, document.activeElement);
         });
 
         it('should focus the first akshram of next talam line when the last akshram in the current talam line is entered', function() {
-          var swaramLines = editorDom.select('div.swaram');
+          var swaramLines = talamBlockDom.select('div.swaram');
           var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
           keyEvent.perform(0, 65);
 
-          swaramLines = editorDom.select('div.swaram');
+          swaramLines = talamBlockDom.select('div.swaram');
           var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
           expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
         });
 
         it('should focus the last akshram of previous talam line when backspaced from first akshram in the current talam line', function() {
-          var swaramLines = editorDom.select('div.swaram');
+          var swaramLines = talamBlockDom.select('div.swaram');
           var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
           keyEvent.perform(0, 65);
 
-          swaramLines = editorDom.select('div.swaram');
+          swaramLines = talamBlockDom.select('div.swaram');
           var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
           keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
           keyEvent.perform(8, 0);
@@ -463,7 +463,7 @@ Screw.Unit(function() {
         });
 
         it('should focus the first akshram of next sahidyam line when the last akshram in previous sahiydam line is entered', function() {
-          editorDom.update();
+          talamBlockDom.update();
           talamBlock = new Music.TalamBlock('editor', talam, {
             sahidyamLine: {
               akshramLength: 1,
@@ -472,12 +472,12 @@ Screw.Unit(function() {
             }
           });
 
-          var sahidyamLines = editorDom.select('div.sahidyam');
+          var sahidyamLines = talamBlockDom.select('div.sahidyam');
           var lastAkshramInFirstSahidyamLine = sahidyamLines[0].down('span:last-child > input[type="text"]:last-child');
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstSahidyamLine);
           keyEvent.perform(0, 65);
 
-          sahidyamLines = editorDom.select('div.sahidyam');
+          sahidyamLines = talamBlockDom.select('div.sahidyam');
           var firstAkshramInNextSahidyamLine = sahidyamLines[1].down('span:first-child > input[type="text"]:first-child');
           expect(firstAkshramInNextSahidyamLine).to(equal, document.activeElement);
         });
@@ -486,7 +486,7 @@ Screw.Unit(function() {
           var akshramLength = 3;
 
           before(function() {
-            editorDom.update();
+            talamBlockDom.update();
             talamBlock = new Music.TalamBlock('editor', talam, {
               swaramLine: {
                 akshramLength: akshramLength,
@@ -497,7 +497,7 @@ Screw.Unit(function() {
 
           it('should focus first akshram of next talam line only when the last akshram of current line is filled', function() {
 
-          var swaramLines = editorDom.select('div.swaram');
+          var swaramLines = talamBlockDom.select('div.swaram');
           var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
           lastAkshramInFirstTalamLine.focus();
           keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
@@ -507,14 +507,14 @@ Screw.Unit(function() {
             keyEvent.perform(0, 65);
           }
 
-          swaramLines = editorDom.select('div.swaram');
+          swaramLines = talamBlockDom.select('div.swaram');
           var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
           expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
 
           });
 
           it('should focus the last akshram of previous talam line only when the first akshram is cleared out on backspace', function() {
-            var swaramLines = editorDom.select('div.swaram');
+            var swaramLines = talamBlockDom.select('div.swaram');
             var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
             lastAkshramInFirstTalamLine.focus();
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
@@ -525,7 +525,7 @@ Screw.Unit(function() {
               keyEvent.perform(0, 65);
             }
 
-            swaramLines = editorDom.select('div.swaram');
+            swaramLines = talamBlockDom.select('div.swaram');
             var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
 
             keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
@@ -551,7 +551,7 @@ Screw.Unit(function() {
               }
             });
 
-            var swaramLines = editorDom.select('div.swaram');
+            var swaramLines = talamBlockDom.select('div.swaram');
             var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
             var eventCountIndex;
@@ -560,7 +560,7 @@ Screw.Unit(function() {
               keyEvent.perform(0, 65);
             }
 
-            swaramLines = editorDom.select('div.swaram');
+            swaramLines = talamBlockDom.select('div.swaram');
             var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
             expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
 
@@ -575,7 +575,7 @@ Screw.Unit(function() {
               }
             });
 
-            var swaramLines = editorDom.select('div.swaram');
+            var swaramLines = talamBlockDom.select('div.swaram');
             var lastAkshramInFirstTalamLine = swaramLines[0].down('span:last-child > input[type="text"]:last-child');
             keyEvent = new SimulateKeyboardEvent(lastAkshramInFirstTalamLine);
             var eventCountIndex;
@@ -584,7 +584,7 @@ Screw.Unit(function() {
               keyEvent.perform(0, 65);
             }
 
-            swaramLines = editorDom.select('div.swaram');
+            swaramLines = talamBlockDom.select('div.swaram');
             var firstAkshramInSecondTalamLine = swaramLines[1].down('span:first-child > input[type="text"]:first-child');
             keyEvent = new SimulateKeyboardEvent(firstAkshramInSecondTalamLine);
             for(eventCountIndex = 0; eventCountIndex < newAkshramLength; eventCountIndex++) {
@@ -605,5 +605,55 @@ Screw.Unit(function() {
 
     });
 
+    describe('Editor', function() {
+
+      var editorDom = $('editor');
+      var carnaticEditor;
+      var defaultTalamBlock = {
+        swaramLine: {
+          disabled: false,
+          className: 'swaram',
+          akshramLength: 1
+        },
+        sahidyamLine: {
+          disabled: false,
+          className: 'sahidyam',
+          akshramLength: 1
+        }
+      };
+
+      before(function() {
+        talam = SampleTalams.Adi;
+        editorDom.update();
+        carnaticEditor = new Music.Editor(editorDom, talam);
+      });
+
+      it('should create a editor', function() {
+        var editor = editorDom.down('div.editor');
+        expect(editor).to_not(be_undefined)
+      });
+
+      it('should add talam block', function() {
+        carnaticEditor.addTalamBlock(defaultTalamBlock);
+        var swaramLine = editor.down('div.editor > div > div.swaram');
+        var sahidyamLine = editor.down('div.editor > div > div.sahidyam');
+        var blocks = editor.select('div.editor > div');
+
+        expect(blocks.length).to(equal, 1);
+        expect(swaramLine).to_not(be_undefined);
+        expect(sahidyamLine).to_not(be_undefined);
+      });
+
+      it('should be able to add more than one talam block', function() {
+        carnaticEditor.addTalamBlock(defaultTalamBlock);
+        carnaticEditor.addTalamBlock(defaultTalamBlock);
+        var blocks = editor.select('div.editor > div');
+
+        expect(blocks.length).to(equal, 2);
+      });
+
+    });
+
   });
+
 });
