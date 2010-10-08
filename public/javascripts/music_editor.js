@@ -10,37 +10,49 @@ var Music = {
       this.options = {
         swaramLine: {
           akshramLength: 1,
-          className: 'swaram'
+          className: 'swaram',
+          disabled: false
         },
         sahidyamLine: {
           akshramLength: 1,
-          className: 'sahidyam'
+          className: 'sahidyam',
+          disabled: true
         }
       };
       Object.extend(this.options, options);
       this._focusNextTalamLine();
     },
 
-    _createSwaramLine: function() {
-      var swaramLine = new Music.TalamLine(this.domNode, this.talam, {
-        akshramLength: this.options.swaramLine.akshramLength,
-        className: this.options.swaramLine.className,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.swaramLines, this.options.swaramLine.className),
-        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.swaramLines, this.options.swaramLine.className)
-      });
-      this.swaramLines.push(swaramLine);
-      return swaramLine;
+    _createSwaramLine: function(focus) {
+      if (!this.options.swaramLine.disabled) {
+        var swaramLine = new Music.TalamLine(this.domNode, this.talam, {
+          akshramLength: this.options.swaramLine.akshramLength,
+          className: this.options.swaramLine.className,
+          onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.swaramLines, this.options.swaramLine.className),
+          onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.swaramLines, this.options.swaramLine.className)
+        });
+        this.swaramLines.push(swaramLine);
+        return swaramLine;
+      }
     },
 
-    _createSahidyamLine: function() {
-      var sahidyamLine = new Music.TalamLine(this.domNode, this.talam, {
-        akshramLength: this.options.sahidyamLine.akshramLength,
-        className: this.options.sahidyamLine.className,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.sahidyamLines, this.options.sahidyamLine.className),
-        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.sahidyamLines, this.options.sahidyamLine.className)
-      });
-      this.sahidyamLines.push(sahidyamLine);
-      return sahidyamLine;
+    _createSahidyamLine: function(focus) {
+      if (!this.options.sahidyamLine.disabled) {
+        var sahidyamLine = new Music.TalamLine(this.domNode, this.talam, {
+          akshramLength: this.options.sahidyamLine.akshramLength,
+          className: this.options.sahidyamLine.className,
+          onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.sahidyamLines, this.options.sahidyamLine.className),
+          onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.sahidyamLines, this.options.sahidyamLine.className)
+        });
+        this.sahidyamLines.push(sahidyamLine);
+        return sahidyamLine;
+      }
+    },
+
+    _createTalamLines: function(selector) {
+      var swaramLine = this._createSwaramLine(selector == this.options.swaramLine.className);
+      var sahidyamLine = this._createSahidyamLine(selector == this.options.sahidyamLine.className);
+      return (selector == this.options.sahidyamLine.className ? sahidyamLine : swaramLine);
     },
 
     _getTalamLine: function(talamLines, talamDomNode) {
@@ -71,9 +83,11 @@ var Music = {
     _focusNextTalamLine: function(current, talamLines, selector) {
       var nextTalamLine = this._getNextTalamLine(current, talamLines, selector);
       if (!nextTalamLine) {
-        nextTalamLine = this._createSwaramLine();
+        nextTalamLine = this._createTalamLines(selector);
       }
-      nextTalamLine.focusFirstAkshram();
+      if (nextTalamLine) {
+        nextTalamLine.focusFirstAkshram();
+      }
     },
 
     _focusPreviousTalamLine: function(current, talamLines, selector) {
