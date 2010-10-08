@@ -1,4 +1,4 @@
-//Todo: Create seperate test suite for TalamLine and Editor.
+//Todo: Create seperate test suite for TalamLine and TalamBlock.
 Screw.Unit(function() {
   var SampleTalams = {
     SangeernaJathiBhuvana: [9,2,9,9],
@@ -280,13 +280,13 @@ Screw.Unit(function() {
     });
 
     describe('TalamBlock', function() {
-      var editor;
+      var talamBlock;
       var editorDom = $('editor');
 
       before(function() {
         editorDom.update();
         talam = SampleTalams.Adi;
-        editor = new Music.TalamBlock('editor', talam);
+        talamBlock = new Music.TalamBlock('editor', talam);
       });
 
       describe('Layout', function() {
@@ -316,7 +316,7 @@ Screw.Unit(function() {
 
         it ('should use custom classname', function() {
           editorDom.update();
-          editor = new Music.TalamBlock('editor', talam, {
+          talamBlock = new Music.TalamBlock('editor', talam, {
             className: {
               swaramLine: 'swaram'
             }
@@ -329,9 +329,9 @@ Screw.Unit(function() {
 
           before(function() {
             editorDom.update();
-            editor = new Music.TalamBlock('editor', talam, {
-              akshramLength: {
-                swaramLine: 2
+            talamBlock = new Music.TalamBlock('editor', talam, {
+              swaramLine: {
+                akshramLength: 2
               }
             });
           });
@@ -346,8 +346,8 @@ Screw.Unit(function() {
           it('shoud use the new akshram length', function() {
             var newAkshramLength = 4;
             editor.update({
-              akshramLength: {
-                swaramLine: newAkshramLength
+              swaramLine: {
+                akshramLength: newAkshramLength
               }
             });
 
@@ -395,9 +395,10 @@ Screw.Unit(function() {
 
           before(function() {
             editorDom.update();
-            editor = new Music.TalamBlock('editor', talam, {
-              akshramLength: {
-                swaramLine: akshramLength
+            talamBlock = new Music.TalamBlock('editor', talam, {
+              swaramLine: {
+                akshramLength: akshramLength,
+                className: 'swaram'
               }
             });
           });
@@ -436,7 +437,7 @@ Screw.Unit(function() {
             }
             firstAkshramInSecondTalamLine.focus();
 
-            for(eventCountIndex = 0; eventCountIndex < editor.options.akshramLength.swaramLine; eventCountIndex++) {
+            for(eventCountIndex = 0; eventCountIndex < talamBlock.options.swaramLine.akshramLength; eventCountIndex++) {
               expect(firstAkshramInSecondTalamLine).to(equal, document.activeElement);
               keyEvent.perform(8, 0);
             }
@@ -446,9 +447,10 @@ Screw.Unit(function() {
 
           it('should respect the new akshram length and focus the first akshram in the next talam line when the last akshram in current line is filled', function() {
             var newAkshramLength = 4;
-            editor.update({
+            talamBlock.update({
               akshramLength: {
-                swaramLine: newAkshramLength
+                swaramLine: newAkshramLength,
+                className: 'swaram'
               }
             });
 
@@ -467,9 +469,10 @@ Screw.Unit(function() {
 
           it('should respect the new akshram lengh and focus the last akshram in the previous talam line when the first akshram is cleared out on backspace', function() {
             var newAkshramLength = 4;
-            editor.update({
-              akshramLength: {
-                swaramLine: newAkshramLength
+            talamBlock.update({
+              swaramLine: {
+                akshramLength: newAkshramLength,
+                className: 'swaram'
               }
             });
 

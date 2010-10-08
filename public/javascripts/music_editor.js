@@ -8,13 +8,13 @@ var Music = {
       this.swaramLines = [];
       this.sahidyamLines = [];
       this.options = {
-        akshramLength: {
-          swaramLine: 1,
-          sahidyamLine: 1
+        swaramLine: {
+          akshramLength: 1,
+          className: 'swaram'
         },
-        className: {
-          swaramLine: 'swaram',
-          sahidyamLine: 'sahidyam'
+        sahidyamLine: {
+          akshramLength: 1,
+          className: 'sahidyam'
         }
       };
       Object.extend(this.options, options);
@@ -23,10 +23,10 @@ var Music = {
 
     _createSwaramLine: function() {
       var swaramLine = new Music.TalamLine(this.domNode, this.talam, {
-        akshramLength: this.options.akshramLength.swaramLine,
-        className: this.options.className.swaramLine,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.swaramLine),
-        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.className.swaramLine)
+        akshramLength: this.options.swaramLine.akshramLength,
+        className: this.options.swaramLine.className,
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.swaramLine.className),
+        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.swaramLine.className)
       });
       this.swaramLines.push(swaramLine);
       return swaramLine;
@@ -35,9 +35,9 @@ var Music = {
     _createSahidyamLine: function() {
       var sahidyamLine = new Music.TalamLine(this.domNode, this.talam, {
         akshramLength: this.options.akshramLength.sahidyamLine,
-        className: this.options.className.sahidyamLine,
-        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.className.sahidyamLine),
-        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.className.sahidyamLine)
+        className: this.options.sahidyamLine.className,
+        onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, this.options.sahidyamLine.className),
+        onFirstAkshram: this._focusPreviousTalamLine.bindAsEventListener(this, this.options.sahidyamLine.className)
       });
       this.sahidyamLines.push(sahidyamLine);
       return sahidyamLine;
@@ -86,7 +86,7 @@ var Music = {
     _reAssignAkshramLength: function() {
       this.swaramLines.each(function(talamLine) {
         talamLine.update({
-          akshramLength: this.options.akshramLength.swaramLine
+          akshramLength: this.options.swaramLine.akshramLength
         });
       }.bind(this));
     },
