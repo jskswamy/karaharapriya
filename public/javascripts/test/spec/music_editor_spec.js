@@ -623,7 +623,7 @@ Screw.Unit(function() {
       };
 
       before(function() {
-        talam = SampleTalams.Adi;
+        talam = SampleTalams.Rupagam;
         editorDom.update();
         carnaticEditor = new Music.Editor(editorDom, talam);
       });
@@ -635,8 +635,8 @@ Screw.Unit(function() {
 
       it('should add talam block', function() {
         carnaticEditor.addTalamBlock(defaultTalamBlock);
-        var swaramLine = editor.down('div.editor > div > div.swaram');
-        var sahidyamLine = editor.down('div.editor > div > div.sahidyam');
+        var swaramLine = editor.down('div.editor > div > div > div.swaram');
+        var sahidyamLine = editor.down('div.editor > div > div > div.sahidyam');
         var blocks = editor.select('div.editor > div');
 
         expect(blocks.length).to(equal, 1);

@@ -15,9 +15,9 @@ var Music = {
     },
 
     addTalamBlock: function(talamBlockOption, className) {
-      var blockDom = new Element('div', {'class' : className ? className : ''});
-      var talamBlock = new Music.TalamBlock(blockDom, this.talam, talamBlockOption);
-      this.domNode.appendChild(blockDom);
+      var talamBlockDom = new Element('div', {'class' : className ? className : 'block'});
+      var talamBlock = new Music.TalamBlock(talamBlockDom, this.talam, talamBlockOption);
+      this.domNode.appendChild(talamBlockDom);
     }
 
   }),
@@ -41,13 +41,14 @@ var Music = {
           disabled: true
         }
       };
+      this.talamLinesCount = 1;
       Object.extend(this.options, options);
       this._focusNextTalamLine();
     },
 
-    _createTalamLine: function(talamLines, option) {
+    _createTalamLine: function(target, talamLines, option) {
       if (!option.disabled) {
-        var talamLine = new Music.TalamLine(this.domNode, this.talam, {
+        var talamLine = new Music.TalamLine(target, this.talam, {
           akshramLength: option.akshramLength,
           className: option.className,
           onLastAkshram: this._focusNextTalamLine.bindAsEventListener(this, talamLines, option.className),
@@ -59,9 +60,22 @@ var Music = {
     },
 
     _createTalamLines: function(selector) {
-      var swaramLine = this._createTalamLine(this.swaramLines, this.options.swaramLine);
-      var sahidyamLine = this._createTalamLine(this.sahidyamLines, this.options.sahidyamLine);
+      var newBlock = new Element('div', {'class': this.talamLinesCount % 2 === 0 ? 'even' : 'odd'});
+      var swaramLine = this._createTalamLine(newBlock, this.swaramLines, this.options.swaramLine);
+      var sahidyamLine = this._createTalamLine(newBlock, this.sahidyamLines, this.options.sahidyamLine);
+
+      this.talamLinesCount++;
+      this.domNode.appendChild(newBlock);
+      this._insertClearElement(this.domNode);
       return (selector == this.options.sahidyamLine.className ? sahidyamLine : swaramLine);
+    },
+
+    _insertClearElement: function(target) {
+      var clearElement = target.down('div.clear');
+      if (clearElement) {
+        clearElement.remove();
+      }
+      target.insert(new Element('div', {'class': 'clear'}));
     },
 
     _getTalamLine: function(talamLines, talamDomNode) {
@@ -79,14 +93,16 @@ var Music = {
 
     //TODO: Merge _getNextTalamLine and _getPreviousTalamLine into one.
     _getNextTalamLine: function(current, talamLines, selector) {
-      if (current) {
-        return this._getTalamLine(talamLines, current.domNode.next("div." + selector));
+      var nextParent;
+      if (current && (nextParent = current.target.next('div'))) {
+        return this._getTalamLine(talamLines, nextParent.down("div." + selector));
       }
     },
 
     _getPreviousTalamLine: function(current, talamLines, selector) {
-      if (current) {
-        return this._getTalamLine(talamLines, current.domNode.previous("div." + selector));
+      var previousParent;
+      if (current && (previousParent = current.target.previous('div'))) {
+        return this._getTalamLine(talamLines, previousParent.down("div." + selector));
       }
     },
 
@@ -107,17 +123,19 @@ var Music = {
       }
     },
 
-    _reAssignAkshramLength: function() {
-      this.swaramLines.each(function(talamLine) {
+    _reAssignAkshramLength: function(talamLines, newAkshramLength) {
+      talamLines.each(function(talamLine) {
         talamLine.update({
-          akshramLength: this.options.swaramLine.akshramLength
+          akshramLength: newAkshramLength
         });
       }.bind(this));
     },
 
+    //TODO: No proper test coverage for reassign of akshram length for sahidyam line
     update: function(options) {
       Object.extend(this.options, options);
-      this._reAssignAkshramLength();
+      this._reAssignAkshramLength(this.swaramLines, this.options.swaramLine.akshramLength);
+      this._reAssignAkshramLength(this.sahidyamLines, this.options.sahidyamLine.akshramLength);
     }
 
   }),
