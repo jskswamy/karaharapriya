@@ -7,7 +7,7 @@ var Music = {
 
     initialize: function(target, talam) {
       this.target = $(target);
-      this.options = { className: 'editor' }
+      this.options = { className: 'editor' };
       this.domNode = new Element('div', { 'class': this.options.className });
       this.talamBlocks = [];
       this.target.appendChild(this.domNode);

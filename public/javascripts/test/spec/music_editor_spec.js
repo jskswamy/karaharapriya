@@ -630,7 +630,7 @@ Screw.Unit(function() {
 
       it('should create a editor', function() {
         var editor = editorDom.down('div.editor');
-        expect(editor).to_not(be_undefined)
+        expect(editor).to_not(be_undefined);
       });
 
       it('should add talam block', function() {
