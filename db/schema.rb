@@ -10,6 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20101012105100) do
+
+  create_table "song_content_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "song_contents", :force => true do |t|
+    t.integer  "song_id"
+    t.integer  "song_content_type_id"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "song_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "songs", :force => true do |t|
+    t.string   "name"
+    t.string   "composer"
+    t.integer  "song_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
