@@ -10,7 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012105100) do
+ActiveRecord::Schema.define(:version => 20101012115420) do
+
+  create_table "ragams", :force => true do |t|
+    t.string   "name"
+    t.string   "arohana"
+    t.string   "avarohana"
+    t.boolean  "major"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "song_content_infos", :force => true do |t|
+    t.integer  "song_content_id"
+    t.integer  "info_id"
+    t.string   "info_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "song_content_types", :force => true do |t|
     t.string   "name"
@@ -38,6 +56,14 @@ ActiveRecord::Schema.define(:version => 20101012105100) do
     t.string   "name"
     t.string   "composer"
     t.integer  "song_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "talams", :force => true do |t|
+    t.string   "name"
+    t.string   "avartanam"
+    t.integer  "laghu_length"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
