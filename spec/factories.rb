@@ -1,6 +1,6 @@
 Factory.define :song do |f|
   f.name 'A song'
-  f.composer 'Unknown composer'
+  f.association :composer
   f.association :song_type
 end
 
@@ -36,4 +36,10 @@ Factory.define :talam do |f|
   f.name "aathi"
   f.avartanam "1 0 0"
   f.laghu_length 4
+end
+
+Factory.define :composer do |f|
+  f.name "Thiagarajar"
+  f.century "1780-1880"
+  f.info "Great Composer"
 end

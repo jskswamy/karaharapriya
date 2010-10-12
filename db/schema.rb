@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012115420) do
+ActiveRecord::Schema.define(:version => 20101012130224) do
+
+  create_table "composers", :force => true do |t|
+    t.string   "name"
+    t.string   "century"
+    t.string   "info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ragams", :force => true do |t|
     t.string   "name"
@@ -54,10 +62,10 @@ ActiveRecord::Schema.define(:version => 20101012115420) do
 
   create_table "songs", :force => true do |t|
     t.string   "name"
-    t.string   "composer"
     t.integer  "song_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "composer_id"
   end
 
   create_table "talams", :force => true do |t|
