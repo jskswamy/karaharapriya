@@ -4,7 +4,7 @@ describe Ragam do
 
   it "should not have duplicate name" do
     mohana_ragam = Factory(:ragam, :name => "mohanam")
-    another_mohana_ragam = Factory.build(:ragam, :name => "mohanam", :arohana => "sa re2 ga2 ma")
+    another_mohana_ragam = Factory.build(:ragam, :name => "mohanam", :arohana => "sa re2 ga2 ma1 pa")
     another_mohana_ragam.valid?.should be_false
     another_mohana_ragam.errors.full_messages.to_sentence.should == "Name has already been taken"
   end
@@ -38,6 +38,18 @@ describe Ragam do
                                        :avarohana => "sa^ th2 pa ga2 re2 sa")
     fake_mohana_ragam.valid?.should be_false
     fake_mohana_ragam.errors.full_messages.to_sentence.should == "Arohana and Avarohana already defined for another ragam"
+  end
+
+  it "arohana should have a minimum length of five" do
+    invalid_arohana_ragam = Factory.build(:ragam, :arohana => "sa re ga ma")
+    invalid_arohana_ragam.valid?.should be_false
+    invalid_arohana_ragam.errors.full_messages.to_sentence.should == "Arohana should have atleast 5 swaras"
+  end
+
+  it "avarohana should have a minimum length of five" do
+    invalid_avarohana_ragam = Factory.build(:ragam, :avarohana => "ma ga re sa")
+    invalid_avarohana_ragam.valid?.should be_false
+    invalid_avarohana_ragam.errors.full_messages.to_sentence.should == "Avarohana should have atleast 5 swaras"
   end
 
 end
