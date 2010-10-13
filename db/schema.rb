@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012130224) do
+ActiveRecord::Schema.define(:version => 20101013064956) do
 
   create_table "composers", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(:version => 20101012130224) do
     t.string   "avarohana"
     t.boolean  "major"
     t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "song_compositions", :force => true do |t|
+    t.integer  "song_type_id"
+    t.integer  "song_content_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

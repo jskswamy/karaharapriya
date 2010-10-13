@@ -1,6 +1,17 @@
-<script type="text/javascript">
-  bkLib.onDomLoaded ( function() { new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'}).panelInstance('pallavi') } );
-</script>
 <% form_tag '/new' do %>
-  <%= text_area_tag :pallavi , "", {:style => "width:300px;"} %>
+  <fieldset style="width: 600px">
+    <div>
+      <%= label_tag :song_name %>
+      <%= text_field_tag :song_name %>
+    </div>
+    <div>
+      <%= label_tag :song_type %>
+      <%= select_tag :song_type , options_for_select(@song_types) %>
+    </div>
+  </fieldset>
+  <div id='song_editor'></div>
 <% end %>
+
+<script type="text/javascript">
+  var editor = new Song.Editor($('song_editor'), $('song_type'), <%= "'#{editor_songs_path}'" %> );
+</script>

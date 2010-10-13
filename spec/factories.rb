@@ -43,3 +43,8 @@ Factory.define :composer do |f|
   f.century "1780-1880"
   f.info "Great Composer"
 end
+
+Factory.define :song_composition do |f|
+  f.association :song_content_type
+  f.association :song_type
+end
