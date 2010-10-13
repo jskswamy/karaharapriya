@@ -1,5 +1,6 @@
 Karaharapriya::Application.routes.draw do
   resources :ragam
+  resources :songs
 
 
 
