@@ -1,0 +1,17 @@
+<% form_tag '/new' do %>
+  <fieldset style="width: 600px">
+    <div>
+      <%= label_tag :song_name %>
+      <%= text_field_tag :song_name %>
+    </div>
+    <div>
+      <%= label_tag :song_type %>
+      <%= select_tag :song_type , options_for_select(@song_types) %>
+    </div>
+  </fieldset>
+  <div id='song_editor'></div>
+<% end %>
+
+<script type="text/javascript">
+  var editor = new Song.Editor($('song_editor'), $('song_type'), <%= "'#{editor_songs_path}'" %> );
+</script>

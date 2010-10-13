@@ -3,6 +3,15 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0'
 gem 'mysql2'
 
+group :test do
+  gem 'factory_girl', '1.3.2'
+  gem 'rspec', '2.0.0'
+  gem 'rspec-rails', '2.0.0'
+  gem 'autotest', '4.4.1'
+  gem 'autotest-rails', '4.1.0'
+end
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
