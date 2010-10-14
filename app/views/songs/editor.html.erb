@@ -1,4 +1,16 @@
+<% @song_compositions.map(&:name).each do |name| %>
+  <fieldset>
+    <div class="editor_name">
+      <%= name %>
+    </div>
+    <div>
+      <%= text_area_tag name %>
+    </div>
+  </fieldset>
+<% end %>
 
 <script type="text/javascript">
-  bkLib.onDomLoaded ( function() { new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'}).panelInstance('pallavi') } );
+  <% @song_compositions.map(&:name).each do |name| %>
+    bkLib.onDomLoaded ( function() { new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'}).panelInstance("<%= name %>") } );
+  <% end %>
 </script>
