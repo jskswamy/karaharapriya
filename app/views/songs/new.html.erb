@@ -6,11 +6,11 @@
     </div>
     <div class="type">
       <%= label_tag :type %>
-      <%= select_tag :type , options_for_select(@song_types) %>
+      <%= select_tag :type , options_for_select(@song_types), :include_blank => "----------" %>
     </div>
     <div class="composer">
       <%= label_tag :composer %>
-      <%= select_tag :composer , options_for_select(@composers) %>
+      <%= select_tag :composer , options_for_select(@composers), :include_blank => "----------" %>
     </div>
     <div id='content'></div>
   </fieldset>
