@@ -49,4 +49,10 @@ namespace :bootstrap do
     SongComposition.create(:song_type => keerthanai_song_type, :song_content_type => SongContentType.find_by_name("Charanam"))
   end
 
+  desc "Create composers"
+  task :create_composers => :environment do
+    Composer.delete_all
+    Composer.create(:name => "Thiagarajar", :century => "18th", :info => "Great Composer")
+  end
+
 end
