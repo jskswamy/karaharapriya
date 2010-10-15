@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
 
   def new
-    @song_types = ["Basic Lesson", "Geetham", "Varnam", "Swarajathi", "Keerthanai"].sort #SongType.all.collect(&:name)
+    @song_types = SongType.all.collect(&:name).sort
   end
 
   def editor
