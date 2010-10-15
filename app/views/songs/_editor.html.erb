@@ -1,0 +1,10 @@
+<div class="song_editors">
+  <% @song_compositions.map(&:name).each do |name| %>
+    <div class="editor_name">
+      <%= name %>
+    </div>
+    <div class="editor">
+      <%= text_area_tag name, "", :class => "rich_editor" %>
+    </div>
+  <% end %>
+<div>

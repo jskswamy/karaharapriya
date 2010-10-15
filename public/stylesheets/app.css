@@ -1,4 +1,4 @@
-body {
-  font-family: sans-serif;
-  font-size: .8em;
+.base_font, body {
+  font-family: sans-serif, ubuntu;
+  font-size: 0.9em;
 }

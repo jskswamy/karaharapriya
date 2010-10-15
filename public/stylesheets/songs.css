@@ -1,3 +1,23 @@
-.song_editors .rich_editor{
-  width: 600px;
+.song_editor_width, .song, .content { width: 620px; }
+.song {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
+fieldset.song label {
+  display: inline-block;
+  width: 80px;
+  padding: 10px;
+}
+.song select { width: 200px; }
+.song .name input { width: 500px; }
+.song .type { float: left; }
+.rich_editor {
+  height: 100px;
+  width: 100%;
+}
+.song_editors .editor_name {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.song #content .editor { padding: 0px 10px; }

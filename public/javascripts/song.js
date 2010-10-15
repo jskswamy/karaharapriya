@@ -12,12 +12,13 @@ var Song = {
         parameters: {
           song_type: e.element().value
         },
-        onSuccess: function(response){
+        onSuccess: function(response) {
           this.target.innerHTML = response.responseText;
           $$('.rich_editor').each(function(item){
             var editor = new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'});
             editor.panelInstance(item.id);
           });
+          this.target.highlight({ startcolor: '#ffff99', endcolor: '#ffffff' });
         }.bind(this)
       });
     }

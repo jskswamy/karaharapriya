@@ -1,17 +1,21 @@
 <% form_tag '/new' do %>
-  <fieldset style="width: 600px">
-    <div>
-      <%= label_tag :song_name %>
-      <%= text_field_tag :song_name %>
+  <fieldset class="song">
+    <div class="name">
+      <%= label_tag :name %>
+      <%= text_field_tag :name %>
     </div>
-    <div>
-      <%= label_tag :song_type %>
-      <%= select_tag :song_type , options_for_select(@song_types) %>
+    <div class="type">
+      <%= label_tag :type %>
+      <%= select_tag :type , options_for_select(@song_types) %>
     </div>
+    <div class="composer">
+      <%= label_tag :composer %>
+      <%= select_tag :composer , options_for_select(@composers) %>
+    </div>
+    <div id='content'></div>
   </fieldset>
-  <div id='song_editor'></div>
 <% end %>
 
 <script type="text/javascript">
-  var editor = new Song.Editor($('song_editor'), $('song_type'), <%= "'#{editor_songs_path}'" %> );
+  var editor = new Song.Editor($('content'), $('type'), <%= "'#{editor_songs_path}'" %> );
 </script>

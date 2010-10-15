@@ -1,0 +1,57 @@
+.width (@width: auto){
+  width: @width
+}
+
+.height (@height: auto) {
+  height: @height;
+}
+
+.song_editor_width {
+  .width(620px);
+}
+
+.rounded_corners (@radius: 5px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.song, .content {
+  .song_editor_width;
+}
+
+.song {
+  .rounded_corners(10px);
+}
+
+fieldset.song label {
+  display: inline-block;
+  .width(80px);
+  padding: 10px;
+}
+
+.song select {
+  .width(200px);
+}
+
+.song .name input {
+  width: 500px;
+}
+
+.song .type {
+  float: left;
+}
+
+.rich_editor {
+  .height(100px);
+  .width(100%);
+}
+
+.song_editors .editor_name {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.song #content .editor {
+  padding: 0px 10px;
+}

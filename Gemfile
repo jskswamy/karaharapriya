@@ -3,6 +3,10 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0'
 gem 'mysql2'
 
+group :development do
+  gem 'less', '1.2.21'
+end
+
 group :test do
   gem 'factory_girl', '1.3.2'
   gem 'rspec', '2.0.0'
