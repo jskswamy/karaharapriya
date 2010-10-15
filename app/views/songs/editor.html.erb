@@ -1,4 +1,12 @@
-
-<script type="text/javascript">
-  bkLib.onDomLoaded ( function() { new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'}).panelInstance('pallavi') } );
-</script>
+<div class="song_editors">
+  <% @song_compositions.map(&:name).each do |name| %>
+    <fieldset>
+      <div class="editor_name">
+        <%= name %>
+      </div>
+      <div>
+        <%= text_area_tag name, "", :class => "rich_editor" %>
+      </div>
+    </fieldset>
+  <% end %>
+  <div>

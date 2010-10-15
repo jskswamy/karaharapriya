@@ -7,11 +7,17 @@ var Song = {
     },
 
     updateTarget: function(e){
-      var updater = new Ajax.Updater(this.target, this.url, {
+      var request = new Ajax.Request(this.url, {
         method: 'get',
         parameters: {
           song_type: e.element().value
-        }
+        },
+        onSuccess: function(response){
+          this.target.innerHTML = response.responseText;
+          $$('.rich_editor').each(function(item){
+            new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'}).panelInstance(item.id);
+          });
+        }.bind(this)
       });
     }
   })
