@@ -15,7 +15,8 @@ var Song = {
         onSuccess: function(response){
           this.target.innerHTML = response.responseText;
           $$('.rich_editor').each(function(item){
-            new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'}).panelInstance(item.id);
+            var editor = new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'});
+            editor.panelInstance(item.id);
           });
         }.bind(this)
       });
