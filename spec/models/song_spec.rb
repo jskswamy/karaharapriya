@@ -18,4 +18,10 @@ describe Song do
     a_song_in_varnam.valid?.should be_true
   end
 
+  it "should not be able to create a song without name" do
+    song = Factory.build(:song, :name => nil)
+    song.valid?.should be_false
+    song.errors.full_messages.to_sentence.should == "Name can't be blank"
+  end
+
 end

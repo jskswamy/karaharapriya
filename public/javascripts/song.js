@@ -10,7 +10,7 @@ var Song = {
       var request = new Ajax.Request(this.url, {
         method: 'get',
         parameters: {
-          song_type: e.element().value
+          song_type_id: e.element().value
         },
         onSuccess: function(response) {
           this.target.innerHTML = response.responseText;

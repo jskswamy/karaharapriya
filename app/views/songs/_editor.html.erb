@@ -1,10 +1,12 @@
 <div class="song_editors">
-  <% @song_compositions.map(&:name).each do |name| %>
+  <% @song_compositions.each_with_index do |song_composition, index| %>
     <div class="editor_name">
-      <%= name %>
+      <%= song_composition.name %>
+      <%= hidden_field_tag "song_contents[#{index.to_s}][song_content_type_id]", song_composition.id %> 
     </div>
     <div class="editor">
-      <%= text_area_tag name, "", :class => "rich_editor" %>
+      <%= text_area_tag "song_contents[#{index.to_s}][body]", "" , :class => "rich_editor" %>
     </div>
   <% end %>
+  <%= submit_tag :submit %>
 <div>

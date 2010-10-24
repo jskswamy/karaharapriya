@@ -5,6 +5,9 @@ Karaharapriya::Application.routes.draw do
     collection do
       get :editor
     end
+    member do
+      post :create
+    end
   end
 
   # The priority is based upon order of creation:

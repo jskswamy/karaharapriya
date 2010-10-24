@@ -1,21 +1,25 @@
-<% form_tag '/new' do %>
+<div style="color:red;">
+  <%= flash[:error] %>
+</div>
+
+<%= form_tag 'create' do %>
   <fieldset class="song">
     <div class="name">
-      <%= label_tag :name %>
-      <%= text_field_tag :name %>
+      <%= label_tag "song_name", "Name" %>
+      <%= text_field_tag "song[name]" %>
     </div>
     <div class="type">
-      <%= label_tag :type %>
-      <%= select_tag :type , options_for_select(@song_types), :include_blank => "----------" %>
+      <%= label_tag "song_song_type_id", "Song Type" %>
+      <%= select_tag "song[song_type_id]" , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
     </div>
     <div class="composer">
-      <%= label_tag :composer %>
-      <%= select_tag :composer , options_for_select(@composers), :include_blank => "----------" %>
+      <%= label_tag "song_composer_id", "Composer" %>
+      <%= select_tag "song[composer_id]" , options_for_select(@composers.collect{ |composer| [composer.name, composer.id] }), :include_blank => "-select-" %>
     </div>
     <div id='content'></div>
   </fieldset>
 <% end %>
 
 <script type="text/javascript">
-  var editor = new Song.Editor($('content'), $('type'), <%= "'#{editor_songs_path}'" %> );
+  var editor = new Song.Editor($('content'), $('song_song_type_id'), <%= "'#{editor_songs_path}'" %> );
 </script>
