@@ -23,5 +23,11 @@ describe SongContent do
     content.errors.full_messages.to_sentence.should == "Song content type can't be blank"
   end
 
+  it "should destroy the song contents when the song is destroyed" do
+    content = Factory(:song_content)
+    song = content.song
+    song.destroy
+    SongContent.all.count.should == 0
+  end
 
 end
