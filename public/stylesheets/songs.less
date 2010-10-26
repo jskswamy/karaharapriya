@@ -6,8 +6,22 @@
   height: @height;
 }
 
-.song_editor_width {
-  .width(620px);
+.left_content_height {
+  height: 400px;
+}
+
+.left_content_width {
+  width: 315px;
+}
+
+.left_content_dimension {
+  .left_content_height;
+  .left_content_width;
+}
+
+.font_heading {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .rounded_corners (@radius: 5px) {
@@ -16,42 +30,82 @@
   border-radius: @radius;
 }
 
-.song, .content {
-  .song_editor_width;
+.rounded_corners_top (@radius: 5px) {
+  -moz-border-radius: @radius @radius 0px 0px;
+  -webkit-border-radius: @radius @radius 0px 0px;
+  border-radius: @radius @radius 0px 0px;
 }
 
-.song {
-  .rounded_corners(10px);
+.rounded_corners_bottom (@radius: 5px) {
+  -moz-border-radius: 0px 0px @radius @radius;
+  -webkit-border-radius: 0px 0px @radius @radius;
+  border-radius: 0px 0px @radius @radius;
 }
 
-fieldset.song label {
-  display: inline-block;
-  .width(80px);
-  padding: 10px;
+.basic_background_color {
+  background-color: #ccc;
 }
 
-.song select {
-  .width(200px);
-}
-
-.song .name input {
-  width: 500px;
-}
-
-.song .type {
+.content .body .left {
   float: left;
 }
 
-.rich_editor {
-  .height(100px);
-  .width(100%);
+.content .body .right {
+  margin-left: 350px;
 }
 
-.song_editors .editor_name {
-  padding-left: 10px;
-  padding-top: 10px;
+.content .body .left .header {
+  .basic_background_color;
+  height: 20px;
+  .font_heading;
+  .rounded_corners_top(10px);
+  margin-top: 0px;
+  padding: 10px 10px;
 }
 
-.song #content .editor {
-  padding: 0px 10px;
+.content .body .left .body {
+  border-right: solid 1px #ccc;
+  border-left: solid 1px #ccc;
+  .left_content_width;
+  padding: 5px 10px;
+}
+
+.content .body .left .body .section {
+  margin: 10px 0px 0px 0px;
+  line-height: 2.0em;
+}
+
+.content .body .left .body .section .input input,
+.content .body .left .body .section .input textarea {
+  width: 97%;
+}
+
+.content .body .left .body .section .input select {
+  width: 100%;
+}
+
+.content .body .left .body .section .input textarea {
+  height: 60px;
+}
+
+.content .body .left .footer {
+  border: none;
+  .basic_background_color;
+  clear: both;
+  height: 40px;
+  .rounded_corners_bottom(10px);
+  margin-top: 0px;
+}
+
+.content .body .right .editor {
+  margin-bottom: 20px;
+}
+
+.content .body .right .editor_name h1 {
+  .font_heading;
+}
+
+.content .body .right .editor textarea {
+  height: 150px;
+  width: 100%;
 }

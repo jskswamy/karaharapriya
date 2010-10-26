@@ -1,23 +1,57 @@
-.song_editor_width, .song, .content { width: 620px; }
-.song {
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
+.left_content_height { height: 400px; }
+.left_content_width { width: 315px; }
+.left_content_dimension {
+  height: 400px;
+  width: 315px;
 }
-fieldset.song label {
-  display: inline-block;
-  width: 80px;
-  padding: 10px;
+.font_heading {
+  font-size: 1.5em;
+  font-weight: bold;
 }
-.song select { width: 200px; }
-.song .name input { width: 500px; }
-.song .type { float: left; }
-.rich_editor {
-  height: 100px;
+.basic_background_color { background-color: #cccccc; }
+.content .body .left { float: left; }
+.content .body .right { margin-left: 350px; }
+.content .body .left .header {
+  background-color: #cccccc;
+  height: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  -moz-border-radius: 10px 10px 0px 0px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: 0px;
+  padding: 10px 10px;
+}
+.content .body .left .body {
+  border-right: solid 1px #cccccc;
+  border-left: solid 1px #cccccc;
+  width: 315px;
+  padding: 5px 10px;
+}
+.content .body .left .body .section {
+  margin: 10px 0px 0px 0px;
+  line-height: 2em;
+}
+.content .body .left .body .section .input input { width: 97%; }
+.content .body .left .body .section .input textarea { width: 97%; }
+.content .body .left .body .section .input select { width: 100%; }
+.content .body .left .body .section .input textarea { height: 60px; }
+.content .body .left .footer {
+  border: none;
+  background-color: #cccccc;
+  clear: both;
+  height: 40px;
+  -moz-border-radius: 0px 0px 10px 10px;
+  -webkit-border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
+  margin-top: 0px;
+}
+.content .body .right .editor { margin-bottom: 20px; }
+.content .body .right .editor_name h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.content .body .right .editor textarea {
+  height: 150px;
   width: 100%;
 }
-.song_editors .editor_name {
-  padding-left: 10px;
-  padding-top: 10px;
-}
-.song #content .editor { padding: 0px 10px; }

@@ -1,24 +1,80 @@
-<div style="color:red;">
-  <%= flash[:error] %>
+<div class="left">
+  <div class="header">
+      Song
+  </div>
+  <div class="body">
+    <%= form_tag 'create' do %>
+      <div class="section">
+        <div class="title">
+          <%= label_tag "song_song_type_id", "Song Type" %>
+        </div>
+        <div class="input">
+          <%= select_tag "song[song_type_id]" , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= label_tag "song_name", "Name" %>
+        </div>
+        <div class="input">
+          <%= text_field_tag "song[name]" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= label_tag "song_composer_id", "Composer" %>
+        </div>
+        <div class="input">
+          <%= select_tag "song[composer_id]" , options_for_select(@composers.collect{ |composer| [composer.name, composer.id] }), :include_blank => "-select-" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= label_tag "song_ragam", "Ragam" %>
+        </div>
+        <div class="input">
+          <%= text_field_tag "song[ragam]" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= label_tag "song_talam", "Talam" %>
+        </div>
+        <div class="input">
+          <%= text_field_tag "song[talam]" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= label_tag "song_description", "Description" %>
+        </div>
+        <div class="input">
+          <%= text_area_tag "song[description]" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+
+  <div class="footer">
+  </div>
+
 </div>
 
-<%= form_tag 'create' do %>
-  <fieldset class="song">
-    <div class="name">
-      <%= label_tag "song_name", "Name" %>
-      <%= text_field_tag "song[name]" %>
-    </div>
-    <div class="type">
-      <%= label_tag "song_song_type_id", "Song Type" %>
-      <%= select_tag "song[song_type_id]" , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
-    </div>
-    <div class="composer">
-      <%= label_tag "song_composer_id", "Composer" %>
-      <%= select_tag "song[composer_id]" , options_for_select(@composers.collect{ |composer| [composer.name, composer.id] }), :include_blank => "-select-" %>
-    </div>
-    <div id='content'></div>
-  </fieldset>
-<% end %>
+<div class="right">
+  <div style="color:red;">
+    <%= flash[:error] %>
+  </div>
+
+  <div id='content'>
+    <div style="text-align: center; padding-top: 20%;">Choose a song type!!!</div>
+  </div>
+</div>
 
 <script type="text/javascript">
   var editor = new Song.Editor($('content'), $('song_song_type_id'), <%= "'#{editor_songs_path}'" %> );

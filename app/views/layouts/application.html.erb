@@ -8,7 +8,31 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="content">
+    <div class="header">
+        <div class="logo">
+        </div>
+    </div>
+    <div class="body">
+      <div class="menu">
+        <ul>
+          <li><a class="home" href="#"></a></li>
+          <li><a href="#">Song</a></li>
+          <li><a href="#">Ragam</a></li>
+          <li><a href="#">Talam</a></li>
+          <li><a href="#">Composer</a></li>
+        </ul>
+      </div>
+
+      <div class="page_content">
+        <%= yield %>
+        <div class="clear"></div>
+      </div>
+
+    </div>
+    <div class="footer">
+    </div>
+  </div>
 
 </body>
 </html>
