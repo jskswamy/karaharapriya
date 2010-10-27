@@ -9,8 +9,11 @@
   font-weight: bold;
 }
 .basic_background_color { background-color: #cccccc; }
-.content .body .left { float: left; }
-.content .body .right { margin-left: 350px; }
+.content .body .left {
+  float: left;
+  width: 315px;
+}
+.content .body .right { margin-left: 330px; }
 .content .body .left .header {
   background-color: #cccccc;
   height: 20px;
@@ -25,7 +28,6 @@
 .content .body .left .body {
   border-right: solid 1px #cccccc;
   border-left: solid 1px #cccccc;
-  width: 315px;
   padding: 5px 10px;
 }
 .content .body .left .body .section {

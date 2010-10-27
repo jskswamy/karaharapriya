@@ -1,17 +1,13 @@
-.base_font {
-  font-family: sans-serif;
-  font-size: 0.8em;
-}
+.base_font { font-family: verdana, sans-serif; }
+.base_font_size { font-size: 0.8em; }
 .menu_span { background: url(/images/menu_span.jpg); }
 .menu_style {
   color: #000000;
   font-weight: bold;
   text-decoration: none;
 }
-body {
-  font-family: sans-serif;
-  font-size: 0.8em;
-}
+body, select, input, textarea { font-family: verdana, sans-serif; }
+body { font-size: 0.8em; }
 body, ul {
   margin: 0px;
   padding: 0px;
@@ -65,7 +61,10 @@ body .content .body .menu li a {
 body .content .body .menu li a:hover { background-color: #e3e3e2; }
 body .content .body .menu li a.home:hover { background-color: #848181; }
 .clear { clear: both; }
-body .content .body .page_content { margin-top: 15px; }
+body .content .body .page_content {
+  margin-top: 15px;
+  padding: 0px 10px;
+}
 body .content .footer {
   border-bottom: solid 3px #125687;
   margin-top: 30px;

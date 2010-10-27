@@ -1,5 +1,8 @@
 .base_font {
-  font-family: sans-serif;
+  font-family: verdana, sans-serif;
+}
+
+.base_font_size {
   font-size: 0.8em;
 }
 
@@ -25,8 +28,12 @@
   text-decoration: none;
 }
 
-body {
+body, select, input, textarea {
   .base_font;
+}
+
+body {
+  .base_font_size;
 }
 
 body, ul {
@@ -96,6 +103,7 @@ body .content .body .menu li a.home:hover {
 
 body .content .body .page_content {
   margin-top: 15px;
+  padding: 0px 10px;
 }
 
 body .content .footer {
