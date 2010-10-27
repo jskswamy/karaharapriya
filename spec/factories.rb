@@ -1,11 +1,15 @@
+Factory.sequence :name do |n|
+  "first#{n}"
+end
+
 Factory.define :song do |f|
-  f.name 'A song'
+  f.name {Factory.next(:name)}
   f.association :composer
   f.association :song_type
 end
 
 Factory.define :song_type do |f|
-  f.name 'varnam'
+  f.name {Factory.next(:name)}
   f.description 'varnam'
 end
 
