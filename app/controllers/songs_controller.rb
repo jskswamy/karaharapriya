@@ -31,9 +31,4 @@ class SongsController < ApplicationController
     end
   end
 
-  private
-
-  def load_data
-  end
-
 end
