@@ -1,5 +1,8 @@
 namespace :bootstrap do
 
+  desc "runs all default bootstrap tasks"
+  task :run_all => [:create_basic_ragam, :create_basic_talam, :create_song_type, :create_song_content_type, :create_song_composition, :create_composers]
+
   desc "Create basic ragam"
   task :create_basic_ragam => :environment do
     Ragam.delete_all
