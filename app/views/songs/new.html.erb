@@ -38,7 +38,7 @@
           <%= label_tag "song_ragam", "Ragam" %>
         </div>
         <div class="input">
-          <%= text_field_tag "song[ragam]" %>
+          <%= select_tag "song[ragam]" , options_for_select(@ragams.collect{ |ragam| [ragam.name, ragam.id] }), :include_blank => "-select-" %>
         </div>
       </div>
 
@@ -47,7 +47,7 @@
           <%= label_tag "song_talam", "Talam" %>
         </div>
         <div class="input">
-          <%= text_field_tag "song[talam]" %>
+          <%= select_tag "song[talam]" , options_for_select(@talams.collect{ |talam| [talam.name, talam.id] }), :include_blank => "-select-" %>
         </div>
       </div>
 

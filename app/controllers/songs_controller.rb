@@ -3,6 +3,8 @@ class SongsController < ApplicationController
   def new
     @song_types = SongType.all
     @composers = Composer.all
+    @ragams = Ragam.all
+    @talams = Talam.all
   end
 
   def create
