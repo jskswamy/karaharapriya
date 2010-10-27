@@ -65,7 +65,7 @@ body .content .body .menu li a {
 body .content .body .menu li a:hover { background-color: #e3e3e2; }
 body .content .body .menu li a.home:hover { background-color: #848181; }
 .clear { clear: both; }
-body .content .body .page_content { margin-top: 10px; }
+body .content .body .page_content { margin-top: 15px; }
 body .content .footer {
   border-bottom: solid 3px #125687;
   margin-top: 30px;

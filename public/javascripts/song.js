@@ -18,7 +18,6 @@ var Song = {
             var editor = new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'});
             editor.panelInstance(item.id);
           });
-          this.target.highlight({ startcolor: '#ffff99', endcolor: '#ffffff' });
         }.bind(this)
       });
     }

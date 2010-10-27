@@ -11,6 +11,12 @@ describe SongsController do
 
     get :editor, {"song_type_id" => song_type.id}
     assigns(:song_compositions).should == [swarajathi_pallavi, swarajathi_anu_pallavi]
+    response.should render_template("songs/_editor")
+  end
+
+  it "should get the create song instruction when an invalid song type is specified" do
+    get :editor, {"song_type_id" => -1}
+    response.should render_template("songs/_create_instruction")
   end
 
   it "should load the song types on new song in alphabetical order" do

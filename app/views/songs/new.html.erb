@@ -1,7 +1,9 @@
 <div class="left">
+
   <div class="header">
       Song
   </div>
+
   <div class="body">
     <%= form_tag 'create' do %>
       <div class="section">
@@ -72,7 +74,7 @@
   </div>
 
   <div id='content'>
-    <div style="text-align: center; padding-top: 20%;">Choose a song type!!!</div>
+    <%= render :partial => "create_instruction" %>
   </div>
 </div>
 
