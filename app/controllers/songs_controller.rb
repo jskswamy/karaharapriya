@@ -5,10 +5,10 @@ class SongsController < ApplicationController
   end
 
   def new
-    @song_types = SongType.all
-    @composers = Composer.all
-    @ragams = Ragam.all
-    @talams = Talam.all
+    @song_types = SongType.ascending
+    @composers = Composer.ascending
+    @ragams = Ragam.ascending
+    @talams = Talam.ascending
   end
 
   def create

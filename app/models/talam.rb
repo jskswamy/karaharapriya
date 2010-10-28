@@ -1,4 +1,5 @@
 class Talam < ActiveRecord::Base
+  include Sorter
   has_many :song_content_info, :as => :info
   validate :validate_avartanam
 

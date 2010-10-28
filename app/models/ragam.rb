@@ -1,4 +1,5 @@
 class Ragam < ActiveRecord::Base
+  include Sorter
   has_many :song_content_info, :as => :info
   validates_presence_of :name, :arohana, :avarohana
   validates_uniqueness_of :name
