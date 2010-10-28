@@ -27,7 +27,7 @@ describe SongsController do
     response.should render_template("songs/_create_instruction")
   end
 
-  pending "should load the song types on new song in alphabetical order" do
+  it "should load the song types on new song in alphabetical order" do
     sarali = Factory(:song_type, :name => "sarali")
     janda = Factory(:song_type, :name => "janda")
 
@@ -36,18 +36,13 @@ describe SongsController do
   end
 
 
-  pending "should load the composers on new song in alphabetical order" do
+  it "should load the composers on new song in alphabetical order" do
     thyagraja = Factory(:composer)
     oothkadu_venkarasubbair = Factory(:composer, :name => "Oothukadu Venkara subbier", :century => "18th")
 
     get :new
     assigns(:composers).should == [thyagraja, oothkadu_venkarasubbair]
   end
-
-  pending "should load the ragam on new song in alphabetical order"
-
-  pending "should load the talam on new song in alphabetical order"
-
 
   it "should create song and its contents" do
     thyagaraja = Factory(:composer)
