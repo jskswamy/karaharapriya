@@ -1,5 +1,9 @@
 class SongsController < ApplicationController
 
+  def index
+    @songs = Song.all
+  end
+
   def new
     @song_types = SongType.all
     @composers = Composer.all
@@ -27,11 +31,6 @@ class SongsController < ApplicationController
     else
       render :partial => "create_instruction"
     end
-  end
-
-  private
-
-  def load_data
   end
 
 end

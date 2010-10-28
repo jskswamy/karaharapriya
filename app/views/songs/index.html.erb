@@ -1,0 +1,17 @@
+<div class="left">
+  <div class="header">
+    Song
+  </div>
+  <div class="body">
+    <ul>
+      <% @songs.each do |song| %>
+        <li><%= song.name %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="footer">
+  </div>
+</div>
+<div class="right">
+  <%= link_to "New Song", new_song_path %>
+</div>

@@ -1,4 +1,6 @@
 Karaharapriya::Application.routes.draw do
+
+  root :to => "home#index"
   resources :ragam
 
   resources :songs do
