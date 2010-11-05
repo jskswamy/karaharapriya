@@ -15,13 +15,7 @@
     </div>
     <div class="body">
       <div class="menu">
-        <ul>
-          <li><%= link_to "", root_path, :class  => "home" %></li>
-          <li><%= link_to "Song", songs_path %></li>
-          <li><a href="#">Ragam</a></li>
-          <li><a href="#">Talam</a></li>
-          <li><a href="#">Composer</a></li>
-        </ul>
+        <%= render_navigation %>
       </div>
 
       <div class="page_content">
