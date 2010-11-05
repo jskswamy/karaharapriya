@@ -1,70 +1,78 @@
 @import "common";
 
-.content .body .left {
-  float: left;
-  .left_content_width;
-}
+.content {
+  .body {
+    .left {
+      float: left;
+      .left_content_width;
 
-.content .body .right {
-  margin-left: 330px;
-}
+      .header {
+        .basic_background_color;
+        height: 20px;
+        .font_heading;
+        .rounded_corners_top(10px);
+        margin-top: 0px;
+        padding: 10px 10px;
+      }
 
-.content .body .left .header {
-  .basic_background_color;
-  height: 20px;
-  .font_heading;
-  .rounded_corners_top(10px);
-  margin-top: 0px;
-  padding: 10px 10px;
-}
+      .body {
+        border-right: solid 1px #ccc;
+        border-left: solid 1px #ccc;
+        padding: 5px 10px;
 
-.content .body .left .body {
-  border-right: solid 1px #ccc;
-  border-left: solid 1px #ccc;
-  padding: 5px 10px;
-}
+        .section {
+          margin: 10px 0px 0px 0px;
+          line-height: 2.0em;
 
-.content .body .left .body .section {
-  margin: 10px 0px 0px 0px;
-  line-height: 2.0em;
-}
+          .input {
+            input, textarea {
+              width: 97%;
+            }
 
-.content .body .left .body .section .input input,
-.content .body .left .body .section .input textarea {
-  width: 97%;
-}
+            select {
+              width: 100%;
+            }
 
-.content .body .left .body .section .input select {
-  width: 100%;
-}
+            textarea {
+              height: 60px;
+            }
 
-.content .body .left .body .section .input textarea {
-  height: 60px;
-}
+          }
+        }
+      }
 
-.content .body .left .footer {
-  border: none;
-  .basic_background_color;
-  clear: both;
-  height: 40px;
-  .rounded_corners_bottom(10px);
-  margin-top: 0px;
-}
+      .footer {
+        border: none;
+        .basic_background_color;
+        clear: both;
+        height: 40px;
+        .rounded_corners_bottom(10px);
+        margin-top: 0px;
+      }
 
-.content .body .right .editor {
-  margin-bottom: 20px;
-}
+    }
 
-.content .body .right #content .default {
-  background: url(/images/arrow_left.jpg) bottom left no-repeat;
-  padding: 85px 0px 0px 40px;
-}
+    .right {
+      margin-left: 330px;
 
-.content .body .right .editor_name h1 {
-  .font_heading;
-}
+      #content .default {
+        background: url(/images/arrow_left.jpg) bottom left no-repeat;
+        padding: 85px 0px 0px 40px;
+      }
 
-.content .body .right .editor textarea {
-  height: 150px;
-  width: 100%;
+      .editor_name h1 {
+        .font_heading;
+      }
+
+      .editor {
+        margin-bottom: 20px;
+
+        textarea {
+          height: 150px;
+          width: 100%;
+        }
+      }
+    }
+
+  }
 }
