@@ -4,6 +4,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :song, 'Song', songs_path
     primary.item :ragam, 'Ragam', '#'
     primary.item :talam, 'Talam', '#'
-    primary.item :composer, 'Talam', '#'
+    primary.item :composer, 'Composer', '#'
   end
 end
