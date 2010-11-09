@@ -12,13 +12,23 @@ describe RagamController do
 
     before(:each) do
       @mayamalavagowlai = Factory(:ragam, :name => "Mayamalavagowlai", :arohana => "sa re1 ga2 ma1 pa th1 ni2 sa", :avarohana => "sa ni2 th1 pa ma1 ga2 re1 sa")
-      @sankarabharanam = Factory(:ragam, :name => "Sankarabharanam", :arohana => "sa re2 ga2 ma1 pa th2 ni2 sa", :avarohana => "sa ni2 th2 pa ma1 ga2 re2 sa")
+      @kalyani = Factory(:ragam, :name => "Kalyani", :arohana => "sa re2 ga2 ma2 pa th2 ni2 sa", :avarohana => "sa ni2 th2 pa ma2 ga2 re2 sa")
       @karharapriya = Factory(:ragam, :name => "Karharapriya", :arohana => "sa re2 ga1 ma1 pa th2 ni1 sa", :avarohana => "sa ni1 th2 pa ma1 ga1 re2 sa")
+      @mohanam = Factory(:ragam, :name => "Mohanam", :arohana => "sa re2 ga2 pa th1 sa", :avarohana => "sa th1 pa ga2 re2 sa")
     end
 
-    pending "show the available ragam" do
-      get :suggest
-      assigns[:ragams].should == [@mayamalavagowlai, @sankarabharanam, @karharapriya]
+    describe "suggest" do
+
+      it "show all the available ragam" do
+        get :suggest
+        assigns[:ragams].should == [@mayamalavagowlai, @kalyani, @karharapriya, @mohanam]
+      end
+
+      it "show only the matching ragam" do
+        get :suggest, :name => "m"
+        assigns[:ragams].should == [@mayamalavagowlai, @mohanam]
+      end
+
     end
 
   end
