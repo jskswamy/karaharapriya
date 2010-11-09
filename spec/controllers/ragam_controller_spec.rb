@@ -19,12 +19,12 @@ describe RagamController do
 
     describe "suggest" do
 
-      it "show all the available ragam" do
+      it "should show all the available ragam" do
         get :suggest
         assigns[:ragams].should == [@mayamalavagowlai, @kalyani, @karharapriya, @mohanam]
       end
 
-      it "show only the matching ragam" do
+      it "should show only the matching ragam" do
         get :suggest, :name => "m"
         assigns[:ragams].should == [@mayamalavagowlai, @mohanam]
       end

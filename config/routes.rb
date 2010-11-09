@@ -2,11 +2,7 @@ Karaharapriya::Application.routes.draw do
 
   root :to => "home#index"
 
-  resources :ragam do
-    collection do
-      get :suggest
-    end
-  end
+  resources :ragam
 
   resources :songs do
     collection do
@@ -16,6 +12,9 @@ Karaharapriya::Application.routes.draw do
       post :create
     end
   end
+
+  match "suggest/ragam" => "ragam#suggest", :as => "suggest_ragam"
+  match "suggest/talam" => "talam#suggest", :as => "suggest_talam"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
