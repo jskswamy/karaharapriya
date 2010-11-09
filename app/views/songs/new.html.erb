@@ -26,10 +26,11 @@
 
       <div class="section">
         <div class="title">
-          <%= label_tag "song_composer_id", "Composer" %>
+          <%= label_tag "song_composer_name", "Composer" %>
         </div>
         <div class="input">
-          <%= select_tag "song[composer_id]" , options_for_select(@composers.collect{ |composer| [composer.name, composer.id] }), :include_blank => "-select-" %>
+          <%= text_field_tag "song[composer_name]" %>
+          <div id="song_composer_name_completion" class="auto_completion"></div>
         </div>
       </div>
 
@@ -39,6 +40,7 @@
         </div>
         <div class="input">
           <%= select_tag "song[ragam_id]" , options_for_select(@ragams.collect{ |ragam| [ragam.name, ragam.id] }), :include_blank => "-select-" %>
+          <div id="song_ragam_completion" class="auto_completion"></div>
         </div>
       </div>
 
@@ -48,6 +50,7 @@
         </div>
         <div class="input">
           <%= select_tag "song[talam_id]" , options_for_select(@talams.collect{ |talam| [talam.name, talam.id] }), :include_blank => "-select-" %>
+          <div id="song_talam_completion" class="auto_completion"></div>
         </div>
       </div>
 
@@ -76,4 +79,13 @@
 
 <script type="text/javascript">
   var editor = new Song.Editor($('content'), $('song_song_type_id'), <%= "'#{editor_songs_path}'" %> );
+  var composerAutoComplete = new Ajax.Autocompleter('song_composer_name',
+      'song_composer_name_completion', <%= "'#{suggest_composer_path}'" %>, {method: "get", paramName: "name"}
+      );
+  var ragamAutoComplete = new Ajax.Autocompleter('song_ragam',
+      'song_ragam_completion', <%= "'#{suggest_ragam_path}'" %>, {method: "get", paramName: "name"}
+      );
+  var talamAutoComplete = new Ajax.Autocompleter('song_talam',
+      'song_talam_completion', <%= "'#{suggest_talam_path}'" %>, {method: "get", paramName: "name"}
+      );
 </script>

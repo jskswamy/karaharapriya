@@ -1,0 +1,53 @@
+.rounded_corners (@radius: 5px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.rounded_corners_left (@radius: 5px) {
+  -moz-border-radius: @radius 0px 0px @radius;
+  -webkit-border-radius: @radius 0px 0px @radius;
+  border-radius: @radius 0px 0px @radius;
+}
+
+.width (@width: auto){
+  width: @width
+}
+
+.height (@height: auto) {
+  height: @height;
+}
+
+.left_content_height {
+  height: 400px;
+}
+
+.left_content_width {
+  width: 315px;
+}
+
+.left_content_dimension {
+  .left_content_height;
+  .left_content_width;
+}
+
+.font_heading {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.rounded_corners_top (@radius: 5px) {
+  -moz-border-radius: @radius @radius 0px 0px;
+  -webkit-border-radius: @radius @radius 0px 0px;
+  border-radius: @radius @radius 0px 0px;
+}
+
+.rounded_corners_bottom (@radius: 5px) {
+  -moz-border-radius: 0px 0px @radius @radius;
+  -webkit-border-radius: 0px 0px @radius @radius;
+  border-radius: 0px 0px @radius @radius;
+}
+
+.basic_background_color {
+  background-color: #ccc;
+}

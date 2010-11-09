@@ -1,5 +1,6 @@
 class Ragam < ActiveRecord::Base
   has_many :songs
+  include Sorter
   validates_presence_of :name, :arohana, :avarohana
   validates_uniqueness_of :name
   validates_uniqueness_of :arohana, :scope => :avarohana, :message => "and Avarohana already defined for another ragam"

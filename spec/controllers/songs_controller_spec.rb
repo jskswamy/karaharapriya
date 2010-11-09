@@ -2,6 +2,14 @@ require 'spec_helper'
 
 describe SongsController do
 
+  it "should list the songs from the system" do
+    song1 = Factory(:song, :name => "my_name_1")
+    song2 = Factory(:song, :name => "my_name_2")
+
+    get :index
+    assigns(:songs).should == [song1,song2]
+  end
+
   it "should get the response which has the editors based on song composition" do
     song_type = Factory(:song_type, :name => "swarajathi")
     pallavi = Factory(:song_content_type, :name => "Pallavi")
@@ -24,16 +32,7 @@ describe SongsController do
     janda = Factory(:song_type, :name => "janda")
 
     get :new
-    assigns(:song_types).should == [sarali, janda]
-  end
-
-
-  it "should load the composers on new song in alphabetical order" do
-    thyagraja = Factory(:composer)
-    oothkadu_venkarasubbair = Factory(:composer, :name => "Oothukadu Venkara subbier", :century => "18th")
-
-    get :new
-    assigns(:composers).should == [thyagraja, oothkadu_venkarasubbair]
+    assigns(:song_types).should == [janda, sarali]
   end
 
   it "should create song and its contents" do

@@ -1,116 +1,78 @@
-.width (@width: auto){
-  width: @width
-}
+@import "common";
 
-.height (@height: auto) {
-  height: @height;
-}
+.content {
+  .body {
+    .left {
+      float: left;
+      .left_content_width;
 
-.left_content_height {
-  height: 400px;
-}
+      .header {
+        .basic_background_color;
+        height: 20px;
+        .font_heading;
+        .rounded_corners_top(10px);
+        margin-top: 0px;
+        padding: 10px 10px;
+      }
 
-.left_content_width {
-  width: 315px;
-}
+      .body {
+        border-right: solid 1px #ccc;
+        border-left: solid 1px #ccc;
+        padding: 5px 10px;
 
-.left_content_dimension {
-  .left_content_height;
-  .left_content_width;
-}
+        .section {
+          margin: 10px 0px 0px 0px;
+          line-height: 2.0em;
 
-.font_heading {
-  font-size: 1.5em;
-  font-weight: bold;
-}
+          .input {
+            input, textarea {
+              width: 97%;
+            }
 
-.rounded_corners (@radius: 5px) {
-  -moz-border-radius: @radius;
-  -webkit-border-radius: @radius;
-  border-radius: @radius;
-}
+            select {
+              width: 100%;
+            }
 
-.rounded_corners_top (@radius: 5px) {
-  -moz-border-radius: @radius @radius 0px 0px;
-  -webkit-border-radius: @radius @radius 0px 0px;
-  border-radius: @radius @radius 0px 0px;
-}
+            textarea {
+              height: 60px;
+            }
 
-.rounded_corners_bottom (@radius: 5px) {
-  -moz-border-radius: 0px 0px @radius @radius;
-  -webkit-border-radius: 0px 0px @radius @radius;
-  border-radius: 0px 0px @radius @radius;
-}
+          }
+        }
+      }
 
-.basic_background_color {
-  background-color: #ccc;
-}
+      .footer {
+        border: none;
+        .basic_background_color;
+        clear: both;
+        height: 40px;
+        .rounded_corners_bottom(10px);
+        margin-top: 0px;
+      }
 
-.content .body .left {
-  float: left;
-  .left_content_width;
-}
+    }
 
-.content .body .right {
-  margin-left: 330px;
-}
+    .right {
+      margin-left: 330px;
 
-.content .body .left .header {
-  .basic_background_color;
-  height: 20px;
-  .font_heading;
-  .rounded_corners_top(10px);
-  margin-top: 0px;
-  padding: 10px 10px;
-}
+      #content .default {
+        background: url(/images/arrow_left.jpg) bottom left no-repeat;
+        padding: 85px 0px 0px 40px;
+      }
 
-.content .body .left .body {
-  border-right: solid 1px #ccc;
-  border-left: solid 1px #ccc;
-  padding: 5px 10px;
-}
+      .editor_name h1 {
+        .font_heading;
+      }
 
-.content .body .left .body .section {
-  margin: 10px 0px 0px 0px;
-  line-height: 2.0em;
-}
+      .editor {
+        margin-bottom: 20px;
 
-.content .body .left .body .section .input input,
-.content .body .left .body .section .input textarea {
-  width: 97%;
-}
+        textarea {
+          height: 150px;
+          width: 100%;
+        }
+      }
+    }
 
-.content .body .left .body .section .input select {
-  width: 100%;
-}
-
-.content .body .left .body .section .input textarea {
-  height: 60px;
-}
-
-.content .body .left .footer {
-  border: none;
-  .basic_background_color;
-  clear: both;
-  height: 40px;
-  .rounded_corners_bottom(10px);
-  margin-top: 0px;
-}
-
-.content .body .right .editor {
-  margin-bottom: 20px;
-}
-
-.content .body .right #content .default {
-  background: url(/images/arrow_left.jpg) bottom left no-repeat;
-  padding: 85px 0px 0px 40px;
-}
-
-.content .body .right .editor_name h1 {
-  .font_heading;
-}
-
-.content .body .right .editor textarea {
-  height: 150px;
-  width: 100%;
+  }
 }

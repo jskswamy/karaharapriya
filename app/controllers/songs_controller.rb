@@ -1,10 +1,11 @@
 class SongsController < ApplicationController
 
+  def index
+    @songs = Song.all
+  end
+
   def new
-    @song_types = SongType.all
-    @composers = Composer.all
-    @ragams = Ragam.all
-    @talams = Talam.all
+    @song_types = SongType.ascending
   end
 
   def create
@@ -28,11 +29,6 @@ class SongsController < ApplicationController
     else
       render :partial => "create_instruction"
     end
-  end
-
-  private
-
-  def load_data
   end
 
 end
