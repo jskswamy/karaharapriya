@@ -6,7 +6,6 @@ class SongsController < ApplicationController
 
   def new
     @song_types = SongType.ascending
-    @composers = Composer.ascending
   end
 
   def create

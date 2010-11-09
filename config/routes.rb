@@ -15,6 +15,7 @@ Karaharapriya::Application.routes.draw do
 
   match "suggest/ragam" => "ragam#suggest", :as => "suggest_ragam"
   match "suggest/talam" => "talam#suggest", :as => "suggest_talam"
+  match "suggest/composer" => "composer#suggest", :as => "suggest_composer"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
