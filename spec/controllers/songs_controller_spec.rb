@@ -35,15 +35,6 @@ describe SongsController do
     assigns(:song_types).should == [janda, sarali]
   end
 
-
-  it "should load the composers on new song in alphabetical order" do
-    thyagraja = Factory(:composer)
-    oothkadu_venkarasubbair = Factory(:composer, :name => "Oothukadu Venkara subbier", :century => "18th")
-
-    get :new
-    assigns(:composers).should == [oothkadu_venkarasubbair,thyagraja]
-  end
-
   it "should create song and its contents" do
     thyagaraja = Factory(:composer)
     sarali = Factory(:song_type, :name => "sarali")
