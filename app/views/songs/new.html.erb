@@ -1,11 +1,11 @@
-<div class="left">
+<%= form_tag 'create' , :remote => true do %>
+  <div class="left">
 
-  <div class="header">
+    <div class="header">
       Song
-  </div>
+    </div>
 
-  <div class="body">
-    <%= form_tag 'create' do %>
+    <div class="body">
       <div class="section">
         <div class="title">
           <%= label_tag "song_song_type_id", "Song Type" %>
@@ -35,19 +35,19 @@
 
       <div class="section">
         <div class="title">
-          <%= label_tag "song_ragam", "Ragam" %>
+          <%= label_tag "song_ragam_id", "Ragam" %>
         </div>
         <div class="input">
-          <%= select_tag "song[ragam]" , options_for_select(@ragams.collect{ |ragam| [ragam.name, ragam.id] }), :include_blank => "-select-" %>
+          <%= select_tag "song[ragam_id]" , options_for_select(@ragams.collect{ |ragam| [ragam.name, ragam.id] }), :include_blank => "-select-" %>
         </div>
       </div>
 
       <div class="section">
         <div class="title">
-          <%= label_tag "song_talam", "Talam" %>
+          <%= label_tag "song_talam_id", "Talam" %>
         </div>
         <div class="input">
-          <%= select_tag "song[talam]" , options_for_select(@talams.collect{ |talam| [talam.name, talam.id] }), :include_blank => "-select-" %>
+          <%= select_tag "song[talam_id]" , options_for_select(@talams.collect{ |talam| [talam.name, talam.id] }), :include_blank => "-select-" %>
         </div>
       </div>
 
@@ -59,24 +59,20 @@
           <%= text_area_tag "song[description]" %>
         </div>
       </div>
-
-    <% end %>
+    </div>
   </div>
 
-  <div class="footer">
+  <div class="right">
+    <div id="flash_notice" style="color:red;">
+      <%= flash[:notice] %>
+    </div>
+
+    <div id='content'>
+      <%= render :partial => "create_instruction" %>
+    </div>
   </div>
 
-</div>
-
-<div class="right">
-  <div style="color:red;">
-    <%= flash[:error] %>
-  </div>
-
-  <div id='content'>
-    <%= render :partial => "create_instruction" %>
-  </div>
-</div>
+<% end %>
 
 <script type="text/javascript">
   var editor = new Song.Editor($('content'), $('song_song_type_id'), <%= "'#{editor_songs_path}'" %> );

@@ -1,5 +1,5 @@
 class Talam < ActiveRecord::Base
-  has_many :song_content_info, :as => :info
+  has_many :songs
   validate :validate_avartanam
 
   def akshram_length_map
