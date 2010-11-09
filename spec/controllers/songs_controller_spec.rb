@@ -35,31 +35,6 @@ describe SongsController do
     assigns(:song_types).should == [janda, sarali]
   end
 
-
-  it "should load the composers on new song in alphabetical order" do
-    thyagraja = Factory(:composer)
-    oothkadu_venkarasubbair = Factory(:composer, :name => "Oothukadu Venkara subbier", :century => "18th")
-
-    get :new
-    assigns(:composers).should == [oothkadu_venkarasubbair,thyagraja]
-  end
-
-  it "should load the ragam on new song in alphabetical order" do
-    raagam_1 = Factory(:ragam, :name => "raagam", :arohana => "sa re ga ma pa ga re", :avarohana => "ya pa ma ba po do ma ka")
-    raagam_2 = Factory(:ragam, :name => "baagam", :arohana => "sa re ga ma pa ga re da", :avarohana => "ya pa ma ba da ya ma ka")
-
-    get :new
-    assigns(:ragams).should == [raagam_2, raagam_1]
-  end
-
-  it "should load the talam on new song in alphabetical order" do
-    aathi = Factory(:talam, :name => "aathi")
-    rupakam = Factory(:talam, :name => "rupakam")
-
-    get :new
-    assigns(:talams).should == [aathi, rupakam]
-  end
-
   it "should create song and its contents" do
     thyagaraja = Factory(:composer)
     sarali = Factory(:song_type, :name => "sarali")

@@ -1,0 +1,2 @@
+module TalamHelper
+end

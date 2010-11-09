@@ -1,7 +1,9 @@
 class Talam < ActiveRecord::Base
   include Sorter
   has_many :song_content_info, :as => :info
+  validates_uniqueness_of :avartanam
   validate :validate_avartanam
+  validates_uniqueness_of :name
 
   def akshram_length_map
     @akshram_length_map ||= {"1" => self.laghu_length, "0" => 2, "U" => 1}
