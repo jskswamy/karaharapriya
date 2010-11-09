@@ -73,6 +73,18 @@ body, ul {
 .content .body .menu ul li.selected a { background-color: #e3e3e2; }
 .content .body .menu ul li a:hover { background-color: #e3e3e2; }
 .content .body .menu ul li a.home:hover { background-color: #848181; }
+.content .body .auto_completion {
+  background-color: #cccccc;
+  border: solid 1px #000000;
+}
+.content .body .auto_completion ul { list-style-type: none; }
+.content .body .auto_completion ul li a {
+  color: #000000;
+  display: block;
+  padding: 0px 10px;
+  text-decoration: none;
+}
+.content .body .auto_completion ul li a:hover { background-color: #ffffcc; }
 .content .body .page_content {
   margin-top: 15px;
   padding: 0px 10px;
