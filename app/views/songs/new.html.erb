@@ -48,7 +48,8 @@
           <%= label_tag "song_talam", "Talam" %>
         </div>
         <div class="input">
-          <%= select_tag "song[talam]" , options_for_select(@talams.collect{ |talam| [talam.name, talam.id] }), :include_blank => "-select-" %>
+          <%= text_field_tag "song[talam]" %>
+          <div id="song_talam_completion" class="auto_completion"></div>
         </div>
       </div>
 
@@ -81,11 +82,10 @@
 
 <script type="text/javascript">
   var editor = new Song.Editor($('content'), $('song_song_type_id'), <%= "'#{editor_songs_path}'" %> );
-  var ragam_autoComplete = new Ajax.Autocompleter('song_ragam',
-      'song_ragam_completion',
-      <%= "'#{suggest_ragam_index_path}'" %>,
-      {
-        method: "get",
-        paramName: "name"
-      });
+  var ragamAutoComplete = new Ajax.Autocompleter('song_ragam',
+      'song_ragam_completion', <%= "'#{suggest_ragam_path}'" %>, {method: "get", paramName: "name"}
+      );
+  var talamAutoComplete = new Ajax.Autocompleter('song_talam',
+      'song_talam_completion', <%= "'#{suggest_talam_path}'" %>, {method: "get", paramName: "name"}
+      );
 </script>
