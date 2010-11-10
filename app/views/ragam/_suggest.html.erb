@@ -1,5 +1,5 @@
 <ul>
   <% @ragams.each do |ragam| %>
-    <li><a href="javascript:void(0)"><%= ragam.name %></a></li>
+    <li id="<%= ragam.id %>"><a href="javascript:void(0)"><%= ragam.name %></a></li>
   <% end %>
 </ul>
