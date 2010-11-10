@@ -85,6 +85,7 @@ body, ul {
   text-decoration: none;
 }
 .content .body .auto_completion ul li a:hover { background-color: #ffffcc; }
+.content .body .auto_completion ul li.selected a { background-color: #ffffcc; }
 .content .body .page_content {
   margin-top: 15px;
   padding: 0px 10px;

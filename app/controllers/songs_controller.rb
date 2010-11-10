@@ -6,8 +6,6 @@ class SongsController < ApplicationController
 
   def new
     @song_types = SongType.ascending
-    @ragams = Ragam.all
-    @talams = Talam.all
   end
 
   def create
@@ -24,7 +22,6 @@ class SongsController < ApplicationController
 
   def editor
     song_type = SongType.find_by_id(params["song_type_id"])
-    p song_type.inspect
     unless song_type.nil?
       @song_compositions = song_type.song_compositions
       render :partial => "editor"

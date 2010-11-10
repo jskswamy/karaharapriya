@@ -62,6 +62,6 @@ describe SongsController do
     sarali = Factory(:song_type, :name => "sarali")
     post :create, {"song" => {"song_type_id" => sarali.id, "composer_id" => thyagaraja.id}}
     response.headers["ResponseType"].should == "ValidationErrors"
-  end 
+  end
 
 end

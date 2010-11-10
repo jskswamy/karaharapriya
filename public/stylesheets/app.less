@@ -101,7 +101,7 @@ body, ul {
     }
 
     .auto_completion {
-      background-color: #ccc;
+      background-color: @auto_complete_background_color;
       border: solid 1px #000;
 
       ul {
@@ -116,7 +116,13 @@ body, ul {
           }
 
           a:hover {
-            background-color: #FFFFCC;
+            background-color: @auto_complete_selected_color;
+          }
+        }
+
+        li.selected {
+          a {
+            background-color: @auto_complete_selected_color;
           }
         }
       }

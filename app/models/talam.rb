@@ -1,6 +1,8 @@
 class Talam < ActiveRecord::Base
   has_many :songs
   include Sorter
+
+  has_many :song_content_info, :as => :info
   validates_uniqueness_of :avartanam
   validate :validate_avartanam
   validates_uniqueness_of :name
