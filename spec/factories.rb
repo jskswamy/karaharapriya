@@ -10,18 +10,18 @@ end
 
 Factory.define :song_type do |f|
   f.name {Factory.next(:name)}
-  f.description 'varnam'
+  f.sequence(:description) { |n| "song description #{n}" }
 end
 
 Factory.define :song_content do |f|
-  f.body 'sa re ga ma'
+  f.sequence(:body) { |n| 'sa re ga ma ' * n }
   f.association :song
   f.association :song_content_type
 end
 
 Factory.define :song_content_type do |f|
-  f.name "Pallavi"
-  f.description "Starting portion of a song"
+  f.name { Factory.next(:name) }
+  f.sequence(:description) { |n| "song content type #{n}" }
 end
 
 Factory.define :song_content_info do |f|
@@ -37,15 +37,15 @@ Factory.define :ragam do |f|
 end
 
 Factory.define :talam do |f|
-  f.name "aathi"
-  f.avartanam "1 0 0"
+  f.name { Factory.next(:name) }
+  f.sequence(:avartanam) { |n| "1 0 0 " * n }
   f.laghu_length 4
 end
 
 Factory.define :composer do |f|
-  f.name "Thiagarajar"
-  f.century "1780-1880"
-  f.info "Great Composer"
+  f.name { Factory.next(:name) }
+  f.sequence(:century) { |n| "178#{n}-188#{n}" }
+  f.sequence(:info) { |n| "Additional information for composer #{n}" }
 end
 
 Factory.define :song_composition do |f|

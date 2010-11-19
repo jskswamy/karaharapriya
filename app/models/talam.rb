@@ -1,6 +1,7 @@
 class Talam < ActiveRecord::Base
+  include Sorter, Suggest
+
   has_many :songs
-  include Sorter
 
   has_many :song_content_info, :as => :info
   validates_uniqueness_of :avartanam

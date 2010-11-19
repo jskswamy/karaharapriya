@@ -27,4 +27,18 @@ describe Talam do
     someother_random_talam.valid?.should be_true
   end
 
+  describe "named scope" do
+
+    it "should find talam by name" do
+      a_talam = Factory(:talam, :name => "a")
+      aa_talam = Factory(:talam, :name => "aa")
+      b_talam = Factory(:talam, :name => "b")
+      bb_talam = Factory(:talam, :name => "bb")
+      suggested_talam = Talam.suggest_by_name("a")
+      suggested_talam.count.should == 2
+      suggested_talam.should == [a_talam, aa_talam]
+    end
+
+  end
+
 end

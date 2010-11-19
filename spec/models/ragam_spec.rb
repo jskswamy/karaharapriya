@@ -52,4 +52,18 @@ describe Ragam do
     invalid_avarohana_ragam.errors.full_messages.to_sentence.should == "Avarohana should have atleast 5 swaras"
   end
 
+  describe "named scope" do
+
+    it "should suggest by name" do
+      a_ragam = Factory(:ragam, :name => "a", :arohana => "a b c d e f")
+      aa_ragam = Factory(:ragam, :name => "aa", :arohana => "b a c d e f")
+      b_ragam = Factory(:ragam, :name => "b", :arohana => "c a b d e f")
+      bb_ragam = Factory(:ragam, :name => "bb", :arohana => "d a b c e f")
+      suggested_ragam = Ragam.suggest_by_name("a")
+      suggested_ragam.count.should == 2
+      suggested_ragam.should == [a_ragam, aa_ragam]
+    end
+
+  end
+
 end

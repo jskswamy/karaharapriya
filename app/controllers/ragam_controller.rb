@@ -5,7 +5,7 @@ class RagamController < ApplicationController
   end
 
   def suggest
-    @ragams = Ragam.find(:all, :conditions => ['name like ?', "%#{params[:name]}%"])
+    @ragams = Ragam.suggest_by_name(params[:name])
     render :partial => "suggest"
   end
 

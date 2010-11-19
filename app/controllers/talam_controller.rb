@@ -1,7 +1,7 @@
 class TalamController < ApplicationController
 
   def suggest
-    @talams = Talam.find(:all, :conditions => ['name like ?', "%#{params[:name]}%"]);
+    @talams = Talam.suggest_by_name(params[:name]);
     render :partial => "suggest"
   end
 
