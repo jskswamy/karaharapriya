@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101105162639) do
+ActiveRecord::Schema.define(:version => 20101119035813) do
 
   create_table "composers", :force => true do |t|
     t.string   "name"
@@ -30,12 +30,17 @@ ActiveRecord::Schema.define(:version => 20101105162639) do
     t.datetime "updated_at"
   end
 
+  add_index "ragams", ["parent_id"], :name => "index_ragams_on_parent_id"
+
   create_table "song_compositions", :force => true do |t|
     t.integer  "song_type_id"
     t.integer  "song_content_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "song_compositions", ["song_content_type_id"], :name => "index_song_compositions_on_song_content_type_id"
+  add_index "song_compositions", ["song_type_id"], :name => "index_song_compositions_on_song_type_id"
 
   create_table "song_content_infos", :force => true do |t|
     t.integer  "song_content_id"
@@ -44,6 +49,9 @@ ActiveRecord::Schema.define(:version => 20101105162639) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "song_content_infos", ["info_id"], :name => "index_song_content_infos_on_info_id"
+  add_index "song_content_infos", ["song_content_id"], :name => "index_song_content_infos_on_song_content_id"
 
   create_table "song_content_types", :force => true do |t|
     t.string   "name"
@@ -59,6 +67,9 @@ ActiveRecord::Schema.define(:version => 20101105162639) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "song_contents", ["song_content_type_id"], :name => "index_song_contents_on_song_content_type_id"
+  add_index "song_contents", ["song_id"], :name => "index_song_contents_on_song_id"
 
   create_table "song_types", :force => true do |t|
     t.string   "name"
@@ -77,6 +88,11 @@ ActiveRecord::Schema.define(:version => 20101105162639) do
     t.integer  "talam_id"
     t.string   "description"
   end
+
+  add_index "songs", ["composer_id"], :name => "index_songs_on_composer_id"
+  add_index "songs", ["ragam_id"], :name => "index_songs_on_ragam_id"
+  add_index "songs", ["song_type_id"], :name => "index_songs_on_song_type_id"
+  add_index "songs", ["talam_id"], :name => "index_songs_on_talam_id"
 
   create_table "talams", :force => true do |t|
     t.string   "name"
