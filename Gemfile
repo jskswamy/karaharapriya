@@ -14,6 +14,7 @@ group :test do
   gem 'rspec-rails', '2.0.0'
   gem 'autotest', '4.4.1'
   gem 'autotest-rails', '4.1.0'
+  gem 'metric_fu'
 end
 
 
