@@ -12,11 +12,13 @@ describe TalamController do
 
     it "should show all the talams" do
       get :suggest
+      response.should be_success
       assigns[:talams].should == [@adhi, @rupagam, @another_adhi]
     end
 
     it "should show only the matching talam" do
       get :suggest, :name => "a"
+      response.should be_success
       assigns[:talams].should == [@adhi, @another_adhi]
     end
 

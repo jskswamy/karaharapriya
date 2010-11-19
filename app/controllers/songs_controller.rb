@@ -21,7 +21,7 @@ class SongsController < ApplicationController
   end
 
   def editor
-    song_type = SongType.find_by_id(params["song_type_id"])
+    song_type = SongType.includes(:song_compositions => [:song_content_type]).find_by_id(params["song_type_id"])
     unless song_type.nil?
       @song_compositions = song_type.song_compositions
       render :partial => "editor"
