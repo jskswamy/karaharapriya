@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.0'
 gem 'mysql2'
 gem 'simple-navigation', '3.0.1'
+gem 'webrat', '0.7.1'
 
 group :development do
   gem 'less', '1.2.21'

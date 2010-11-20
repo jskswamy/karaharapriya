@@ -1,8 +1,7 @@
 class TalamController < ApplicationController
 
   def suggest
-    @talams = Talam.suggest_by_name(params[:name]);
-    render :partial => "suggest"
+    render :partial => "common/suggest", :locals => { :suggestions => Talam.suggest_by_name(params[:name]) }
   end
 
 end

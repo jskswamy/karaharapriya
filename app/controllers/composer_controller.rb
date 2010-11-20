@@ -1,8 +1,7 @@
 class ComposerController < ApplicationController
 
   def suggest
-    @composers = Composer.suggest_by_name(params[:name]);
-    render :partial => "suggest"
+    render :partial => "common/suggest", :locals => { :suggestions => Composer.suggest_by_name(params[:name]) }
   end
 
 end

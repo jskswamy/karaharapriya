@@ -30,10 +30,20 @@ Factory.define :song_content_info do |f|
 end
 
 Factory.define :ragam do |f|
-  f.name "karaharapriya"
-  f.arohana "sa re2 ga1 ma1 pa th2 ni1 sa^"
-  f.avarohana "sa^ ni1 th2 pa ma1 ga1 re2 sa"
-  f.major true
+  f.sequence(:name) { |n| "ragam #{n}" }
+  f.sequence(:arohana) do |n|
+    arohana_list = ["sa", "re1", "re2", "ga1", "ga2", "ma1", "ma2", "pa", "th1", "th2", "ni1", "ni2", "sa^"]
+    arohana = ""
+    (0...8).each { arohana << "#{arohana_list[rand(100 * n) % arohana_list.count]} " }
+    arohana.chop
+  end
+  f.sequence(:avarohana) do |n|
+    avarohana_list = ["sa", "re1", "re2", "ga1", "ga2", "ma1", "ma2", "pa", "th1", "th2", "ni1", "ni2", "sa^"].reverse
+    avarohana = ""
+    (0...8).each { avarohana << "#{avarohana_list[rand(100 * n) % avarohana_list.count]} " }
+    avarohana.chop
+  end
+  f.major false
 end
 
 Factory.define :talam do |f|

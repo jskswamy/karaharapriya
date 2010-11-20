@@ -5,8 +5,7 @@ class RagamController < ApplicationController
   end
 
   def suggest
-    @ragams = Ragam.suggest_by_name(params[:name])
-    render :partial => "suggest"
+    render :partial => "common/suggest", :locals => {:suggestions => Ragam.suggest_by_name(params[:name])}
   end
 
 end
