@@ -15,6 +15,7 @@ describe "Suggestions" do
 
     it "should suggest all the ragams" do
       get suggest_ragam_path
+      response.should render_template("common/_suggest")
       @ragams.each do |ragam|
         response.should have_selector("ul > li[id='#{ragam.id}'] > a", :content => ragam.name)
       end
@@ -22,6 +23,7 @@ describe "Suggestions" do
 
     it "should suggest ragams with character 'a' in it" do
       get suggest_ragam_path, :name => "a"
+      response.should render_template("common/_suggest")
       @ragams.each do |ragam|
         if ragam.name.include?("a")
           response.should have_selector("ul > li[id='#{ragam.id}'] > a", :content => ragam.name)
@@ -42,6 +44,7 @@ describe "Suggestions" do
 
     it "should suggest all the talams" do
       get suggest_talam_path
+      response.should render_template("common/_suggest")
       @talams.each do |talam|
         response.should have_selector("ul > li[id='#{talam.id}'] > a", :content => talam.name)
       end
@@ -49,6 +52,7 @@ describe "Suggestions" do
 
     it "should suggest ragams with character 'b' in it" do
       get suggest_talam_path, :name => "b"
+      response.should render_template("common/_suggest")
       @talams.each do |talam|
         if talam.name.include?("b")
           response.should have_selector("ul > li[id='#{talam.id}'] > a", :content => talam.name)
@@ -69,6 +73,7 @@ describe "Suggestions" do
 
     it "should suggest all the composers" do
       get suggest_composer_path
+      response.should render_template("common/_suggest")
       @composers.each do |composer|
         response.should have_selector("ul > li[id='#{composer.id}'] > a", :content => composer.name)
       end
@@ -76,6 +81,7 @@ describe "Suggestions" do
 
     it "should suggest ragams with character 'b' in it" do
       get suggest_composer_path, :name => "c"
+      response.should render_template("common/_suggest")
       @composers.each do |composer|
         if composer.name.include?("c")
           response.should have_selector("ul > li[id='#{composer.id}'] > a", :content => composer.name)
