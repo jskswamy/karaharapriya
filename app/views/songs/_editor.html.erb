@@ -1,5 +1,5 @@
 <div class="song_editors">
-  <% @song_compositions.each_with_index do |song_composition, index| %>
+  <% song_compositions.each_with_index do |song_composition, index| %>
     <div class="editor_name">
       <h1> <%= song_composition.name %> </h1>
       <%= hidden_field_tag "song_contents[#{index.to_s}][song_content_type_id]", song_composition.id %> 
