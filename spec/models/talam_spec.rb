@@ -14,16 +14,17 @@ describe Talam do
 
   it "should not create if the talam name already exists" do
     random_talam = Factory(:talam, :name => "some talam")
-    another_talam = Factory.build(:talam, :name => "some talam", :avartanam => "0 1")
+    another_talam = Factory.build(:talam, :name => "some talam")
     another_talam.valid?.should be_false
     another_talam.errors.full_messages.to_sentence.should == "Name has already been taken"
   end
 
-  pending "shoult not create if the avartanam and length are already assigned to another talam" do
+  it "shoult not create if the avartanam and length are already assigned to another talam" do
     random_talam = Factory(:talam, :name => "random talam", :avartanam => "1 0 0", :laghu_length => 4)
     duplicate_random_talam = Factory.build(:talam, :name => "another random talam", :avartanam => "1 0 0", :laghu_length => 4)
     someother_random_talam = Factory.build(:talam, :name => "someother random talam", :avartanam => "1 0 0", :laghu_length => 3)
     duplicate_random_talam.valid?.should be_false
+    duplicate_random_talam.errors.full_messages.to_sentence.should == "Laghu length has already been taken"
     someother_random_talam.valid?.should be_true
   end
 

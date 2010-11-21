@@ -49,7 +49,7 @@ end
 Factory.define :talam do |f|
   f.name { Factory.next(:name) }
   f.sequence(:avartanam) { |n| "1 0 0 " * n }
-  f.laghu_length 4
+  f.sequence(:laghu_length) { |n| n }
 end
 
 Factory.define :composer do |f|
