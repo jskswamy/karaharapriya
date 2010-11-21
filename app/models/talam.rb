@@ -4,9 +4,11 @@ class Talam < ActiveRecord::Base
   has_many :songs
 
   has_many :song_content_info, :as => :info
-  validates_uniqueness_of :avartanam
-  validate :validate_avartanam
+
   validates_uniqueness_of :name
+  validates_uniqueness_of :laghu_length, :through => :avartanam
+
+  validate :validate_avartanam
 
   def akshram_length_map
     @akshram_length_map ||= {"1" => self.laghu_length, "0" => 2, "U" => 1}
