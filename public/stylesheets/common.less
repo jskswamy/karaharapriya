@@ -18,17 +18,12 @@
   height: @height;
 }
 
-.left_content_height {
-  height: 400px;
-}
-
-.left_content_width {
-  width: 315px;
-}
+@left_content_height: 400px;
+@left_content_width: 300px;
 
 .left_content_dimension {
-  .left_content_height;
-  .left_content_width;
+  width: @left_content_height;
+  height: @left_content_width;
 }
 
 .font_heading {

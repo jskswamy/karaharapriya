@@ -1,8 +1,6 @@
-.left_content_height { height: 400px; }
-.left_content_width { width: 315px; }
 .left_content_dimension {
-  height: 400px;
-  width: 315px;
+  width: 400px;
+  height: 315px;
 }
 .font_heading {
   font-size: 1.5em;
@@ -26,8 +24,7 @@ body, ul {
 }
 .content {
   margin: auto;
-  min-width: 960px;
-  width: 80%;
+  width: 960px;
 }
 .content .header {
   height: 40px;
