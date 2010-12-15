@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.3'
 gem 'mysql2'
 gem 'simple-navigation', '3.0.1'
 gem 'webrat', '0.7.1'
@@ -11,8 +11,8 @@ end
 
 group :test do
   gem 'factory_girl', '1.3.2'
-  gem 'rspec', '2.0.0'
-  gem 'rspec-rails', '2.0.0'
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'autotest', '4.4.1'
   gem 'autotest-rails', '4.1.0'
   gem 'metric_fu'
