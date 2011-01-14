@@ -5,3 +5,4 @@ tmp/**/*
 *.lock
 tags
 tmp
+coverage

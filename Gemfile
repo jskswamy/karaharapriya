@@ -5,16 +5,15 @@ gem 'mysql2'
 gem 'simple-navigation', '3.0.1'
 gem 'webrat', '0.7.1'
 
-group :development do
+group :development, :test do
   gem 'less', '1.2.21'
-end
-
-group :test do
   gem 'factory_girl', '1.3.2'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'autotest', '4.4.1'
   gem 'autotest-rails', '4.1.0'
+  gem 'simplecov'
+  gem 'rails_best_practices'
   gem 'metric_fu'
 end
 

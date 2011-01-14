@@ -1,5 +1,14 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
+require 'simplecov'
+
+SimpleCov.start 'rails'
+
+SimpleCov.at_exit do
+  SimpleCov.result.format!
+  puts "Code coverage: #{SimpleCov.result.covered_percent.round(2)}%"
+end
+
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_girl'
@@ -26,4 +35,8 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.after(:suite) do
+    system("rails_best_practices")
+  end
 end

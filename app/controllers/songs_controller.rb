@@ -9,10 +9,9 @@ class SongsController < ApplicationController
   end
 
   def create
-    song_contents = params["song_contents"].values.collect{|song_content| SongContent.new(song_content)} unless params["song_contents"].blank?
+    song_contents = params["song_contents"].blank? ? [] : params["song_contents"].values
     @song = Song.new(params["song"])
-    if @song.save
-      @song.song_contents << song_contents
+    if @song.save_with_contents(song_contents)
       render :text => "Song saved successfully"
     else
       response.headers['ResponseType'] = 'ValidationErrors'

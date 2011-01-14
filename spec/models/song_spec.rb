@@ -24,4 +24,22 @@ describe Song do
     song.errors.full_messages.to_sentence.should == "Name can't be blank"
   end
 
+  it "should save with content" do
+    song = Factory.build(:song)
+    song_content_type = Factory(:song_content_type)
+    song_contents = Hash.new
+    3.times { |index| song_contents[index] = {:body => "song body #{index + 1}", :song_content_type_id => song_content_type.id } }
+    song.save_with_contents(song_contents.values).should be_true
+    song.reload
+    song.song_contents.map { |song_content| song_content.body }.should == ["song body 1", "song body 2", "song body 3"]
+  end
+
+  it "should not save with content" do
+    song = Factory.build(:song, :name => nil)
+    song_content_type = Factory(:song_content_type)
+    song_contents = Hash.new
+    3.times { |index| song_contents[index] = {:body => "song body #{index + 1}", :song_content_type_id => song_content_type.id } }
+    song.save_with_contents(song_contents.values).should be_false
+  end
+
 end

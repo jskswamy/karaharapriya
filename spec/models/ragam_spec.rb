@@ -62,7 +62,7 @@ describe Ragam do
     end
 
     it "should suggest all" do
-      suggested_ragam = Ragam.suggest_by_name
+      suggested_ragam = Ragam.suggest_by_name("")
       suggested_ragam.count.should == 4
       suggested_ragam.should == [@a_ragam, @aa_ragam, @b_ragam, @bb_ragam]
     end

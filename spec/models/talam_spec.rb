@@ -38,7 +38,7 @@ describe Talam do
     end
 
     it "should get all the talams" do
-      suggested_talam = Talam.suggest_by_name
+      suggested_talam = Talam.suggest_by_name("")
       suggested_talam.count.should == 4
       suggested_talam.should == [@a_talam, @aa_talam, @b_talam, @bb_talam]
     end
