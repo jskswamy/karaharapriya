@@ -76,15 +76,19 @@
       <%= flash[:notice] %>
     </div>
 
-    <div id='content'>
+    <div id='content' data-song-editor="true" data-song-type="song_song_type_id" data-song-editor-url="<%= editor_songs_path %>"  >
       <%= render :partial => "create_instruction" %>
     </div>
   </div>
 
+  <div class="clear"></div>
+
 <% end %>
 
 <script type="text/javascript">
-  var editor = new Song.Editor($('content'), $('song_song_type_id'), <%= "'#{editor_songs_path}'" %> );
+
+  var remote_form = $('create_song').observe("ajax:complete", function(data) {});
+
   var composerAutoComplete = new Ajax.Autocompleter('composer_name',
       'composer_name_completion', <%= "'#{suggest_composer_path}'" %>, {
           method: "get",

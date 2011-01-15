@@ -21,5 +21,18 @@ var Song = {
         }.bind(this)
       });
     }
-  })
+  }),
+
+  bindEditors: function() {
+    $$("div[data-song-editor]").each(function(element) {
+      songType = $(element.readAttribute("data-song-type"));
+      url = element.readAttribute("data-song-editor-url");
+      song_editor = new Song.Editor(element, songType, url);
+    });
+  }
 };
+
+//Unobtrusive
+document.observe("dom:loaded", function() {
+  Song.bindEditors();
+});
