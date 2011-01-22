@@ -1,4 +1,5 @@
-<%= form_tag 'create' , :remote => true do %>
+<%= form_tag 'create' , :remote => true, :id => "create_song" do %>
+
   <div class="left">
 
     <div class="header">
@@ -87,7 +88,8 @@
 
 <script type="text/javascript">
 
-  var remote_form = $('create_song').observe("ajax:complete", function(data) {});
+  var remote_form = $('create_song').observe("ajax:complete", function(data) {
+  });
 
   var composerAutoComplete = new Ajax.Autocompleter('composer_name',
       'composer_name_completion', <%= "'#{suggest_composer_path}'" %>, {
