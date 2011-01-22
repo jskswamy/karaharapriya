@@ -76,10 +76,9 @@
     <div id="flash_notice" style="color:red;">
       <%= flash[:notice] %>
     </div>
-
-    <div id='content' data-song-editor="true" data-song-type="song_song_type_id" data-song-editor-url="<%= editor_songs_path %>"  >
+    <%= editor :class => "editor", :url => editor_songs_path, :song_type => "song_song_type_id" do %>
       <%= render :partial => "create_instruction" %>
-    </div>
+    <% end %>
   </div>
 
   <div class="clear"></div>

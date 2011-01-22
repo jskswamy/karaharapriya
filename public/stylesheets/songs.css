@@ -49,10 +49,6 @@
   margin-left: 315px;
   margin-right: 5px;
 }
-.content .body .right #content .default {
-  background: url(/images/arrow_left.jpg) bottom left no-repeat;
-  padding: 85px 0px 0px 40px;
-}
 .content .body .right .editor_name h1 {
   font-size: 1.5em;
   font-weight: bold;
@@ -61,4 +57,8 @@
 .content .body .right .editor textarea {
   height: 150px;
   width: 100%;
+}
+.content .body .right .editor .default {
+  background: url(/images/arrow_left.jpg) bottom left no-repeat;
+  padding: 85px 0px 0px 40px;
 }

@@ -37,6 +37,6 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.after(:suite) do
-    system("rails_best_practices")
+    #system("rails_best_practices")
   end
 end
