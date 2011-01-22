@@ -10,7 +10,7 @@ group :development, :test do
   gem 'factory_girl', '1.3.2'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'autotest', '4.4.1'
+  gem 'autotest-standalone'
   gem 'autotest-rails', '4.1.0'
   gem 'simplecov'
   gem 'rails_best_practices'
