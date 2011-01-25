@@ -31,8 +31,3 @@ var Song = {
     });
   }
 };
-
-//Unobtrusive
-document.observe("dom:loaded", function() {
-  Song.bindEditors();
-});
