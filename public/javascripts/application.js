@@ -3,6 +3,7 @@
 //
 
 var AutoComplete = {
+  Wrappers: [],
 
   Wrapper: Class.create({
     initialize: function(element) {
@@ -27,7 +28,7 @@ var AutoComplete = {
 
   bindAutoComplete: function() {
     $$("div[data-auto-complete]").each(function(element) {
-      var wrapper = new AutoComplete.Wrapper(element);
+      AutoComplete.Wrappers.push(new AutoComplete.Wrapper(element));
     });
   }
 };
