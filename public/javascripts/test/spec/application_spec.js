@@ -15,23 +15,21 @@ Screw.Unit(function() {
         options: options
       };
     };
+    AutoComplete.bindAutoComplete();
   });
 
   describe('AutoComplete.Wrapper', function() {
-
-    //Check why the test is not turing red if the variable is null
     it('should attach to autocomplete on page load', function() {
-      document.observe("dom:loaded", function() {
-        expect(AutoComplete.Wrappers.length).to(equal, 1);
-        expect(autocomplete).to_not(equal, null);
-        expect(input).to(equal, autocomplete.input);
-        expect(completion).to(equal, autocomplete.completion);
-        expect(url).to(equal, autocomplete.url);
-        autocomplete.options.afterUpdateElement("test", {id: "1"});
-        expect(hidden.value).to(equal, "1");
-      });
+      expect(AutoComplete.Wrappers.length).to(equal, 1);
+      expect(autocomplete).to_not(equal, null);
+      expect(input).to(equal, autocomplete.input);
+      expect(completion).to(equal, autocomplete.completion);
+      expect(url).to(equal, autocomplete.url);
+      autocomplete.options.afterUpdateElement("test", {id: "1"});
+      expect(hidden.value).to(equal, "1");
     });
 
   });
 
 });
+
