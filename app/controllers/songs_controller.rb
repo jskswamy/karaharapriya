@@ -11,12 +11,8 @@ class SongsController < ApplicationController
   def create
     song_contents = params["song_contents"].blank? ? [] : params["song_contents"].values
     @song = Song.new(params["song"])
-    if @song.save_with_contents(song_contents)
-      render :text => "Song saved successfully"
-    else
-      response.headers['ResponseType'] = 'ValidationErrors'
-      render :text => @song.errors.full_messages.to_sentence
-    end
+    @song.save_with_contents(song_contents)
+    render :json => RemoteResponse.new(@song, songs_path)
   end
 
   def editor

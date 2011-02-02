@@ -45,6 +45,12 @@
   border-radius: 0px 0px 10px 10px;
   margin-top: 0px;
 }
+.content .body .left .footer .error {
+  color: red;
+  font-weight: bold;
+  padding: 10px 5px;
+  text-align: center;
+}
 .content .body .right {
   margin-left: 315px;
   margin-right: 5px;

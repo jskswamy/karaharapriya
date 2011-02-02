@@ -20,6 +20,7 @@ Screw.Unit(function() {
 
   describe('AutoComplete.Wrapper', function() {
     it('should attach to autocomplete on page load', function() {
+      expect(AutoComplete.isAttached()).to(equal, true);
       expect(AutoComplete.Wrappers.length).to(equal, 1);
       expect(autocomplete).to_not(equal, null);
       expect(input).to(equal, autocomplete.input);

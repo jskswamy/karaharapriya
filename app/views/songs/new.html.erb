@@ -26,15 +26,15 @@
       </div>
 
       <div class="section">
-        <%= auto_complete({:label => "composer", :name => "song[composer_id]", :url => suggest_composer_path}) %>
+        <%= auto_complete :label => "composer", :name => "song[composer_id]", :url => suggest_composer_path %>
       </div>
 
       <div class="section">
-        <%= auto_complete({:label => "ragam", :name => "song[ragam_id]", :url => suggest_ragam_path}) %>
+        <%= auto_complete :label => "ragam", :name => "song[ragam_id]", :url => suggest_ragam_path %>
       </div>
 
       <div class="section">
-        <%= auto_complete({:label => "talam", :name => "song[talam_id]", :url => suggest_talam_path}) %>
+        <%= auto_complete :label => "talam", :name => "song[talam_id]", :url => suggest_talam_path %>
       </div>
 
       <div class="section">
@@ -48,7 +48,10 @@
     </div>
 
     <div class="footer">
+      <div class="error" data-error-display="true">
+      </div>
     </div>
+
   </div>
 
   <div class="right">
@@ -63,10 +66,3 @@
   <div class="clear"></div>
 
 <% end %>
-
-<script type="text/javascript">
-
-  var remote_form = $('create_song').observe("ajax:complete", function(data) {
-  });
-
-</script>
