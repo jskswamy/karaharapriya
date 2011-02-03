@@ -55,8 +55,7 @@
   </div>
 
   <div class="right">
-    <div id="flash_notice" style="color:red;">
-      <%= flash[:notice] %>
+    <div class="flash_notice" data-error-info="true">
     </div>
     <%= editor :class => "editor", :url => editor_songs_path, :song_type => "song_song_type_id" do %>
       <%= render :partial => "create_instruction" %>

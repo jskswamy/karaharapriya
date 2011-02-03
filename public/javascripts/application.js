@@ -49,6 +49,8 @@ var RemoteForm = {
       this.form = $(element);
       this.form.observe("ajax:complete", this.ajaxComplete.bindAsEventListener(this));
       this.errorDisplay = this.form.down("div[data-error-display]");
+      this.errorInfo = this.form.down("div[data-error-info]");
+      this.errorInfo.hide();
     },
 
     ajaxComplete: function(data) {
@@ -58,17 +60,20 @@ var RemoteForm = {
         inputElement = this.form.down("input[name='" + elementName + "']");
         inputElement.stopObserving("focus");
         inputElement.stopObserving("blur");
-        inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
-        inputElement.observe("blur", this.clearError.bindAsEventListener(this));
+        if (error.errors.length) {
+          this.errorInfo.show().update("Please review the highlighted fields");
+          inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
+          inputElement.observe("blur", this.clearError.bindAsEventListener(this));
+        }
       }.bind(this));
     },
 
     showError: function(event, errors) {
-      $(this.errorDisplay).update(errors[0]);
+      this.errorDisplay.update(errors[0]);
     },
 
     clearError: function() {
-      $(this.errorDisplay).update();
+      this.errorDisplay.update();
     }
 
   }),

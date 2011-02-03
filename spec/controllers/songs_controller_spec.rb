@@ -55,7 +55,7 @@ describe SongsController do
 
     Song.find_by_name("new song").should_not be_nil
     response.should be_success
-    response.body.should == {:model_name => "song", :errors => [], :has_errors => false, :redirect_url => "/songs"}.to_json
+    response.body.should == {:model_name => "song", :errors => [], :redirect_url => "/songs"}.to_json
   end
 
   it "should have validationErrors as response type in case of validation errors" do
@@ -63,7 +63,7 @@ describe SongsController do
     sarali = Factory(:song_type, :name => "sarali")
     post :create, {"song" => {"song_type_id" => sarali.id, "composer_id" => thyagaraja.id}}
     response.should be_success
-    response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :has_errors => true, :redirect_url => "/songs"}.to_json
+    response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/songs"}.to_json
   end
 
 end

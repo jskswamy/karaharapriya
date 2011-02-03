@@ -9,7 +9,6 @@ describe RemoteResponse do
     remote = RemoteResponse.new(model, redirect_url);
     remote.errors.should == [{:field => :name, :errors => model.errors[:name]}]
     remote.redirect_url.should == redirect_url
-    remote.has_errors.should be_true
   end
 
 end
