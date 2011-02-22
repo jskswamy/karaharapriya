@@ -31,6 +31,7 @@
   margin: 10px 0px 0px 0px;
   line-height: 2em;
 }
+.content .body .left .body .section label.error { color: red; }
 .content .body .left .body .section .input input { width: 97%; }
 .content .body .left .body .section .input textarea { width: 97%; }
 .content .body .left .body .section .input select { width: 100%; }

@@ -56,12 +56,14 @@ var RemoteForm = {
     ajaxComplete: function(data) {
       response = data.memo.responseJSON;
       response.errors.each(function(error) {
-        elementName = response.model_name + "[" + error.field + "]";
-        inputElement = this.form.down("input[name='" + elementName + "']");
+        htmlElementId = response.model_name + "_" + error.field;
+        inputElement = this.form.down("input[id='" + htmlElementId + "']");
+        labelElement = this.form.down("label[for='" + htmlElementId + "']");
         inputElement.stopObserving("focus");
         inputElement.stopObserving("blur");
         if (error.errors.length) {
           this.errorInfo.show().update("Please review the highlighted fields");
+          labelElement.addClassName("error");
           inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
           inputElement.observe("blur", this.clearError.bindAsEventListener(this));
         }
