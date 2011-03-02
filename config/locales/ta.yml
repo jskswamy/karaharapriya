@@ -13,6 +13,7 @@ ta:
   submit: "தாக்கல் செய்"
   content: "உள்ளடக்கம்"
   new_song: "புதிய பாட்டு"
+  select: "தேர்வு செய்"
 
   activemodel:
     errors:

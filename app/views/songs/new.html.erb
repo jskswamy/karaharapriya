@@ -22,7 +22,7 @@
           <%= label_tag :song_type, t(:song_type) %>
         </div>
         <div class="input">
-          <%= select_tag :song_type , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
+          <%= select_tag :song_type , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-#{t :select}-" %>
         </div>
       </div>
 
