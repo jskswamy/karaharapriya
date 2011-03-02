@@ -2,4 +2,14 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  song: "Song"
+  ragam: "Ragam"
+  talam: "Talam"
+  composer: "Composer"
+  name: "Name"
+  song_type: "Song Type"
+  description: "Description"
+  add_section: "Add Section"
+  submit: "Submit"
+  content: "Content"
+  new_song: "New Song"

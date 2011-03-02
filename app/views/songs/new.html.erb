@@ -3,14 +3,14 @@
   <div class="left">
 
     <div class="header">
-      Song
+      <%= t :song %>
     </div>
 
     <div class="body">
 
       <div class="section">
         <div class="title">
-          <%= label_tag :name %>
+          <%= label_tag :name, t(:name) %>
         </div>
         <div class="input">
           <%= text_field_tag :name %>
@@ -19,7 +19,7 @@
 
       <div class="section">
         <div class="title">
-          <%= label_tag :song_type %>
+          <%= label_tag :song_type, t(:song_type) %>
         </div>
         <div class="input">
           <%= select_tag :song_type , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
@@ -27,20 +27,20 @@
       </div>
 
       <div class="section">
-        <%= auto_complete :label => "composer", :name => "composer_id", :url => suggest_composer_path %>
+        <%= auto_complete :label => t(:composer), :field_name => "composer", :name => "composer_id", :url => suggest_composer_path %>
       </div>
 
       <div class="section">
-        <%= auto_complete :label => "ragam", :name => "ragam_id", :url => suggest_ragam_path %>
+        <%= auto_complete :label => t(:ragam), :field_name => "ragam", :name => "ragam_id", :url => suggest_ragam_path %>
       </div>
 
       <div class="section">
-        <%= auto_complete :label => "talam", :name => "talam_id", :url => suggest_talam_path %>
+        <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path %>
       </div>
 
       <div class="section">
         <div class="title">
-          <%= label_tag :description %>
+          <%= label_tag :description, t(:description) %>
         </div>
         <div class="input">
           <%= text_area_tag :description %>
@@ -63,14 +63,14 @@
     <div class="song_editors" data-song-editor="true" data-song-editor-url="<%= editor_songs_path %>">
       <div class="section">
         <div class="action">
-          <%= link_to "Add Section", "#", "data-song-add-section" => "true" %>
+          <%= link_to t(:add_section), "#", "data-song-add-section" => "true" %>
         </div>
-        <h2>Song Content</h2>
+        <h2><%= t(:content) %></h2>
       </div>
       <%= render :partial => "editor", :locals => { :index => 0 } %>
     </div>
 
-    <%= submit_tag :Submit %>
+    <%= submit_tag t(:submit) %>
 
   </div>
 

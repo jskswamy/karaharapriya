@@ -1,10 +1,10 @@
 <div data-auto-complete="true">
   <div class="title">
-    <%= label_tag label.downcase, label.capitalize %>
+    <%= label_tag field_name.downcase, label.capitalize %>
   </div>
   <div class="input" data-auto-complete-url="<%= url %>">
     <%= hidden_field_tag name, nil, "data-auto-complete-hidden" => "true" %>
-    <%= text_field_tag "#{label.downcase}", nil, "data-auto-complete-input" => "true" %>
+    <%= text_field_tag "#{field_name.downcase}", nil, "data-auto-complete-input" => "true" %>
     <div class="auto_completion" data-auto-complete-completion="true"></div>
   </div>
 </div>
