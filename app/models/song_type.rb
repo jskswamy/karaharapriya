@@ -1,5 +1,8 @@
-class SongType < ActiveRecord::Base
+class SongType
+  include Mongoid::Document
   include Sorter
-  has_many :song_compositions
+
+  field :name
+  field :description
   validates_uniqueness_of :name
 end

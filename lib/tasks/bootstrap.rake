@@ -6,14 +6,14 @@ namespace :bootstrap do
   desc "Create basic ragam"
   task :create_basic_ragam => :environment do
     Ragam.delete_all
-    mayamalavagowlai= Ragam.create(:name => "MayamalavaGowlai", :arohana => "s r1 g2 m1 p t1 n2 s^", :avarohana => "s^ n2 t1 p m1 g2 r1 s", :major => true)
-    sankarabharnam = Ragam.create(:name => "Sankarabharnam", :arohana => "s r2 g2 m1 p t2 n2 s^", :avarohana => "s^ n2 t2 p m1 g2 r2 s", :major => true)
-    karaharapriya = Ragam.create(:name => "Karaharapriya", :arohana => "s r2 g1 m1 p t2 n1 s^", :avarohana => "s^ n1 t2 p m1 g1 r2 s", :major => true)
-    Ragam.create(:name => "Thodi", :arohana => "s r1 g1 m1 p t1 n1 s^", :avarohana => "s^ n1 t1 p m1 g1 r1 s", :major => true)
-    Ragam.create(:name => "Kalyani", :arohana => "s r2 g2 m2 p t2 n2 s^", :avarohana => "s^ n2 t2 p m2 g2 r2 s", :major => true)
-    Ragam.create(:name => "Mohanam", :arohana => "s r2 g2 p t2 s^", :avarohana => "s^ t2 p g2 r2 s", :major => false, :parent_id => sankarabharnam)
-    Ragam.create(:name => "Shivaranjani", :arohana => "s r2 g1 p t2 s^", :avarohana => "s^ t2 p g1 r2 s", :major => false, :parent_id => karaharapriya)
-    Ragam.create(:name => "Boopalam", :arohana => "s r1 g2 p t1 s^", :avarohana => "s^ t1 p g2 r1 s", :major => false, :parent_id => mayamalavagowlai)
+    mayamalavagowlai= Ragam.create(:name => "MayamalavaGowlai", :arohana => "s r1 g2 m1 p t1 n2 s^", :avarohana => "s^ n2 t1 p m1 g2 r1 s")
+    sankarabharnam = Ragam.create(:name => "Sankarabharnam", :arohana => "s r2 g2 m1 p t2 n2 s^", :avarohana => "s^ n2 t2 p m1 g2 r2 s")
+    karaharapriya = Ragam.create(:name => "Karaharapriya", :arohana => "s r2 g1 m1 p t2 n1 s^", :avarohana => "s^ n1 t2 p m1 g1 r2 s")
+    Ragam.create(:name => "Thodi", :arohana => "s r1 g1 m1 p t1 n1 s^", :avarohana => "s^ n1 t1 p m1 g1 r1 s")
+    Ragam.create(:name => "Kalyani", :arohana => "s r2 g2 m2 p t2 n2 s^", :avarohana => "s^ n2 t2 p m2 g2 r2 s")
+    Ragam.create(:name => "Mohanam", :arohana => "s r2 g2 p t2 s^", :avarohana => "s^ t2 p g2 r2 s", :parent_id => sankarabharnam)
+    Ragam.create(:name => "Shivaranjani", :arohana => "s r2 g1 p t2 s^", :avarohana => "s^ t2 p g1 r2 s", :parent_id => karaharapriya)
+    Ragam.create(:name => "Boopalam", :arohana => "s r1 g2 p t1 s^", :avarohana => "s^ t1 p g2 r1 s", :parent_id => mayamalavagowlai)
   end
 
   desc "Create basic talam"

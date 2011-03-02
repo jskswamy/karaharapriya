@@ -7,42 +7,43 @@
     </div>
 
     <div class="body">
-      <div class="section">
-        <div class="title">
-          <%= label_tag "song_song_type_id", "Song Type" %>
-        </div>
-        <div class="input">
-          <%= select_tag "song[song_type_id]" , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
-        </div>
-      </div>
 
       <div class="section">
         <div class="title">
-          <%= label_tag "song_name", "Name" %>
+          <%= label_tag :name %>
         </div>
         <div class="input">
-          <%= text_field_tag "song[name]" %>
+          <%= text_field_tag :name %>
         </div>
-      </div>
-
-      <div class="section">
-        <%= auto_complete :label => "composer", :name => "song[composer_id]", :url => suggest_composer_path %>
-      </div>
-
-      <div class="section">
-        <%= auto_complete :label => "ragam", :name => "song[ragam_id]", :url => suggest_ragam_path %>
-      </div>
-
-      <div class="section">
-        <%= auto_complete :label => "talam", :name => "song[talam_id]", :url => suggest_talam_path %>
       </div>
 
       <div class="section">
         <div class="title">
-          <%= label_tag "song_description", "Description" %>
+          <%= label_tag :song_type %>
         </div>
         <div class="input">
-          <%= text_area_tag "song[description]" %>
+          <%= select_tag :song_type , options_for_select(@song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-select-" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <%= auto_complete :label => "composer", :name => "composer_id", :url => suggest_composer_path %>
+      </div>
+
+      <div class="section">
+        <%= auto_complete :label => "ragam", :name => "ragam_id", :url => suggest_ragam_path %>
+      </div>
+
+      <div class="section">
+        <%= auto_complete :label => "talam", :name => "talam_id", :url => suggest_talam_path %>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= label_tag :description %>
+        </div>
+        <div class="input">
+          <%= text_area_tag :description %>
         </div>
       </div>
     </div>
@@ -55,11 +56,22 @@
   </div>
 
   <div class="right">
+
     <div class="flash_notice" data-error-info="true">
     </div>
-    <%= editor :class => "editor", :url => editor_songs_path, :song_type => "song_song_type_id" do %>
-      <%= render :partial => "create_instruction" %>
-    <% end %>
+
+    <div class="song_editors" data-song-editor="true" data-song-editor-url="<%= editor_songs_path %>">
+      <div class="section">
+        <div class="action">
+          <%= link_to "Add Section", "#", "data-song-add-section" => "true" %>
+        </div>
+        <h2>Song Content</h2>
+      </div>
+      <%= render :partial => "editor", :locals => { :index => 0 } %>
+    </div>
+
+    <%= submit_tag :Submit %>
+
   </div>
 
   <div class="clear"></div>

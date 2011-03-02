@@ -6,7 +6,7 @@ describe Ragam do
     mohana_ragam = Factory(:ragam, :name => "mohanam")
     another_mohana_ragam = Factory.build(:ragam, :name => "mohanam", :arohana => "sa re2 ga2 ma1 pa")
     another_mohana_ragam.valid?.should be_false
-    another_mohana_ragam.errors.full_messages.to_sentence.should == "Name has already been taken"
+    another_mohana_ragam.errors.full_messages.to_sentence.should == "Name is already taken"
   end
 
   it "should not create a ragam without a name" do

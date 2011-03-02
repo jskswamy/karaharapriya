@@ -1,23 +1,18 @@
 var Song = {
   Editor: Class.create({
-    initialize: function(target, songType, url) {
-      songType.observe('change', this.updateTarget.bindAsEventListener(this));
+    initialize: function(target, addLink, url) {
+      addLink.observe('click', this.addSection.bindAsEventListener(this));
       this.target = target;
       this.url = url;
     },
 
-    updateTarget: function(e){
+    addSection: function(e){
+      var sectionIndex = this.target.select("div[data-section-index]:last-child")[0].readAttribute("data-section-index");
       var request = new Ajax.Request(this.url, {
         method: 'get',
-        parameters: {
-          song_type_id: e.element().value
-        },
+        parameters: {index: ++sectionIndex},
         onSuccess: function(response) {
-          this.target.innerHTML = response.responseText;
-          $$('.rich_editor').each(function(item){
-            var editor = new nicEditor({fullPanel: true, iconsPath: '/images/nicEditorIcons.gif'});
-            editor.panelInstance(item.id);
-          });
+          this.target.insert(response.responseText);
         }.bind(this)
       });
     }
@@ -25,9 +20,9 @@ var Song = {
 
   bindEditors: function() {
     $$("div[data-song-editor]").each(function(element) {
-      songType = $(element.readAttribute("data-song-type"));
+      addLink = element.down("a[data-song-add-section]");
       url = element.readAttribute("data-song-editor-url");
-      song_editor = new Song.Editor(element, songType, url);
+      songEditor = new Song.Editor(element, addLink, url);
     });
   }
 };

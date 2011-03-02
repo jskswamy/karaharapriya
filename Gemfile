@@ -1,9 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
-gem 'mysql2'
 gem 'simple-navigation', '3.0.1'
 gem 'webrat', '0.7.1'
+gem "mongoid", "2.0.0.rc.6"
+gem "bson_ext", "~> 1.2"
 
 group :development, :test do
   gem 'less', '1.2.21'

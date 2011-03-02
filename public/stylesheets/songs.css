@@ -70,9 +70,25 @@
   font-size: 1.5em;
   font-weight: bold;
 }
+.content .body .right .section { margin-bottom: 10px; }
+.content .body .right .action { float: right; }
 .content .body .right .editor { margin-bottom: 20px; }
+.content .body .right .editor .title { text-align: center; }
+.content .body .right .editor .title input {
+  text-align: center;
+  text-transform: capitalize;
+}
+.content .body .right .editor input {
+  border: none;
+  border-bottom: solid 2px #c8e2e1;
+  background: url(/images/paper_bg.jpg) top left repeat;
+  width: 300px;
+}
 .content .body .right .editor textarea {
-  height: 150px;
+  border: none;
+  background: url(/images/paper_bg.jpg) top left repeat;
+  line-height: 40px;
+  height: 200px;
   width: 100%;
 }
 .content .body .right .editor .default {

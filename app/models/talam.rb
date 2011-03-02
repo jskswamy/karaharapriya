@@ -1,9 +1,10 @@
-class Talam < ActiveRecord::Base
-  include Sorter, Suggest
+class Talam
+  include Mongoid::Document
+  include Suggest
 
-  has_many :songs
-
-  has_many :song_content_info, :as => :info
+  field :name
+  field :avartanam
+  field :laghu_length, :type => Integer
 
   validates_uniqueness_of :name
   validates_uniqueness_of :laghu_length, :through => :avartanam
