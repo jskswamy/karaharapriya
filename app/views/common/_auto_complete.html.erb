@@ -5,6 +5,6 @@
   <div class="input" data-auto-complete-url="<%= url %>">
     <%= hidden_field_tag name, nil, "data-auto-complete-hidden" => "true" %>
     <%= text_field_tag "#{field_name.downcase}", nil, "data-auto-complete-input" => "true" %>
-    <div class="auto_completion" data-auto-complete-completion="true"></div>
+    <div class="auto_completion" data-auto-complete-completion="true" style="display: none"></div>
   </div>
 </div>

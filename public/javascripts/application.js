@@ -105,14 +105,27 @@ var RemoteForm = {
   bindResponders: function() {
     if(RemoteForm.isAttached()) { return; }
     $$("form[data-remote]").each(function(element) {
-      RemoteForm.Responder.push(new RemoteForm.Responder(element));
+      RemoteForm.Responders.push(new RemoteForm.Responder(element));
     });
   }
 };
+
+function transLiteration() {
+  var options = {
+    sourceLanguage: 'en',
+    destinationLanguage: ['ta'],
+    shortcutKey: 'ctrl+g',
+    transliterationEnabled: true
+  };
+  var inputElements = $$("input","textarea");
+  var control = new google.elements.transliteration.TransliterationControl(options);
+  control.makeTransliteratable(inputElements);
+}
 
 //Unobtrusive
 document.observe("dom:loaded", function() {
   Song.bindEditors();
   AutoComplete.bindAutoComplete();
   RemoteForm.bindResponders();
+  transLiteration();
 });

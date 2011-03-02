@@ -4,6 +4,7 @@
   <title>Karaharapriya</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :all %>
+  <%= javascript_include_tag "https://www.google.com/jsapi?key=ABQIAAAABFSWlP7TORN_QUoJYaDYXxR1iNzBUkafRrQ9OvFJPsgJAkAYMRTMcz7FXqb0G79w3H4-1UM2ytfW6Q" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -30,3 +31,11 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+
+  //Load the Language API.
+  google.load("language", "1");
+  google.load("elements", "1", {packages: "transliteration", "nocss" : true});
+
+</script>
