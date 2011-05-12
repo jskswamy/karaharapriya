@@ -1,18 +1,18 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
-gem 'simple-navigation', '3.0.1'
-gem 'webrat', '0.7.1'
-gem "mongoid", "2.0.0.rc.6"
-gem "bson_ext", "~> 1.2"
+gem 'simple-navigation'
+gem 'webrat'
+gem "mongoid"
+gem "bson_ext"
 
 group :development, :test do
-  gem 'less', '1.2.21'
-  gem 'factory_girl', '1.3.2'
+  gem 'less'
+  gem 'factory_girl'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'autotest-standalone'
-  gem 'autotest-rails', '4.1.0'
+  gem 'autotest-rails'
   gem 'simplecov'
   gem 'rails_best_practices'
   gem 'metric_fu'
