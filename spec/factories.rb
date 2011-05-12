@@ -3,7 +3,8 @@ Factory.sequence :name do |n|
 end
 
 Factory.define :song do |f|
-  f.name {Factory.next(:name)}
+  f.sequence(:name) { |n| "name #{n}" }
+  f.sequence(:content) { |n| "content #{n}" }
   f.association :song_type
   f.association :ragam
   f.association :talam

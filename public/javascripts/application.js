@@ -62,11 +62,12 @@ var RemoteForm = {
     processError: function(errors) {
       errors.each(function(error) {
         htmlElementId = error.field;
-        inputElement = this.form.down("input[id='" + htmlElementId + "']");
+        inputElement = this.form.down("#" + htmlElementId);
         labelElement = this.form.down("label[for='" + htmlElementId + "']");
-          if (error.errors.length) {
+          if (error.errors.length && inputElement && labelElement) {
             this.errorInfo.show().update("Please review the highlighted fields");
             labelElement.addClassName("error");
+            labelElement.title = error.errors[0];
             inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
             inputElement.observe("blur", this.clearError.bindAsEventListener(this));
           }
@@ -83,12 +84,13 @@ var RemoteForm = {
 
     reset: function() {
       this.errorInfo.hide();
-      this.form.select("input").each(function(inputElement) {
+      this.form.select("input, textarea, select").each(function(inputElement) {
         inputElement.stopObserving("focus");
         inputElement.stopObserving("blur");
       }.bind(this));
       this.form.select("label").each(function(labelElement) {
         labelElement.removeClassName("error");
+        labelElement.title = " ";
       }.bind(this));
     },
 
@@ -124,7 +126,6 @@ function transLiteration() {
 
 //Unobtrusive
 document.observe("dom:loaded", function() {
-  Song.bindEditors();
   AutoComplete.bindAutoComplete();
   RemoteForm.bindResponders();
   transLiteration();

@@ -62,12 +62,9 @@
 
     <div class="song_editors" data-song-editor="true" data-song-editor-url="<%= editor_songs_path %>">
       <div class="section">
-        <div class="action">
-          <%= link_to t(:add_section), "#", "data-song-add-section" => "true" %>
-        </div>
-        <h2><%= t(:content) %></h2>
+        <h2><%= label_tag :content, t(:content) %></h2>
       </div>
-      <%= render :partial => "editor", :locals => { :index => 0 } %>
+      <%= render :partial => "editor" %>
     </div>
 
     <%= submit_tag t(:submit) %>

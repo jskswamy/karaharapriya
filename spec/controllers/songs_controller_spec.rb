@@ -38,10 +38,8 @@ describe SongsController do
                     :ragam_id => ragam.id.to_s,
                     :composer_id => composer.id.to_s,
                     :description => "song description",
-                    :song => {
-                            "0" => {:title => "pallavi", :body => "sa re ga ma"},
-                            "1" => {:title => "anupallavi", :body => "pa th ne sa"}
-    }}
+                    :content => "sa re ga ma" }
+
     response.should be_success
     response.body.should == {:model_name => "song", :errors => [], :redirect_url => "/songs"}.to_json
     Song.all.count.should == 1
@@ -52,6 +50,7 @@ describe SongsController do
     song.ragam.should == ragam
     song.talam.should == talam
     song.description.should == "song description"
+    song.content.should == "sa re ga ma"
   end
 
   it "should have validationErrors as response type in case of validation errors" do
@@ -60,16 +59,13 @@ describe SongsController do
     composer = Factory(:composer)
     thyagaraja = Factory(:composer)
     sarali = Factory(:song_type, :name => "sarali")
-
     post :create, { :song_type => sarali.id.to_s,
                     :talam_id => talam.id.to_s,
                     :ragam_id => ragam.id.to_s,
                     :composer_id => composer.id.to_s,
                     :description => "song description",
-                    :song => {
-                            "0" => {:title => "pallavi", :body => "sa re ga ma"},
-                            "1" => {:title => "anupallavi", :body => "pa th ne sa"}
-    }}
+                    :content => "sa re ga ma" }
+
     response.should be_success
     response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/songs"}.to_json
   end

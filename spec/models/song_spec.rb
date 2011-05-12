@@ -26,6 +26,12 @@ describe Song do
     song.errors.full_messages.to_sentence.should == "Song type can't be blank"
   end
 
+  it "should not be able to create a song without content" do
+    song = Factory.build(:song, :content => nil)
+    song.valid?.should be_false
+    song.errors.full_messages.to_sentence.should == "Content can't be blank"
+  end
+
   it "should not have duplicate name" do
     ragam = Factory(:ragam)
     talam = Factory(:talam)

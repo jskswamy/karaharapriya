@@ -1,6 +1,3 @@
-<div class="section editor" data-section-index="<%= index %>">
-  <div class="title">
-    <%= text_field_tag "song[#{index}][title]" %>
-  </div>
-  <%= text_area_tag "song[#{index}][body]", "" , :class => "rich_editor" %>
+<div class="section editor">
+  <%= text_area_tag "content", "" , :class => "rich_editor" %>
 </div>

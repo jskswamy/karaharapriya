@@ -9,7 +9,7 @@ class Song
   referenced_in :talam
   referenced_in :composer
 
-  validates_presence_of :name, :ragam, :talam, :song_type
+  validates_presence_of :name, :content, :ragam, :talam, :song_type
   validates_uniqueness_of :name
 
 end
