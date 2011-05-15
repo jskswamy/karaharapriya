@@ -3,30 +3,17 @@ Factory.sequence :name do |n|
 end
 
 Factory.define :song do |f|
-  f.name {Factory.next(:name)}
-  f.association :composer
+  f.sequence(:name) { |n| "name #{n}" }
+  f.sequence(:content) { |n| "content #{n}" }
   f.association :song_type
+  f.association :ragam
+  f.association :talam
+  f.association :composer
 end
 
 Factory.define :song_type do |f|
   f.name {Factory.next(:name)}
-  f.sequence(:description) { |n| "song description #{n}" }
-end
-
-Factory.define :song_content do |f|
-  f.sequence(:body) { |n| 'sa re ga ma ' * n }
-  f.association :song
-  f.association :song_content_type
-end
-
-Factory.define :song_content_type do |f|
-  f.name { Factory.next(:name) }
-  f.sequence(:description) { |n| "song content type #{n}" }
-end
-
-Factory.define :song_content_info do |f|
-  f.association :song_content
-  f.association :info, :factory => :ragam
+  f.description "description"
 end
 
 Factory.define :ragam do |f|
@@ -43,7 +30,6 @@ Factory.define :ragam do |f|
     (0...8).each { avarohana << "#{avarohana_list[rand(100 * n) % avarohana_list.count]} " }
     avarohana.chop
   end
-  f.major false
 end
 
 Factory.define :talam do |f|
@@ -56,9 +42,4 @@ Factory.define :composer do |f|
   f.name { Factory.next(:name) }
   f.sequence(:century) { |n| "178#{n}-188#{n}" }
   f.sequence(:info) { |n| "Additional information for composer #{n}" }
-end
-
-Factory.define :song_composition do |f|
-  f.association :song_content_type
-  f.association :song_type
 end

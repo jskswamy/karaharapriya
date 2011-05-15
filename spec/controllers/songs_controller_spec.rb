@@ -8,60 +8,64 @@ describe SongsController do
 
     get :index
     assigns(:songs).should == [song1,song2]
+    response.should be_success
   end
 
-  it "should get the response which has the editors based on song composition" do
-    song_type = Factory(:song_type, :name => "swarajathi")
-    pallavi = Factory(:song_content_type, :name => "Pallavi")
-    anu_pallavi = Factory(:song_content_type, :name => "Anu Pallavi")
-    swarajathi_pallavi = Factory(:song_composition, :song_type => song_type, :song_content_type => pallavi)
-    swarajathi_anu_pallavi = Factory(:song_composition, :song_type => song_type, :song_content_type => anu_pallavi)
-
-    get :editor, {"song_type_id" => song_type.id}
-    assigns(:song_compositions).should == [swarajathi_pallavi, swarajathi_anu_pallavi]
-    response.should render_template("songs/_editor")
-  end
-
-  it "should get the create song instruction when an invalid song type is specified" do
-    get :editor, {"song_type_id" => -1}
-    response.should render_template("songs/_create_instruction")
-  end
-
-  it "should load the song types on new song in alphabetical order" do
-    sarali = Factory(:song_type, :name => "sarali")
-    janda = Factory(:song_type, :name => "janda")
-
+  it "should assign song type" do
+    song_types = []
+    2.times { song_types << Factory(:song_type) }
     get :new
-    assigns(:song_types).should == [janda, sarali]
+    response.should be_success
+    response.should render_template(:new)
+    assigns[:song_types].should_not be_nil
+    assigns[:song_types].should == song_types
+  end
+
+  it "should render the editor" do
+    get :editor, :index => 1
+    response.should be_success
+    response.should render_template(:editor)
   end
 
   it "should create song and its contents" do
-    thyagaraja = Factory(:composer)
-    sarali = Factory(:song_type, :name => "sarali")
-    pallavi = Factory(:song_content_type, :name => "Pallavi")
-    anupallavi = Factory(:song_content_type, :name => "Anupallavi")
+    ragam = Factory(:ragam)
+    talam = Factory(:talam)
+    geetham = Factory(:song_type, :name => "geetham")
+    composer = Factory(:composer)
+    post :create, { :name => "song",
+                    :song_type => geetham.id.to_s,
+                    :talam_id => talam.id.to_s,
+                    :ragam_id => ragam.id.to_s,
+                    :composer_id => composer.id.to_s,
+                    :description => "song description",
+                    :content => "sa re ga ma" }
 
-    post :create, {"song_contents" => {
-                                      "0" => {
-                                              "body" => "sa re ga ma<br>",
-                                               "song_content_type_id" => pallavi.id
-                                             },
-                                      "1" => {
-                                              "body" => "sa re ga ma<br>",
-                                              "song_content_type_id" => anupallavi.id
-                                             }
-                                      },
-                   "song" => { "name" => "new song", "song_type_id" => sarali.id, "composer_id" => thyagaraja.id, }}
-
-    Song.find_by_name("new song").should_not be_nil
     response.should be_success
     response.body.should == {:model_name => "song", :errors => [], :redirect_url => "/songs"}.to_json
+    Song.all.count.should == 1
+    song = Song.first
+    song.name.should == "song"
+    song.song_type.should == geetham
+    song.composer.should == composer
+    song.ragam.should == ragam
+    song.talam.should == talam
+    song.description.should == "song description"
+    song.content.should == "sa re ga ma"
   end
 
   it "should have validationErrors as response type in case of validation errors" do
+    ragam = Factory(:ragam)
+    talam = Factory(:talam)
+    composer = Factory(:composer)
     thyagaraja = Factory(:composer)
     sarali = Factory(:song_type, :name => "sarali")
-    post :create, {"song" => {"song_type_id" => sarali.id, "composer_id" => thyagaraja.id}}
+    post :create, { :song_type => sarali.id.to_s,
+                    :talam_id => talam.id.to_s,
+                    :ragam_id => ragam.id.to_s,
+                    :composer_id => composer.id.to_s,
+                    :description => "song description",
+                    :content => "sa re ga ma" }
+
     response.should be_success
     response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/songs"}.to_json
   end

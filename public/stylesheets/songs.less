@@ -2,6 +2,11 @@
 
 .content {
   .body {
+
+    label.error {
+      color: @error_color;
+    }
+
     .left {
       float: left;
       width: @left_content_width;
@@ -24,9 +29,6 @@
           margin: 10px 0px 0px 0px;
           line-height: 2.0em;
 
-          label.error {
-            color: @error_color;
-          }
 
           .input {
             input, textarea {
@@ -65,6 +67,9 @@
 
     .right {
 
+      margin-left: @left_content_width + 15px;
+      margin-right: 5px;
+
       .flash_notice {
         background-color: @highlight_color;
         .rounded_corners(10px);
@@ -74,19 +79,42 @@
         width: 500px;
       }
 
-      margin-left: @left_content_width + 15px;
-      margin-right: 5px;
-
-
       .editor_name h1 {
         .font_heading;
+      }
+
+      .section {
+        margin-bottom: 10px;
+      }
+
+      .action {
+        float: right;
       }
 
       .editor {
         margin-bottom: 20px;
 
+        .title {
+          text-align: center;
+
+          input {
+            text-align: center;
+            text-transform: capitalize;
+          }
+        }
+
+        input {
+          border: none;
+          border-bottom: solid 2px #C8E2E1;
+          background: url(/images/paper_bg.jpg) top left repeat;
+          width: 300px;
+        }
+
         textarea {
-          height: 150px;
+          border: none;
+          background: url(/images/paper_bg.jpg) top left repeat;
+          line-height: 40px !important;
+          height: 200px;
           width: 100%;
         }
 

@@ -1,7 +1,3 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-//
-
 var AutoComplete = {
   _attached: false,
   Wrappers: [],
@@ -50,23 +46,31 @@ var RemoteForm = {
       this.form.observe("ajax:complete", this.ajaxComplete.bindAsEventListener(this));
       this.errorDisplay = this.form.down("div[data-error-display]");
       this.errorInfo = this.form.down("div[data-error-info]");
-      this.errorInfo.hide();
+      this.reset();
     },
 
     ajaxComplete: function(data) {
+      this.reset();
       response = data.memo.responseJSON;
-      response.errors.each(function(error) {
-        htmlElementId = response.model_name + "_" + error.field;
-        inputElement = this.form.down("input[id='" + htmlElementId + "']");
+      if (response.errors.length === 0) {
+        this.redirect(response.redirect_url);
+      } else {
+        this.processError(response.errors);
+      }
+    },
+
+    processError: function(errors) {
+      errors.each(function(error) {
+        htmlElementId = error.field;
+        inputElement = this.form.down("#" + htmlElementId);
         labelElement = this.form.down("label[for='" + htmlElementId + "']");
-        inputElement.stopObserving("focus");
-        inputElement.stopObserving("blur");
-        if (error.errors.length) {
-          this.errorInfo.show().update("Please review the highlighted fields");
-          labelElement.addClassName("error");
-          inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
-          inputElement.observe("blur", this.clearError.bindAsEventListener(this));
-        }
+          if (error.errors.length && inputElement && labelElement) {
+            this.errorInfo.show().update("Please review the highlighted fields");
+            labelElement.addClassName("error");
+            labelElement.title = error.errors[0];
+            inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
+            inputElement.observe("blur", this.clearError.bindAsEventListener(this));
+          }
       }.bind(this));
     },
 
@@ -76,6 +80,22 @@ var RemoteForm = {
 
     clearError: function() {
       this.errorDisplay.update();
+    },
+
+    reset: function() {
+      this.errorInfo.hide();
+      this.form.select("input, textarea, select").each(function(inputElement) {
+        inputElement.stopObserving("focus");
+        inputElement.stopObserving("blur");
+      }.bind(this));
+      this.form.select("label").each(function(labelElement) {
+        labelElement.removeClassName("error");
+        labelElement.title = " ";
+      }.bind(this));
+    },
+
+    redirect: function(url) {
+      window.location = url;
     }
 
   }),
@@ -87,14 +107,26 @@ var RemoteForm = {
   bindResponders: function() {
     if(RemoteForm.isAttached()) { return; }
     $$("form[data-remote]").each(function(element) {
-      RemoteForm.Responder.push(new RemoteForm.Responder(element));
+      RemoteForm.Responders.push(new RemoteForm.Responder(element));
     });
   }
 };
 
+function transLiteration() {
+  var options = {
+    sourceLanguage: 'en',
+    destinationLanguage: ['ta'],
+    shortcutKey: 'ctrl+g',
+    transliterationEnabled: true
+  };
+  var inputElements = $$("input","textarea");
+  var control = new google.elements.transliteration.TransliterationControl(options);
+  control.makeTransliteratable(inputElements);
+}
+
 //Unobtrusive
 document.observe("dom:loaded", function() {
-  Song.bindEditors();
   AutoComplete.bindAutoComplete();
   RemoteForm.bindResponders();
+  transLiteration();
 });

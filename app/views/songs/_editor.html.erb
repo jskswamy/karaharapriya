@@ -1,13 +1,3 @@
-<h1><%= song_type %></h1>
-<div class="song_editors">
-  <% song_compositions.each_with_index do |song_composition, index| %>
-    <div class="editor_name">
-      <h2> <%= song_composition.name %> </h2>
-      <%= hidden_field_tag "song_contents[#{index.to_s}][song_content_type_id]", song_composition.id %> 
-    </div>
-    <div class="editor">
-      <%= text_area_tag "song_contents[#{index.to_s}][body]", "" , :class => "rich_editor" %>
-    </div>
-  <% end %>
-  <%= submit_tag :Submit %>
-<div>
+<div class="section editor">
+  <%= text_area_tag "content", "" , :class => "rich_editor" %>
+</div>

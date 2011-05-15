@@ -1,0 +1,32 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ta:
+  song: "பாட்டு"
+  ragam: "ராகம்"
+  talam: "தாளம்"
+  composer: "எழுத்தாளர்"
+  name: "பெயர்"
+  song_type: "ரகம்"
+  description: "விளக்கம்"
+  add_section: "பிரிவு"
+  submit: "தாக்கல் செய்"
+  content: "உள்ளடக்கம்"
+  new_song: "புதிய பாட்டு"
+  select: "தேர்வு செய்"
+
+  activemodel:
+    errors:
+      models:
+        song:
+          attributes:
+            name:
+              blank: "காலியாக இருக்ககூடாது"
+              taken: "ஏற்கனவே எடுதாகிவிட்டது"
+            song_type:
+              blank: "காலியாக இருக்ககூடாது"
+            ragam:
+              blank: "காலியாக இருக்ககூடாது"
+            talam:
+              blank: "காலியாக இருக்ககூடாது"
+

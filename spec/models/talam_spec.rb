@@ -16,7 +16,7 @@ describe Talam do
     random_talam = Factory(:talam, :name => "some talam")
     another_talam = Factory.build(:talam, :name => "some talam")
     another_talam.valid?.should be_false
-    another_talam.errors.full_messages.to_sentence.should == "Name has already been taken"
+    another_talam.errors.full_messages.to_sentence.should == "Name is already taken"
   end
 
   it "shoult not create if the avartanam and length are already assigned to another talam" do
@@ -24,7 +24,7 @@ describe Talam do
     duplicate_random_talam = Factory.build(:talam, :name => "another random talam", :avartanam => "1 0 0", :laghu_length => 4)
     someother_random_talam = Factory.build(:talam, :name => "someother random talam", :avartanam => "1 0 0", :laghu_length => 3)
     duplicate_random_talam.valid?.should be_false
-    duplicate_random_talam.errors.full_messages.to_sentence.should == "Laghu length has already been taken"
+    duplicate_random_talam.errors.full_messages.to_sentence.should == "Laghu length is already taken"
     someother_random_talam.valid?.should be_true
   end
 
@@ -38,9 +38,10 @@ describe Talam do
     end
 
     it "should get all the talams" do
-      suggested_talam = Talam.suggest_by_name("")
+      all_talam = [@a_talam, @aa_talam, @b_talam, @bb_talam]
+      suggested_talam = Talam.suggest_by_name("").to_a
       suggested_talam.count.should == 4
-      suggested_talam.should == [@a_talam, @aa_talam, @b_talam, @bb_talam]
+      suggested_talam.each {|talam| all_talam.include?(talam).should be_true}
     end
 
     it "should find talam by name" do
