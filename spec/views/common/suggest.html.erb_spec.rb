@@ -10,7 +10,7 @@ describe "common/suggest.html.erb" do
   end
 
   it "should render the ragam as list" do
-    render :partial => "suggest", :locals => {:suggestions => @suggestions}
+    render :partial => "suggest", :locals => {:suggestions => @suggestions, :name => "suggest"}
     @suggestions.each do |suggestion|
       rendered.should have_selector("ul > li[id='#{suggestion.id}'] > a", :content => suggestion.name)
     end

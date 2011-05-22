@@ -128,5 +128,5 @@ function transLiteration() {
 document.observe("dom:loaded", function() {
   AutoComplete.bindAutoComplete();
   RemoteForm.bindResponders();
-  transLiteration();
+  //transLiteration();
 });
