@@ -6,7 +6,7 @@
   <div class="body">
     <ul>
       <% @songs.each do |song| %>
-        <li><%= song.name %></li>
+        <li><%= link_to song.name, edit_song_path(song) %></li>
       <% end %>
     </ul>
   </div>

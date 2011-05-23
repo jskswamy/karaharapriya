@@ -27,15 +27,18 @@
       </div>
 
       <div class="section">
-        <%= auto_complete :label => t(:composer), :field_name => "composer", :name => "composer_id", :url => suggest_composer_path, :form_helper => f %>
+        <% composer_name = song.composer.nil? ? nil : song.composer.name %>
+        <%= auto_complete :label => t(:composer), :field_name => "composer", :name => "composer_id", :url => suggest_composer_path, :value => composer_name, :form_helper => f %>
       </div>
 
       <div class="section">
-        <%= auto_complete :label => t(:ragam), :field_name => "ragam", :name => "ragam_id", :url => suggest_ragam_path, :form_helper => f %>
+        <% ragam_name = song.ragam.nil? ? nil : song.ragam.name %>
+        <%= auto_complete :label => t(:ragam), :field_name => "ragam", :name => "ragam_id", :url => suggest_ragam_path, :value => ragam_name, :form_helper => f %>
       </div>
 
       <div class="section">
-        <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path, :form_helper => f %>
+        <% talam_name = song.talam.nil? ? nil : song.talam.name %>
+        <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path, :value => talam_name, :form_helper => f %>
       </div>
 
       <div class="section">

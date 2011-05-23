@@ -42,4 +42,9 @@ describe Song do
     duplicate_song.errors.full_messages.to_sentence.should == "Name is already taken"
   end
 
+  it "should find by id" do
+    song = Factory(:song)
+    Song.find_by_id(song.id).should == song
+  end
+
 end

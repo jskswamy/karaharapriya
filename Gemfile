@@ -5,6 +5,7 @@ gem 'simple-navigation'
 gem 'webrat'
 gem "mongoid"
 gem "bson_ext"
+gem 'rake', '~> 0.8.7'
 
 group :development, :test do
   gem 'less'

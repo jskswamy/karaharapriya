@@ -15,9 +15,11 @@ Feature: Manage songs
     Then I should see the following autocomplete options:
       | Ashwin |
       | Chandru |
-    Then I should not see the following autocomplete options:
+    And I should not see the following autocomplete options:
       | Bobby |
       | Dinesh |
+    When I click on the "Chandru" autocomplete option
+    Then the "song_composer" field should contain "Chandru"
 
   @javascript
   Scenario: Ragam auto suggestion
@@ -34,6 +36,8 @@ Feature: Manage songs
       | Dinesh |
     Then I should not see the following autocomplete options:
       | Shulini  |
+    When I click on the "Keeravani" autocomplete option
+    Then the "song_ragam" field should contain "Keeravani"
 
   @javascript
   Scenario: Talam auto suggestion
@@ -48,6 +52,8 @@ Feature: Manage songs
       | Roopagam |
     Then I should not see the following autocomplete options:
       | Tisr  |
+    When I click on the "Adi" autocomplete option
+    Then the "song_talam" field should contain "Adi"
 
   @javascript
   Scenario: Create new song
@@ -65,3 +71,28 @@ Feature: Manage songs
     And I select "Varnam" from "song_song_type"
     And I press "Submit"
     Then I should be on the songs_list page
+
+  @javascript
+  Scenario: Edit a song
+    Given I have a song "Ninu kori" with content "sa re ga ma" song_type "Varnam" ragam "Mohanam" talam "Adi" by composer "Thyagarajar"
+    And I have a song type "Geetham"
+    And I have a composer "Muthuswamy"
+    And I have a ragam "Sankarabharanam"
+    And I have a talam "Rupagam"
+    When I am on the songs_list page
+    And I follow "Ninu kori"
+    Then the "song_name" field should contain "Ninu kori"
+    And the "song_content" field should contain "sa re ga ma"
+    And the "song_composer" field should contain "Thyagarajar"
+    And the "song_ragam" field should contain "Mohanam"
+    And the "song_talam" field should contain "Adi"
+    Then I fill in the following:
+      | song_name | Shayamala meenakshi |
+      | song_content | sa re ga ma pa pa |
+    And I select "Geetham" from "song_song_type"
+    And I choose "Muthuswamy" as "song_composer" using auto complete
+    And I choose "Sankarabharanam" as "song_ragam" using auto complete
+    And I choose "Rupagam" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the songs_list page
+    And I should see "Shayamala meenakshi"

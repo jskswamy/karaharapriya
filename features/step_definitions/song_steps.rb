@@ -26,6 +26,14 @@ Given /^I have a talam "([^"]*)"$/ do |name|
   Factory(:talam, :name => name)
 end
 
+Given /^I have a song "([^"]*)" with content "([^"]*)" song_type "([^"]*)" ragam "([^"]*)" talam "([^"]*)" by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, composer_name|
+  song_type = Factory(:song_type, :name => song_type_name)
+  composer = Factory(:composer, :name => composer_name)
+  ragam = Factory(:ragam, :name => ragam_name)
+  talam = Factory(:talam, :name => talam_name)
+  Factory(:song, :name => name, :song_type => song_type, :ragam => ragam, :talam => talam, :composer => composer, :content => content)
+end
+
 Given /^I have following talams:$/ do |table|
   table.raw.each do |row|
     Factory(:talam, :name => row[0])

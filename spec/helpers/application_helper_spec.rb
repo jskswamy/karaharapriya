@@ -5,7 +5,7 @@ describe ApplicationHelper do
   it "should render necessary html for auto_complete" do
     form_helper = mock
     form_helper.should_receive(:hidden_field).with("song[talam_id]", {"data-auto-complete-hidden"=> "true"})
-    form_helper.should_receive(:text_field).with("talam", {"data-auto-complete-input"=> "true"})
+    form_helper.should_receive(:text_field).with("talam", {"data-auto-complete-input"=> "true",:value => nil})
 
     expected_html = "<div data-auto-complete=\"true\">\n  <div class=\"title\">\n    <label for=\"talam\">Talam</label>\n  </div>\n  <div class=\"input\" data-auto-complete-url=\"url\">\n    \n    \n    <div class=\"auto_completion\" data-auto-complete-completion=\"true\" style=\"display: none\"></div>\n  </div>\n</div>\n"
 
