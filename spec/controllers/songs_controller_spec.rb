@@ -33,10 +33,16 @@ describe SongsController do
     talam = Factory(:talam)
     geetham = Factory(:song_type, :name => "geetham")
     composer = Factory(:composer)
-    post :create, { :song => {:name => "song", :song_type => geetham.id.to_s, :description => "song description", :content => "sa re ga ma" },
-                    :talam_id => talam.id.to_s,
-                    :ragam_id => ragam.id.to_s,
-                    :composer_id => composer.id.to_s }
+    post :create, {:song => {:name => "song",
+                              :song_type => geetham.id.to_s,
+                              :description => "song description",
+                              :content => "sa re ga ma",
+                              :talam_id => talam.id.to_s,
+                              :ragam_id => ragam.id.to_s,
+                              :composer_id => composer.id.to_s,
+                              :composer => composer,
+                              :talam => talam,
+                              :ragam => ragam }}
 
     response.should be_success
     response.body.should == {:model_name => "song", :errors => [], :redirect_url => "/songs"}.to_json
@@ -57,10 +63,12 @@ describe SongsController do
     composer = Factory(:composer)
     thyagaraja = Factory(:composer)
     sarali = Factory(:song_type, :name => "sarali")
-    post :create, { :song => {:song_type => sarali.id.to_s, :description => "song description", :content => "sa re ga ma" },
-                    :talam_id => talam.id.to_s,
-                    :ragam_id => ragam.id.to_s,
-                    :composer_id => composer.id.to_s }
+    post :create, {:song => { :song_type => sarali.id.to_s,
+                              :description => "song description",
+                              :content => "sa re ga ma",
+                              :talam_id => talam.id.to_s,
+                              :ragam_id => ragam.id.to_s,
+                              :composer_id => composer.id.to_s }}
 
     response.should be_success
     response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/songs"}.to_json

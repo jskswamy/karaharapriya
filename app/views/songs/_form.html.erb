@@ -1,0 +1,78 @@
+<%= form_for song, :remote => true do |f| %>
+
+  <div class="left">
+
+    <div class="header">
+      <%= t :song %>
+    </div>
+
+    <div class="body">
+
+      <div class="section">
+        <div class="title">
+          <%= f.label :name, t(:name) %>
+        </div>
+        <div class="input">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= f.label :song_type, t(:song_type) %>
+        </div>
+        <div class="input">
+          <%= f.select :song_type , options_for_select(song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-#{t :select}-" %>
+        </div>
+      </div>
+
+      <div class="section">
+        <%= auto_complete :label => t(:composer), :field_name => "composer", :name => "composer_id", :url => suggest_composer_path, :form_helper => f %>
+      </div>
+
+      <div class="section">
+        <%= auto_complete :label => t(:ragam), :field_name => "ragam", :name => "ragam_id", :url => suggest_ragam_path, :form_helper => f %>
+      </div>
+
+      <div class="section">
+        <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path, :form_helper => f %>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= f.label :description, t(:description) %>
+        </div>
+        <div class="input">
+          <%= f.text_area :description %>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="error" data-error-display="true">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="right">
+
+    <div class="flash_notice" data-error-info="true">
+    </div>
+
+    <div class="song_editors" data-song-editor="true" data-song-editor-url="<%= editor_songs_path %>">
+      <div class="section">
+        <h2><%= f.label :content, t(:content) %></h2>
+      </div>
+      <div class="section editor">
+        <%= f.text_area "content", :class => "rich_editor" %>
+      </div>
+    </div>
+
+    <%= submit_tag t(:submit) %>
+
+  </div>
+
+  <div class="clear"></div>
+
+<% end %>

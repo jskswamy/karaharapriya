@@ -11,7 +11,7 @@ Feature: Manage songs
       | Chandru |
       | Dinesh |
     When I am on the new song page
-    And I fill in "composer" with "A"
+    And I fill in "song_composer" with "A"
     Then I should see the following autocomplete options:
       | Ashwin |
       | Chandru |
@@ -27,7 +27,7 @@ Feature: Manage songs
       | Shulini  |
       | Dinesh |
     When I am on the new song page
-    And I fill in "ragam" with "A"
+    And I fill in "song_ragam" with "A"
     Then I should see the following autocomplete options:
       | Mohanam |
       | Keeravani |
@@ -42,7 +42,7 @@ Feature: Manage songs
       | Roopagam |
       | Tisr  |
     When I am on the new song page
-    And I fill in "talam" with "A"
+    And I fill in "song_talam" with "A"
     Then I should see the following autocomplete options:
       | Adi |
       | Roopagam |
@@ -59,9 +59,9 @@ Feature: Manage songs
     And I fill in the following:
       | song_name | Ninu kori |
       | song_content | ga ga ri sa sa ri ri |
-    And I choose "Thyagarajar" as "composer" using auto complete
-    And I choose "Mohanam" as "ragam" using auto complete
-    And I choose "Adi" as "talam" using auto complete
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
     And I select "Varnam" from "song_song_type"
     And I press "Submit"
     Then I should be on the songs_list page

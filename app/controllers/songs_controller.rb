@@ -11,9 +11,7 @@ class SongsController < ApplicationController
 
   def create
     song_params = params[:song]
-    song_params[:composer] = Composer.find(:first, :conditions => {:id => get_objectId(params[:composer_id])})
-    song_params[:ragam] = Ragam.find(:first, :conditions => {:id => get_objectId(params[:ragam_id])})
-    song_params[:talam] = Talam.find(:first, :conditions => {:id => get_objectId(params[:talam_id])})
+    [:composer,:ragam,:talam].each {|key| song_params.delete(key)}
     @song = Song.create(song_params)
     render :json => RemoteResponse.new(@song, songs_path)
   end

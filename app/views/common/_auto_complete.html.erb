@@ -3,8 +3,8 @@
     <%= label_tag field_name.downcase, label.capitalize %>
   </div>
   <div class="input" data-auto-complete-url="<%= url %>">
-    <%= hidden_field_tag name, nil, "data-auto-complete-hidden" => "true" %>
-    <%= text_field_tag "#{field_name.downcase}", nil, "data-auto-complete-input" => "true" %>
+    <%= form_helper.hidden_field(name, "data-auto-complete-hidden" => "true") %>
+    <%= form_helper.text_field "#{field_name.downcase}", "data-auto-complete-input" => "true" %>
     <div class="auto_completion" data-auto-complete-completion="true" style="display: none"></div>
   </div>
 </div>
