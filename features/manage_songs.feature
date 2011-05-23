@@ -57,11 +57,11 @@ Feature: Manage songs
     And I have a talam "Adi"
     When I am on the new song page
     And I fill in the following:
-      | name | Ninu kori |
-      | content | ga ga ri sa sa ri ri |
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
     And I choose "Thyagarajar" as "composer" using auto complete
     And I choose "Mohanam" as "ragam" using auto complete
     And I choose "Adi" as "talam" using auto complete
-    And I select "Varnam" from "song_type"
+    And I select "Varnam" from "song_song_type"
     And I press "Submit"
     Then I should be on the songs_list page
