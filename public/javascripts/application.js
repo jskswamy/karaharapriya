@@ -60,18 +60,20 @@ var RemoteForm = {
     },
 
     processError: function(errors) {
-      errors.each(function(error) {
-        htmlElementId = error.field;
-        inputElement = this.form.down("#" + htmlElementId);
-        labelElement = this.form.down("label[for='" + htmlElementId + "']");
-          if (error.errors.length && inputElement && labelElement) {
-            this.errorInfo.show().update("Please review the highlighted fields");
-            labelElement.addClassName("error");
-            labelElement.title = error.errors[0];
-            inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
-            inputElement.observe("blur", this.clearError.bindAsEventListener(this));
-          }
-      }.bind(this));
+      if (errors.length) {
+        this.errorInfo.show().update("Please review the highlighted fields");
+        errors.each(function(error) {
+          htmlElementId = error.field;
+          inputElement = this.form.down("#" + htmlElementId);
+          labelElement = this.form.down("label[for='" + htmlElementId + "']");
+            if (error.errors.length && inputElement && labelElement) {
+              labelElement.addClassName("error");
+              labelElement.title = error.errors[0];
+              inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
+              inputElement.observe("blur", this.clearError.bindAsEventListener(this));
+            }
+        }.bind(this));
+      }
     },
 
     showError: function(event, errors) {

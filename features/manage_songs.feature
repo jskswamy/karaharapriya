@@ -65,12 +65,103 @@ Feature: Manage songs
     And I fill in the following:
       | song_name | Ninu kori |
       | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
-    And I select "Varnam" from "song_song_type"
     And I press "Submit"
     Then I should be on the songs_list page
+    And I should see "Ninu kori"
+
+  @javascript
+  Scenario: Should create a song without description and composer
+    Given I have a song type "Varnam"
+    And I have a composer "Thyagarajar"
+    And I have a ragam "Mohanam"
+    And I have a talam "Adi"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
+    And I select "Varnam" from "song_song_type"
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the songs_list page
+    And I should see "Ninu kori"
+
+  @javascript
+  Scenario: Should not create a song without name
+    Given I have a song type "Varnam"
+    And I have a composer "Thyagarajar"
+    And I have a ragam "Mohanam"
+    And I have a talam "Adi"
+    When I am on the new song page
+    And I fill in the following:
+      | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I select "Varnam" from "song_song_type"
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the new song page
+    And I should see "Please review the highlighted fields"
+
+  @javascript
+  Scenario: Should not create a song without song_type
+    Given I have a song type "Varnam"
+    And I have a composer "Thyagarajar"
+    And I have a ragam "Mohanam"
+    And I have a talam "Adi"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the new song page
+    And I should see "Please review the highlighted fields"
+
+  @javascript
+  Scenario: Should not create a song without ragam
+    Given I have a song type "Varnam"
+    And I have a composer "Thyagarajar"
+    And I have a ragam "Mohanam"
+    And I have a talam "Adi"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I select "Varnam" from "song_song_type"
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the new song page
+    And I should see "Please review the highlighted fields"
+
+  @javascript
+  Scenario: Should not create a song without talam
+    Given I have a song type "Varnam"
+    And I have a composer "Thyagarajar"
+    And I have a ragam "Mohanam"
+    And I have a talam "Adi"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I select "Varnam" from "song_song_type"
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I press "Submit"
+    Then I should be on the new song page
+    And I should see "Please review the highlighted fields"
 
   @javascript
   Scenario: Edit a song
