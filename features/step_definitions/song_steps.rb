@@ -26,12 +26,27 @@ Given /^I have a talam "([^"]*)"$/ do |name|
   Factory(:talam, :name => name)
 end
 
-Given /^I have a song "([^"]*)" with content "([^"]*)" song_type "([^"]*)" ragam "([^"]*)" talam "([^"]*)" by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, composer_name|
+Given /^I have a song "([^"]*)" with content "([^"]*)", song_type "([^"]*)", ragam "([^"]*)", talam "([^"]*)" and by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, composer_name|
   song_type = Factory(:song_type, :name => song_type_name)
   composer = Factory(:composer, :name => composer_name)
   ragam = Factory(:ragam, :name => ragam_name)
   talam = Factory(:talam, :name => talam_name)
   Factory(:song, :name => name, :song_type => song_type, :ragam => ragam, :talam => talam, :composer => composer, :content => content)
+end
+
+Given /^the song "([^"]*)" should be with content "([^"]*)", song_type "([^"]*)", ragam "([^"]*)", talam "([^"]*)", description "([^"]*)" and by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, description, composer_name|
+  song_type = SongType.first(:conditions => {:name => song_type_name})
+  composer = Composer.first(:conditions => {:name => composer_name})
+  ragam = Ragam.first(:conditions => {:name => ragam_name})
+  talam = Talam.first(:conditions => {:name => talam_name})
+  song = Song.first(:conditions => {:name => name})
+
+  song.song_type.should == song_type
+  song.composer.should == composer
+  song.ragam.should == ragam
+  song.talam.should == talam
+  song.description.should == description
+  song.content.should == content
 end
 
 Given /^I have following talams:$/ do |table|

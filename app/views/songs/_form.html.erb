@@ -22,7 +22,8 @@
           <%= f.label :song_type, t(:song_type) %>
         </div>
         <div class="input">
-          <%= f.select :song_type , options_for_select(song_types.collect{ |type| [type.name, type.id] }), :include_blank => "-#{t :select}-" %>
+          <% song_type = song.song_type.nil? ? nil : song.song_type.id %>
+          <%= f.select :song_type , options_for_select(song_types.collect{ |type| [type.name, type.id] }, song_type), :include_blank => "-#{t :select}-" %>
         </div>
       </div>
 

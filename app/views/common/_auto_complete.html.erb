@@ -1,6 +1,6 @@
 <div data-auto-complete="true">
   <div class="title">
-    <%= label_tag field_name.downcase, label.capitalize %>
+    <%= form_helper.label field_name.downcase, label.capitalize %>
   </div>
   <div class="input" data-auto-complete-url="<%= url %>">
     <% value ||= nil %>

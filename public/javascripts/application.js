@@ -55,15 +55,17 @@ var RemoteForm = {
       if (response.errors.length === 0) {
         this.redirect(response.redirect_url);
       } else {
-        this.processError(response.errors);
+        this.processError(response);
       }
     },
 
-    processError: function(errors) {
+    processError: function(response) {
+      errors = response.errors;
+      model_name = response.model_name;
       if (errors.length) {
         this.errorInfo.show().update("Please review the highlighted fields");
         errors.each(function(error) {
-          htmlElementId = error.field;
+          htmlElementId = model_name + "_" + error.field;
           inputElement = this.form.down("#" + htmlElementId);
           labelElement = this.form.down("label[for='" + htmlElementId + "']");
             if (error.errors.length && inputElement && labelElement) {

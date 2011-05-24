@@ -34,7 +34,7 @@ Feature: Manage songs
       | Mohanam |
       | Keeravani |
       | Dinesh |
-    Then I should not see the following autocomplete options:
+    And I should not see the following autocomplete options:
       | Shulini  |
     When I click on the "Keeravani" autocomplete option
     Then the "song_ragam" field should contain "Keeravani"
@@ -50,7 +50,7 @@ Feature: Manage songs
     Then I should see the following autocomplete options:
       | Adi |
       | Roopagam |
-    Then I should not see the following autocomplete options:
+    And I should not see the following autocomplete options:
       | Tisr  |
     When I click on the "Adi" autocomplete option
     Then the "song_talam" field should contain "Adi"
@@ -73,6 +73,7 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
+    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
 
   @javascript
   Scenario: Should create a song without description and composer
@@ -90,6 +91,52 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
+    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "" and by composer ""
+
+  @javascript
+  Scenario: Should not create a song if the name is already taken
+    Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
+    And I have a song type "Geetham"
+    And I have a composer "Pattamal"
+    And I have a ragam "Gowlai"
+    And I have a talam "Roopagam"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I select "Geetham" from "song_song_type"
+    And I choose "Pattamal" as "song_composer" using auto complete
+    And I choose "Gowlai" as "song_ragam" using auto complete
+    And I choose "Roopagam" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the new song page
+    And I should see "Please review the highlighted fields"
+    And "song_name" field should have error "is already taken"
+
+  @javascript
+  Scenario: Should create a song if the error are satisfied
+    Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
+    And I have a song type "Geetham"
+    And I have a composer "Pattamal"
+    And I have a ragam "Gowlai"
+    And I have a talam "Roopagam"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | sa ni th pa pa |
+      | song_description | Awesome geetham |
+    And I select "Geetham" from "song_song_type"
+    And I choose "Pattamal" as "song_composer" using auto complete
+    And I choose "Gowlai" as "song_ragam" using auto complete
+    And I choose "Roopagam" as "song_talam" using auto complete
+    And I press "Submit"
+    And "song_name" field should have error "is already taken"
+    Then I fill in "song_name" with "Ganapathy"
+    And I press "Submit"
+    Then I should be on the songs_list page
+    And I should see "Ganapathy"
+    And the song "Ganapathy" should be with content "sa ni th pa pa", song_type "Geetham", ragam "Gowlai", talam "Roopagam", description "Awesome geetham" and by composer "Pattamal"
 
   @javascript
   Scenario: Should not create a song without name
@@ -108,6 +155,7 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
+    And "song_name" field should have error "can't be blank"
 
   @javascript
   Scenario: Should not create a song without song_type
@@ -126,6 +174,7 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
+    And "song_song_type" field should have error "can't be blank"
 
   @javascript
   Scenario: Should not create a song without ragam
@@ -144,6 +193,7 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
+    And "song_ragam" field should have error "can't be blank"
 
   @javascript
   Scenario: Should not create a song without talam
@@ -162,10 +212,30 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
+    And "song_talam" field should have error "can't be blank"
+
+  @javascript
+  Scenario: Should not create a song without content
+    Given I have a song type "Varnam"
+    And I have a composer "Thyagarajar"
+    And I have a ragam "Mohanam"
+    And I have a talam "Adi"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_description | Awesome mohanam varnam |
+    And I select "Varnam" from "song_song_type"
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the new song page
+    And I should see "Please review the highlighted fields"
+    And "song_content" field should have error "can't be blank"
 
   @javascript
   Scenario: Edit a song
-    Given I have a song "Ninu kori" with content "sa re ga ma" song_type "Varnam" ragam "Mohanam" talam "Adi" by composer "Thyagarajar"
+    Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
     And I have a song type "Geetham"
     And I have a composer "Muthuswamy"
     And I have a ragam "Sankarabharanam"
@@ -177,9 +247,11 @@ Feature: Manage songs
     And the "song_composer" field should contain "Thyagarajar"
     And the "song_ragam" field should contain "Mohanam"
     And the "song_talam" field should contain "Adi"
+    And "Varnam" should be selected for "song_song_type"
     Then I fill in the following:
       | song_name | Shayamala meenakshi |
       | song_content | sa re ga ma pa pa |
+      | song_description | Master piece |
     And I select "Geetham" from "song_song_type"
     And I choose "Muthuswamy" as "song_composer" using auto complete
     And I choose "Sankarabharanam" as "song_ragam" using auto complete
@@ -187,3 +259,4 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Shayamala meenakshi"
+    And the song "Shayamala meenakshi" should be with content "sa re ga ma pa pa", song_type "Geetham", ragam "Sankarabharanam", talam "Rupagam", description "Master piece" and by composer "Muthuswamy"
