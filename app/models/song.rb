@@ -12,4 +12,8 @@ class Song
   validates_presence_of :name, :content, :ragam, :talam, :song_type
   validates_uniqueness_of :name
 
+  def self.find_by_id id
+    Song.first(:conditions => {:id => id})
+  end
+
 end

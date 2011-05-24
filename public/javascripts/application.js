@@ -55,23 +55,27 @@ var RemoteForm = {
       if (response.errors.length === 0) {
         this.redirect(response.redirect_url);
       } else {
-        this.processError(response.errors);
+        this.processError(response);
       }
     },
 
-    processError: function(errors) {
-      errors.each(function(error) {
-        htmlElementId = error.field;
-        inputElement = this.form.down("#" + htmlElementId);
-        labelElement = this.form.down("label[for='" + htmlElementId + "']");
-          if (error.errors.length && inputElement && labelElement) {
-            this.errorInfo.show().update("Please review the highlighted fields");
-            labelElement.addClassName("error");
-            labelElement.title = error.errors[0];
-            inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
-            inputElement.observe("blur", this.clearError.bindAsEventListener(this));
-          }
-      }.bind(this));
+    processError: function(response) {
+      errors = response.errors;
+      model_name = response.model_name;
+      if (errors.length) {
+        this.errorInfo.show().update("Please review the highlighted fields");
+        errors.each(function(error) {
+          htmlElementId = model_name + "_" + error.field;
+          inputElement = this.form.down("#" + htmlElementId);
+          labelElement = this.form.down("label[for='" + htmlElementId + "']");
+            if (error.errors.length && inputElement && labelElement) {
+              labelElement.addClassName("error");
+              labelElement.title = error.errors[0];
+              inputElement.observe("focus", this.showError.bindAsEventListener(this, error.errors));
+              inputElement.observe("blur", this.clearError.bindAsEventListener(this));
+            }
+        }.bind(this));
+      }
     },
 
     showError: function(event, errors) {
@@ -128,5 +132,5 @@ function transLiteration() {
 document.observe("dom:loaded", function() {
   AutoComplete.bindAutoComplete();
   RemoteForm.bindResponders();
-  transLiteration();
+  //transLiteration();
 });
