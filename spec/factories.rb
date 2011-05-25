@@ -30,6 +30,7 @@ Factory.define :ragam do |f|
     (0...8).each { avarohana << "#{avarohana_list[rand(100 * n) % avarohana_list.count]} " }
     avarohana.chop
   end
+  f.description "description"
 end
 
 Factory.define :talam do |f|
