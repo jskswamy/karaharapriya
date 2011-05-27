@@ -33,11 +33,37 @@ Feature: Manage songs
     Then I should see the following autocomplete options:
       | Mohanam |
       | Keeravani |
-      | Dinesh |
     And I should not see the following autocomplete options:
+      | Dinesh |
       | Shulini  |
     When I click on the "Keeravani" autocomplete option
     Then the "song_ragam" field should contain "Keeravani"
+
+  @javascript
+  Scenario: Should display the newly ragam created in auto suggestion
+    Given I have following ragams:
+      | Mohanam |
+      | Keeravani |
+      | Shulini |
+    When I am on the new song page
+    And I fill in "song_ragam" with "A"
+    Then I should not see the following autocomplete options:
+      | Sankarabharanam |
+    Then I am on the new ragam page
+    And I fill in the following:
+      | ragam_name | Sankarabharanam |
+      | ragam_arohana | sa re ga pa th sa |
+      | ragam_avarohana | sa th pa ga re sa |
+      | ragam_description | Beautiful ragam |
+    And I press "Submit"
+    Then I am on the new song page
+    And I fill in "song_ragam" with "A"
+    Then I should see the following autocomplete options:
+      | Mohanam |
+      | Keeravani |
+      | Sankarabharanam |
+    When I click on the "Sankarabharanam" autocomplete option
+    Then the "song_ragam" field should contain "Sankarabharanam"
 
   @javascript
   Scenario: Talam auto suggestion

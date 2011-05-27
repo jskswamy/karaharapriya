@@ -16,9 +16,6 @@ class RagamsController < ApplicationController
     render :json => RemoteResponse.new(ragam, ragams_path)
   end
 
-  def edit
-  end
-
   def update
     @ragam.update_attributes(params[:ragam])
     render :json => RemoteResponse.new(@ragam, ragams_path)

@@ -22,3 +22,8 @@ Then /^the ragam "([^"]*)" should be with arohana "([^"]*)", avarohana "([^"]*)"
   ragam.parent.should == parent_ragam
   ragam.description.should == description
 end
+
+Given /^I have a ragam "([^"]*)" with arohana "([^"]*)", avarohana "([^"]*)", parent ragam "([^"]*)" and description "([^"]*)"$/ do |name, arohana, avarohana, parent_ragam_name, description|
+  parent_ragam = Ragam.first(:conditions => {:name => parent_ragam_name })
+  Factory(:ragam, :name => name, :arohana => arohana, :avarohana => avarohana, :parent => parent_ragam, :description => description)
+end
