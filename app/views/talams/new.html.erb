@@ -1,0 +1,67 @@
+<%= form_for @talam, :remote => true do |f| %>
+
+  <div class="left">
+
+    <div class="header">
+      <%= t :talam %>
+    </div>
+
+    <div class="body">
+
+      <div class="section">
+        <div class="title">
+          <%= f.label :name, t(:name) %>
+        </div>
+        <div class="input">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= f.label :avartanam, t(:avartanam) %>
+        </div>
+        <div class="input">
+          <%= f.text_field :avartanam %>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <%= f.label :laghu_length_length, t(:laghu_length) %>
+        </div>
+        <div class="input">
+          <%= f.text_field :laghu_length %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="error" data-error-display="true">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="right">
+
+    <div class="flash_notice" data-error-info="true">
+    </div>
+
+    <div>
+      <div class="section">
+        <h2><%= f.label :description, t(:description) %></h2>
+      </div>
+      <div class="section editor">
+        <%= f.text_area :description, :class => "rich_editor" %>
+      </div>
+    </div>
+
+    <%= submit_tag t(:submit) %>
+
+  </div>
+
+  <div class="clear"></div>
+
+<% end %>

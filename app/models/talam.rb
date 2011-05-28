@@ -5,6 +5,7 @@ class Talam
   field :name
   field :avartanam
   field :laghu_length, :type => Integer
+  field :description
 
   validates_uniqueness_of :name
   validates_uniqueness_of :laghu_length, :through => :avartanam
@@ -16,7 +17,7 @@ class Talam
   end
 
   def validate_avartanam
-    errors.add(:base, "Please enter valid combination in avartanam") unless (avartanam.split(' ') - akshram_length_map.keys).empty?
+    errors.add(:avartanam, "has invalid character") unless (avartanam.split(' ') - akshram_length_map.keys).empty?
   end
 
   def total_aksharam_length

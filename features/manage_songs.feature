@@ -1,7 +1,7 @@
 Feature: Manage songs
   In order to create, delete and update the song
   As a user
-  I wants to add, update and delete the song
+  I want to add, update and delete the song
 
   @javascript
   Scenario: Composer auto suggestion

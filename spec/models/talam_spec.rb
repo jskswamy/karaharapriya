@@ -28,6 +28,12 @@ describe Talam do
     someother_random_talam.valid?.should be_true
   end
 
+  it "should not create if the avartam has invalid characters" do
+    talam = Factory.build(:talam, :avartanam => "1 U N M")
+    talam.save
+    talam.errors.full_messages.to_sentence.should == "Avartanam has invalid character"
+  end
+
   describe "named scope" do
 
     before(:each) do
