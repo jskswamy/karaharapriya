@@ -32,7 +32,7 @@ describe RagamsController do
                               :parent => @parent_ragam.name }}
 
       response.should be_success
-      response.body.should == {:model_name => "ragam", :errors => [], :redirect_url => "/ragams"}.to_json
+      response.body.should == {:redirect_url => "/ragams"}.to_json
       Ragam.all.count.should == 2
       ragam = Ragam.first(:conditions => {:name => "Mohanam"})
       ragam.should_not be_nil
@@ -49,8 +49,11 @@ describe RagamsController do
                               :parent_id => @parent_ragam.id,
                               :parent => @parent_ragam.name }}
 
-      response.should be_success
-      response.body.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/ragams"}.to_json
+      response.should_not be_success
+      response.response_code.should == 400
+      errors = response.headers["Errors"]
+      errors.should_not be_blank
+      errors.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
 
   end
@@ -81,7 +84,7 @@ describe RagamsController do
                                                 :parent => @another_parent_ragam.name }}
 
       response.should be_success
-      response.body.should == {:model_name => "ragam", :errors => [], :redirect_url => "/ragams"}.to_json
+      response.body.should == {:redirect_url => "/ragams"}.to_json
       Ragam.all.count.should == 3
       ragam = Ragam.first(:conditions => {:id => @ragam.id})
       ragam.should_not be_nil
@@ -99,8 +102,11 @@ describe RagamsController do
                                                 :parent_id => @another_parent_ragam.id,
                                                 :parent => @another_parent_ragam.name }}
 
-      response.should be_success
-      response.body.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/ragams"}.to_json
+      response.should_not be_success
+      response.response_code.should == 400
+      errors = response.headers["Errors"]
+      errors.should_not be_blank
+      errors.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
       Ragam.all.count.should == 3
       ragam = Ragam.first(:conditions => {:id => @ragam.id})
       ragam.should_not be_nil

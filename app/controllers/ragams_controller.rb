@@ -13,12 +13,12 @@ class RagamsController < ApplicationController
 
   def create
     ragam = Ragam.create(params[:ragam])
-    render :json => RemoteResponse.new(ragam, ragams_path)
+    render_custom_response RemoteResponse.new(ragam, ragams_path)
   end
 
   def update
     @ragam.update_attributes(params[:ragam])
-    render :json => RemoteResponse.new(@ragam, ragams_path)
+    render_custom_response RemoteResponse.new(@ragam, ragams_path)
   end
 
   def suggest

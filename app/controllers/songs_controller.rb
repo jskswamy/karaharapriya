@@ -14,12 +14,12 @@ class SongsController < ApplicationController
 
   def create
     song = Song.create(params[:song])
-    render :json => RemoteResponse.new(song, songs_path)
+    render_custom_response RemoteResponse.new(song, songs_path)
   end
 
   def update
     @song.update_attributes(params[:song])
-    render :json => RemoteResponse.new(@song, songs_path)
+    render_custom_response RemoteResponse.new(@song, songs_path)
   end
 
   private

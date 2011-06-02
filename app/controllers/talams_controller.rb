@@ -12,12 +12,12 @@ class TalamsController < ApplicationController
 
   def create
     talam = Talam.create(params[:talam])
-    render :json => RemoteResponse.new(talam, talams_path)
+    render_custom_response RemoteResponse.new(talam, talams_path)
   end
 
   def update
     @talam.update_attributes(params[:talam])
-    render :json => RemoteResponse.new(@talam, talams_path)
+    render_custom_response RemoteResponse.new(@talam, talams_path)
   end
 
   def suggest

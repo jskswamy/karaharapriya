@@ -27,7 +27,7 @@ describe TalamsController do
       post :create, parameters
 
       response.should be_success
-      response.body.should == {:model_name => "talam", :errors => [], :redirect_url => "/talams"}.to_json
+      response.body.should == {:redirect_url => "/talams"}.to_json
       talams = Talam.all.to_a
       talams.count.should == 1
       talam = talams.first
@@ -40,8 +40,11 @@ describe TalamsController do
       parameters = {:talam => {:name => "Adi", :avartanam => "1 U N 0", :laghu_length => "4", :description => "desc" }}
       post :create, parameters
 
-      response.should be_success
-      response.body.should == {:model_name => "talam", :errors => [{:field => :avartanam, :errors => ["has invalid character"]}], :redirect_url => "/talams"}.to_json
+      response.should_not be_success
+      response.response_code.should == 400
+      errors = response.header["Errors"]
+      errors.should_not be_blank
+      errors.should == {:model_name => "talam", :errors => [{:field => :avartanam, :errors => ["has invalid character"]}]}.to_json
     end
 
   end
@@ -66,7 +69,19 @@ describe TalamsController do
 
       put :update, parameters
       response.should be_success
-      response.body.should == {:model_name => "talam", :errors => [], :redirect_url => "/talams"}.to_json
+      response.body.should == {:redirect_url => "/talams"}.to_json
+    end
+
+    it "should have validationErrors as response type in case of validation errors" do
+      talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
+      parameters = {:id => talam.id, :talam => {:name => "Roopagam", :avartanam => "1 0 N", :laghu_length => "3" }}
+      post :update, parameters
+
+      response.should_not be_success
+      response.response_code.should == 400
+      errors = response.header["Errors"]
+      errors.should_not be_blank
+      errors.should == {:model_name => "talam", :errors => [{:field => :avartanam, :errors => ["has invalid character"]}]}.to_json
     end
 
   end
