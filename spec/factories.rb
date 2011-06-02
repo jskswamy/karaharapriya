@@ -30,12 +30,14 @@ Factory.define :ragam do |f|
     (0...8).each { avarohana << "#{avarohana_list[rand(100 * n) % avarohana_list.count]} " }
     avarohana.chop
   end
+  f.sequence(:description) { |n| "description #{n}" }
 end
 
 Factory.define :talam do |f|
   f.name { Factory.next(:name) }
   f.sequence(:avartanam) { |n| "1 0 0 " * n }
   f.sequence(:laghu_length) { |n| n }
+  f.sequence(:description) { |n| "description#{n}" }
 end
 
 Factory.define :composer do |f|

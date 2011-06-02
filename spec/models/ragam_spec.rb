@@ -15,6 +15,12 @@ describe Ragam do
     random_ragam.errors.full_messages.to_sentence.should == "Name can't be blank"
   end
 
+  it "should not create a ragam without a description" do
+    random_ragam = Factory.build(:ragam, :description => nil)
+    random_ragam.valid?.should be_false
+    random_ragam.errors.full_messages.to_sentence.should == "Description can't be blank"
+  end
+
   it "should not create a ragam with out arohana" do
     mohana_ragam = Factory.build(:ragam, :name => "Mohanam", :arohana => nil)
     mohana_ragam.valid?.should be_false
@@ -37,7 +43,7 @@ describe Ragam do
                                        :arohana => "sa re2 ga2 pa th2 sa^",
                                        :avarohana => "sa^ th2 pa ga2 re2 sa")
     fake_mohana_ragam.valid?.should be_false
-    fake_mohana_ragam.errors.full_messages.to_sentence.should == "Arohana and Avarohana already defined for another ragam"
+    fake_mohana_ragam.errors.full_messages.to_sentence.should == "Arohana is already taken"
   end
 
   it "arohana should have a minimum length of five" do

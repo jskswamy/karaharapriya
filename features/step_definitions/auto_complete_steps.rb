@@ -1,12 +1,16 @@
 Then /^I should see the following autocomplete options:$/ do |table|
+  And "I wait for 1 seconds"
   table.raw.each do |row|
-    has_selector?(:xpath, "//a[text()='#{row[0]}']")
+    option_name = row[0]
+    raise "#{option_name} is not found in autocomplete options" unless has_selector?(:xpath, "//a[text()='#{option_name}']")
   end
 end
 
 Then /^I should not see the following autocomplete options:$/ do |table|
+  And "I wait for 1 seconds"
   table.raw.each do |row|
-    has_no_selector?(:xpath, "//a[text()='#{row[0]}']")
+    option_name = row[0]
+    raise "#{option_name} is found in autocomplete options" unless has_no_selector?(:xpath, "//a[text()='#{option_name}']")
   end
 end
 

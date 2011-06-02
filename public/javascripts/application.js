@@ -50,18 +50,20 @@ var RemoteForm = {
     },
 
     ajaxComplete: function(data) {
+      response = data.memo;
       this.reset();
-      response = data.memo.responseJSON;
-      if (response.errors.length === 0) {
-        this.redirect(response.redirect_url);
+      if (response.status == 200) {
+        success_data = response.responseJSON;
+        this.redirect(success_data.redirect_url);
       } else {
-        this.processError(response);
+        errors = data.memo.getResponseHeader("Errors").evalJSON(true);
+        this.processError(errors);
       }
     },
 
-    processError: function(response) {
-      errors = response.errors;
-      model_name = response.model_name;
+    processError: function(error_info) {
+      model_name = error_info.model_name;
+      errors = error_info.errors;
       if (errors.length) {
         this.errorInfo.show().update("Please review the highlighted fields");
         errors.each(function(error) {

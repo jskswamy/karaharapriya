@@ -44,7 +44,7 @@ describe SongsController do
                               :ragam => @ragam }}
 
       response.should be_success
-      response.body.should == {:model_name => "song", :errors => [], :redirect_url => "/songs"}.to_json
+      response.body.should == {:redirect_url => "/songs"}.to_json
       Song.all.count.should == 1
       song = Song.first
       song.name.should == "song"
@@ -67,8 +67,11 @@ describe SongsController do
                               :talam => @talam,
                               :ragam => @ragam }}
 
-      response.should be_success
-      response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/songs"}.to_json
+      response.should_not be_success
+      response.response_code.should == 400
+      errors = response.headers["Errors"]
+      errors.should_not be_blank
+      errors.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
 
   end
@@ -112,9 +115,9 @@ describe SongsController do
                               :ragam => @ragam }}
 
       response.should be_success
-      response.body.should == {:model_name => "song", :errors => [], :redirect_url => "/songs"}.to_json
+      response.body.should == {:redirect_url => "/songs"}.to_json
       Song.all.count.should == 1
-      song = Song.first
+      song = Song.first(:conditions => {:id => song.id})
       song.name.should == "song"
       song.song_type.should == @song_type
       song.composer.should == @composer
@@ -138,8 +141,19 @@ describe SongsController do
                               :talam => @talam,
                               :ragam => @ragam }}
 
-      response.should be_success
-      response.body.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}], :redirect_url => "/songs"}.to_json
+      response.should_not be_success
+      response.response_code.should == 400
+      errors = response.headers["Errors"]
+      errors.should_not be_blank
+      errors.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
+      song = Song.first(:conditions => {:id => song.id})
+      song.name.should_not == "song"
+      song.song_type.should_not == @song_type
+      song.composer.should_not == @composer
+      song.ragam.should_not == @ragam
+      song.talam.should_not == @talam
+      song.description.should_not == "song description"
+      song.content.should_not == "sa re ga ma"
     end
 
   end

@@ -7,14 +7,38 @@ describe Talam do
     aathi_talam.total_aksharam_length.should == 8
   end
 
-  it "should not create if avartanam does not contain a valid character" do
-    random_talam = Factory.build(:talam, :avartanam => "1 U N 0", :laghu_length => 4)
-    random_talam.valid?.should be_false
+  it "should not create talam without name" do
+    talam = Factory.build(:talam, :name => nil)
+    talam.save
+    talam.valid?.should be_false
+    talam.errors.full_messages.to_sentence.should == "Name can't be blank"
+  end
+
+  it "should not create talam without avartanam" do
+    talam = Factory.build(:talam, :avartanam => nil)
+    talam.save
+    talam.valid?.should be_false
+    talam.errors.full_messages.to_sentence.should == "Avartanam can't be blank"
+  end
+
+  it "should not create talam without laghu_length" do
+    talam = Factory.build(:talam, :laghu_length => nil)
+    talam.save
+    talam.valid?.should be_false
+    talam.errors.full_messages.to_sentence.should == "Laghu length can't be blank"
+  end
+
+  it "should not create talam without description" do
+    talam = Factory.build(:talam, :description => nil)
+    talam.save
+    talam.valid?.should be_false
+    talam.errors.full_messages.to_sentence.should == "Description can't be blank"
   end
 
   it "should not create if the talam name already exists" do
     random_talam = Factory(:talam, :name => "some talam")
     another_talam = Factory.build(:talam, :name => "some talam")
+    another_talam.save
     another_talam.valid?.should be_false
     another_talam.errors.full_messages.to_sentence.should == "Name is already taken"
   end
@@ -26,6 +50,12 @@ describe Talam do
     duplicate_random_talam.valid?.should be_false
     duplicate_random_talam.errors.full_messages.to_sentence.should == "Laghu length is already taken"
     someother_random_talam.valid?.should be_true
+  end
+
+  it "should not create if the avartam has invalid characters" do
+    talam = Factory.build(:talam, :avartanam => "1 U N M")
+    talam.save
+    talam.errors.full_messages.to_sentence.should == "Avartanam has invalid character"
   end
 
   describe "named scope" do

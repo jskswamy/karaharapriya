@@ -1,0 +1,20 @@
+<div class="left">
+  <div class="header">
+    <%= t(:ragam) %>
+  </div>
+
+  <div class="body">
+    <ul>
+      <% @ragams.each do |ragam| %>
+        <li><%= link_to ragam.name, edit_ragam_path(ragam) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="footer">
+  </div>
+</div>
+
+<div class="right">
+  <%= link_to t(:new_ragam), new_ragam_path %>
+</div>
