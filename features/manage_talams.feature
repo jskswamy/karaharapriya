@@ -15,95 +15,97 @@ Feature: Manage talams
     Then I should be on the talams_list page
     And the talam "Adi" should be with avartanam "1 0 U", laghu_length 4 and description "New Talam"
 
-  @wip
-  Scenario: Should not create a ragam with duplicate name
-    Given I have a ragam "Mohanam"
-    When I am on the new ragam page
+  @javascript
+  Scenario: Should not create a talam with duplicate name
+    Given I have a talam "Adi"
+    When I am on the new talam page
     And I fill in the following:
-      | ragam_name | Mohanam |
-      | ragam_arohana | sa ri ga pa th sa |
-      | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+      | talam_name | Adi |
+      | talam_avartanam | 1 0 U |
+      | talam_laghu_length | 4 |
+      | talam_description | Talam with 8 notes |
     And I press "Submit"
-    Then I should be on the new ragam page
+    Then I should be on the new talam page
     And I should see "Please review the highlighted fields"
-    And "ragam_name" field should have error "is already taken"
+    And "talam_name" field should have error "is already taken"
 
-  @wip
-  Scenario: Should not create a ragam with duplicate arohana and avarohana
-    Given the following ragams:
-      | name | arohana | avarohana |
-      | Kalyani | sa ri ga pa th sa | sa th pa ga ri sa |
-    When I am on the new ragam page
+  @javascript
+  Scenario: Should not create a talam with duplicate avartanam and laghu_length
+    Given the following talams:
+      | name | avartanam | laghu_length |
+      | Adi | 1 0 U | 4 |
+    When I am on the new talam page
     And I fill in the following:
-      | ragam_name | Mohanam |
-      | ragam_arohana | sa ri ga pa th sa |
-      | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+      | talam_name | Mohanam |
+      | talam_avartanam | 1 0 U |
+      | talam_laghu_length | 4 |
+      | talam_description | Talam with 8 notes |
     And I press "Submit"
-    Then I should be on the new ragam page
+    Then I should be on the new talam page
     And I should see "Please review the highlighted fields"
-    And "ragam_arohana" field should have error "and Avarohana already defined for another ragam"
+    And "talam_laghu_length" field should have error "is already taken"
 
-  @wip
-  Scenario: Should not create a ragam without name
-    Given I am on the new ragam page
-    When I fill in the following:
-      | ragam_arohana | sa ri ga pa th sa |
-      | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+  @javascript
+  Scenario: Should not create talam without name
+    Given I am on the new talam page
+    And I fill in the following:
+      | talam_avartanam | 1 0 U |
+      | talam_laghu_length | 4 |
+      | talam_description | New Talam |
     And I press "Submit"
-    Then I should be on the new ragam page
+    Then I should be on the new talam page
     And I should see "Please review the highlighted fields"
-    And "ragam_name" field should have error "can't be blank"
+    And "talam_name" field should have error "can't be blank"
 
-  @wip
-  Scenario: Should not create a ragam without arohana
-    Given I am on the new ragam page
-    When I fill in the following:
-      | ragam_name | Mohanam |
-      | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+  @javascript
+  Scenario: Should not create talam without avartanam
+    Given I am on the new talam page
+    And I fill in the following:
+      | talam_name | Adi |
+      | talam_laghu_length | 4 |
+      | talam_description | New Talam |
     And I press "Submit"
-    Then I should be on the new ragam page
+    Then I should be on the new talam page
     And I should see "Please review the highlighted fields"
-    And "ragam_arohana" field should have error "can't be blank"
+    And "talam_avartanam" field should have error "can't be blank"
 
-  @wip
-  Scenario: Should not create a ragam without avarohana
-    Given I am on the new ragam page
-    When I fill in the following:
-      | ragam_name | Mohanam |
-      | ragam_arohana | sa ri ga pa th sa |
-      | ragam_description | Beautiful ragam |
+  @javascript
+  Scenario: Should not create talam without laghu_length
+    Given I am on the new talam page
+    And I fill in the following:
+      | talam_name | Adi |
+      | talam_avartanam | 1 0 U |
+      | talam_description | New Talam |
     And I press "Submit"
-    Then I should be on the new ragam page
+    Then I should be on the new talam page
     And I should see "Please review the highlighted fields"
-    And "ragam_avarohana" field should have error "can't be blank"
+    And "talam_laghu_length" field should have error "can't be blank"
 
-  @wip
-  Scenario: Should not create a ragam without description
-    Given I am on the new ragam page
-    When I fill in the following:
-      | ragam_name | Mohanam |
-      | ragam_arohana | sa ri ga pa th sa |
-      | ragam_avarohana | sa th pa ga ri sa |
+  @javascript
+  Scenario: Should not create talam without description
+    Given I am on the new talam page
+    And I fill in the following:
+      | talam_name | Adi |
+      | talam_avartanam | 1 0 U |
+      | talam_laghu_length | 4 |
     And I press "Submit"
-    Then I should be on the new ragam page
+    Then I should be on the new talam page
     And I should see "Please review the highlighted fields"
-    And "ragam_description" field should have error "can't be blank"
+    And "talam_description" field should have error "can't be blank"
 
-  @wip
-  Scenario: Edit a ragam
-    Given I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "Mohanam"
-    Given I have a ragam "Sankarabharanam"
-    When I am on the ragams_list page
-    And I follow "Beemplas"
+  @javascript
+  Scenario: Edit a talam
+    Given the following talams:
+      | name | avartanam | laghu_length |
+      | Adi | 1 0 U | 4 |
+      | Roopagam | 1 1 1 0 U  | 5 |
+    When I am on the talams_list page
+    And I follow "Adi"
     Then I fill in the following:
-      | ragam_name | Mohanam |
-      | ragam_arohana | sa re ga pa th sa |
-      | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Renamed to mohanam |
-    And I choose "Sankarabharanam" as "ragam_parent" using auto complete
+      | talam_name | New Adi |
+      | talam_avartanam | 1 1 0 U |
+      | talam_laghu_length | 6 |
+      | talam_description | Updated Talam |
     And I press "Submit"
-    Then the ragam "Mohanam" should be with arohana "sa re ga pa th sa", avarohana "sa th pa ga ri sa", parent ragam "Sankarabharanam" and description "Renamed to mohanam"
+    Then I should be on the talams_list page
+    And the talam "New Adi" should be with avartanam "1 1 0 U", laghu_length 6 and description "Updated Talam"

@@ -1,5 +1,5 @@
 Given /^the following talams:$/ do |talams|
-  Talams.create!(talams.hashes)
+  talams.hashes.each { |hash| Factory(:talam, hash) }
 end
 
 When /^I delete the (\d+)(?:st|nd|rd|th) talams$/ do |pos|

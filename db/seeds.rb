@@ -9,7 +9,7 @@ Ragam.create(:name => "Shivaranjani", :arohana => "s r2 g1 p t2 s^", :avarohana 
 Ragam.create(:name => "Boopalam", :arohana => "s r1 g2 p t1 s^", :avarohana => "s^ t1 p g2 r1 s", :parent => mayamalavagowlai, :description => "TBA")
 
 #create basic talam
-Talam.create(:name => "Adi", :avartanam => "1 0 0", :laghu_length => "4")
+Talam.create(:name => "Adi", :avartanam => "1 0 0", :laghu_length => "4", :description => "Talam with 8 beat")
 
 #create basic composers
 Composer.create(:name => "Thiagarajar", :century => "18th", :info => "Great Composer")

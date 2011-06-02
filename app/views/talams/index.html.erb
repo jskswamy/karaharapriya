@@ -1,0 +1,20 @@
+<div class="left">
+  <div class="header">
+    <%= t(:talam) %>
+  </div>
+
+  <div class="body">
+    <ul>
+      <% @talams.each do |talam| %>
+        <li><%= link_to talam.name, edit_talam_path(talam) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="footer">
+  </div>
+</div>
+
+<div class="right">
+  <%= link_to t(:new_talam), new_talam_path %>
+</div>

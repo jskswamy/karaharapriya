@@ -43,7 +43,7 @@ describe Ragam do
                                        :arohana => "sa re2 ga2 pa th2 sa^",
                                        :avarohana => "sa^ th2 pa ga2 re2 sa")
     fake_mohana_ragam.valid?.should be_false
-    fake_mohana_ragam.errors.full_messages.to_sentence.should == "Arohana and Avarohana already defined for another ragam"
+    fake_mohana_ragam.errors.full_messages.to_sentence.should == "Arohana is already taken"
   end
 
   it "arohana should have a minimum length of five" do

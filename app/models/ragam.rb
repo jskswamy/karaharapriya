@@ -11,7 +11,7 @@ class Ragam
 
   validates_presence_of :name, :arohana, :avarohana, :description
   validates_uniqueness_of :name
-  validates_uniqueness_of :arohana, :scope => :avarohana, :message => "and Avarohana already defined for another ragam"
+  validates_uniqueness_of :arohana, :scope => :avarohana
   validate :minimum_length
 
   scope :find_by_name, lambda { |name| where(:name => name) }

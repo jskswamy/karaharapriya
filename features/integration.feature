@@ -29,6 +29,31 @@ Feature: Integration Tests
     When I click on the "Sankarabharanam" autocomplete option
     Then the "song_ragam" field should contain "Sankarabharanam"
 
+  @wip
+  Scenario: Should display the newly create talam in auto suggestion
+    Given I have following talams:
+      | Adi |
+      | Roopagam |
+    When I am on the new song page
+    And I fill in "song_talam" with "A"
+    Then I should not see the following autocomplete options:
+      | Tisra |
+    Then I am on the new talam page
+    And I fill in the following:
+      | talam_name | Tisra |
+      | talam_avartanam | 1 0 U |
+      | talam_laghu_length | 2 |
+      | talam_description | Trisa nadai |
+    And I press "Submit"
+    Then I am on the new song page
+    And I fill in "song_talam" with "A"
+    Then I should see the following autocomplete options:
+      | Adi |
+      | Roopagam |
+      | Tisra |
+    When I click on the "Tisra" autocomplete option
+    Then the "song_talam" field should contain "Tisra"
+
   @javascript
   Scenario: Should display the updated ragam name in auto suggestion
     Given I have following ragams:

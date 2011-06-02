@@ -63,7 +63,7 @@ Feature: Manage ragams
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
-    And "ragam_arohana" field should have error "and Avarohana already defined for another ragam"
+    And "ragam_arohana" field should have error "is already taken"
 
   @javascript
   Scenario: Should not create a ragam without name

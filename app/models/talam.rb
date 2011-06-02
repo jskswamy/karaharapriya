@@ -7,6 +7,7 @@ class Talam
   field :laghu_length, :type => Integer
   field :description
 
+  validates_presence_of :name, :avartanam, :laghu_length, :description
   validates_uniqueness_of :name
   validates_uniqueness_of :laghu_length, :through => :avartanam
 
@@ -17,14 +18,13 @@ class Talam
   end
 
   def validate_avartanam
+    return if avartanam.blank?
     errors.add(:avartanam, "has invalid character") unless (avartanam.split(' ') - akshram_length_map.keys).empty?
   end
 
   def total_aksharam_length
     length = 0;
-    avartanam.split(' ').each do |lagu_drutham|
-      length += aksharam_length(lagu_drutham)
-    end
+    avartanam.split(' ').each { |lagu_drutham| length += aksharam_length(lagu_drutham) } unless avartanam.blank?
     return length
   end
 
