@@ -9,8 +9,4 @@ class ApplicationController < ActionController::Base
     head :bad_request, :errors => {:model_name => remote_response.model_name, :errors => remote_response.errors}.to_json
   end
 
-  def get_objectId param
-    param.blank? ? param : BSON::ObjectId(param)
-  end
-
 end
