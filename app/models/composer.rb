@@ -6,6 +6,7 @@ class Composer
   field :century
   field :info
 
-  validates_presence_of :name
+  validates_presence_of :name, :info
+  validates_uniqueness_of :name
 
 end

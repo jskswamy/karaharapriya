@@ -70,6 +70,10 @@ describe TalamsController do
       put :update, parameters
       response.should be_success
       response.body.should == {:redirect_url => "/talams"}.to_json
+      talam.reload
+      talam.name.should == "Roopagam"
+      talam.avartanam.should == "1 0"
+      talam.laghu_length.should == 3
     end
 
     it "should have validationErrors as response type in case of validation errors" do

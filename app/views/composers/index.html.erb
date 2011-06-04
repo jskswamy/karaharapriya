@@ -1,0 +1,20 @@
+<div class="left">
+  <div class="header">
+    <%= t(:composer) %>
+  </div>
+
+  <div class="body">
+    <ul>
+      <% @composers.each do |composer| %>
+        <li><%= link_to composer.name, edit_composer_path(composer) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="footer">
+  </div>
+</div>
+
+<div class="right">
+  <%= link_to t(:new_composer), new_composer_path %>
+</div>

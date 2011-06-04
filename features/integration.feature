@@ -30,32 +30,6 @@ Feature: Integration Tests
     Then the "song_ragam" field should contain "Sankarabharanam"
 
   @javascript
-  Scenario: Should display the newly create talam in auto suggestion
-    Given the following talams:
-      | name | avartanam | laghu_length |
-      | Adi | 1 0 U | 4 |
-      | Roopagam | 1 1 1 0 U  | 5 |
-    When I am on the new song page
-    And I fill in "song_talam" with "A"
-    Then I should not see the following autocomplete options:
-      | Tisra |
-    Then I am on the new talam page
-    And I fill in the following:
-      | talam_name | Tisra |
-      | talam_avartanam | 1 0 U U U |
-      | talam_laghu_length | 2 |
-      | talam_description | Trisa nadai |
-    And I press "Submit"
-    Then I am on the new song page
-    And I fill in "song_talam" with "A"
-    Then I should see the following autocomplete options:
-      | Adi |
-      | Roopagam |
-      | Tisra |
-    When I click on the "Tisra" autocomplete option
-    Then the "song_talam" field should contain "Tisra"
-
-  @javascript
   Scenario: Should display the updated ragam name in auto suggestion
     Given I have following ragams:
       | Mohnm |
@@ -83,6 +57,32 @@ Feature: Integration Tests
     Then the "song_ragam" field should contain "Mohanam"
 
   @javascript
+  Scenario: Should display the newly create talam in auto suggestion
+    Given the following talams:
+      | name | avartanam | laghu_length |
+      | Adi | 1 0 U | 4 |
+      | Roopagam | 1 1 1 0 U  | 5 |
+    When I am on the new song page
+    And I fill in "song_talam" with "A"
+    Then I should not see the following autocomplete options:
+      | Tisra |
+    Then I am on the new talam page
+    And I fill in the following:
+      | talam_name | Tisra |
+      | talam_avartanam | 1 0 U U U |
+      | talam_laghu_length | 2 |
+      | talam_description | Trisa nadai |
+    And I press "Submit"
+    Then I am on the new song page
+    And I fill in "song_talam" with "A"
+    Then I should see the following autocomplete options:
+      | Adi |
+      | Roopagam |
+      | Tisra |
+    When I click on the "Tisra" autocomplete option
+    Then the "song_talam" field should contain "Tisra"
+
+  @javascript
   Scenario: Should display the updated talam name in auto suggestion
     Given the following talams:
       | name | avartanam | laghu_length |
@@ -107,6 +107,57 @@ Feature: Integration Tests
       | dai |
     When I click on the "Tisra" autocomplete option
     Then the "song_talam" field should contain "Tisra"
+
+  @javascript
+  Scenario: Should display the newly create composer in auto suggestion
+    Given the following composers:
+      | name | century | info |
+      | Thyagarajar | 19th | Composer  |
+      | Boominathar | 20th  | Another Composer |
+    When I am on the new song page
+    And I fill in "song_composer" with "A"
+    Then I should not see the following autocomplete options:
+      | Muthuswamy |
+    Then I am on the new composer page
+    And I fill in the following:
+      | composer_name | Muthuswamy |
+      | composer_century | 21st |
+      | composer_info | Newly created composer |
+    And I press "Submit"
+    Then I am on the new song page
+    And I fill in "song_composer" with "A"
+    Then I should see the following autocomplete options:
+      | Thyagarajar |
+      | Boominathar |
+      | Muthuswamy |
+    When I click on the "Muthuswamy" autocomplete option
+    Then the "song_composer" field should contain "Muthuswamy"
+
+  @javascript
+  Scenario: Should display the updated composer name in auto suggestion
+    Given the following composers:
+      | name | century | info |
+      | Thyagarajar | 19th | Composer  |
+      | Boominathar | 20th  | Another Composer |
+    When I am on the new song page
+    And I fill in "song_composer" with "A"
+    Then I should see the following autocomplete options:
+      | Thyagarajar |
+      | Boominathar |
+    When I am on the composers_list page
+    And I follow "Thyagarajar"
+    And I fill in the following:
+      | composer_name | Muthuswamy |
+    And I press "Submit"
+    When I am on the new song page
+    And I fill in "song_composer" with "a"
+    Then I should see the following autocomplete options:
+      | Muthuswamy |
+      | Boominathar |
+    Then I should not see the following autocomplete options:
+      | Thyagarajar |
+    When I click on the "Muthuswamy" autocomplete option
+    Then the "song_composer" field should contain "Muthuswamy"
 
   @javascript
   Scenario: Should display the updated ragam name for existing song
@@ -157,6 +208,31 @@ Feature: Integration Tests
       | talam_avartanam | 1 1 1 0 U |
       | talam_laghu_length | 6 |
       | talam_description | Based on 8 beat count |
+    And I press "Submit"
+    When I am on the new song page
+    And I fill in the following:
+      | song_name | Ninu kori |
+      | song_content | ga ga ri sa sa ri ri |
+      | song_description | Awesome mohanam varnam |
+    And I select "Varnam" from "song_song_type"
+    And I choose "Thyagarajar" as "song_composer" using auto complete
+    And I choose "Mohanam" as "song_ragam" using auto complete
+    And I choose "Adi" as "song_talam" using auto complete
+    And I press "Submit"
+    Then I should be on the songs_list page
+    And I should see "Ninu kori"
+    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
+
+  @javascript
+  Scenario: Should be able to use the newly created composer for creating a song
+    Given I have a song type "Varnam"
+    And I have a talam "Adi"
+    And I have a ragam "Mohanam"
+    When I am on the new composer page
+    And I fill in the following:
+      | composer_name | Thyagarajar |
+      | composer_century | 18th |
+      | composer_info | New composer |
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:

@@ -10,6 +10,9 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /the new composers page/
+      new_composers_path
+
     when /the new talams page/
       new_talams_path
 
@@ -27,6 +30,9 @@ module NavigationHelpers
 
     when /the talams_list page/
       talams_path
+
+    when /the composers_list page/
+      composers_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
