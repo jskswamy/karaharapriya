@@ -32,4 +32,8 @@ class Talam
     akshram_length_map[key]
   end
 
+  def to_param
+    self.name
+  end
+
 end

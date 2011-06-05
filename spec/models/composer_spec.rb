@@ -25,6 +25,11 @@ describe Composer do
 
   end
 
+  it "to_param should return name" do
+    composer = Factory(:composer, :name => "Composer")
+    composer.to_param.should == "Composer"
+  end
+
   describe "named scope" do
 
     it "should get composer by name" do

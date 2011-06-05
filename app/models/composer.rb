@@ -9,4 +9,8 @@ class Composer
   validates_presence_of :name, :info
   validates_uniqueness_of :name
 
+  def to_param
+    self.name
+  end
+
 end

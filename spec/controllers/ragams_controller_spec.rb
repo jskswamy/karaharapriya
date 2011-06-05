@@ -60,7 +60,7 @@ describe RagamsController do
 
   it "should load ragam for edit" do
     ragam = Factory(:ragam)
-    get :edit, {:id => ragam.id}
+    get :edit, {:id => ragam.to_param}
 
     expected_ragam = assigns[:ragam]
     expected_ragam.should_not be_nil
@@ -76,7 +76,7 @@ describe RagamsController do
     end
 
     it "should create ragam" do
-      put :update, {:id => @ragam.id, :ragam =>{:name => "Gowlai",
+      put :update, {:id => @ragam.name, :ragam =>{:name => "Gowlai",
                                                 :arohana => "sa ri ga ma pa th ni sa",
                                                 :avarohana => "sa ni th pa ma ga ri sa",
                                                 :description => "Gowlao ragam",
@@ -95,7 +95,7 @@ describe RagamsController do
     end
 
     it "should have validationErrors as response type in case of validation errors" do
-      put :update, {:id => @ragam.id, :ragam =>{:name => nil,
+      put :update, {:id => @ragam.name, :ragam =>{:name => nil,
                                                 :arohana => "sa ri ga ma pa th ni sa",
                                                 :avarohana => "sa ni th pa ma ga ri sa",
                                                 :description => "Gowlao ragam",
@@ -108,7 +108,7 @@ describe RagamsController do
       errors.should_not be_blank
       errors.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
       Ragam.all.count.should == 3
-      ragam = Ragam.first(:conditions => {:id => @ragam.id})
+      ragam = Ragam.first(:conditions => {:name => @ragam.name})
       ragam.should_not be_nil
       ragam.name.should_not == "Gowlai"
       ragam.arohana.should_not == "sa ri ga ma pa th ni sa"

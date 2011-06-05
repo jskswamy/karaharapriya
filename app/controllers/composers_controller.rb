@@ -27,7 +27,7 @@ class ComposersController < ApplicationController
   private
 
   def load_composer
-    @composer = Composer.first(:conditions => {:id => params[:id]})
+    @composer = Composer.first(:conditions => {:name => params[:id]})
   end
 
 end

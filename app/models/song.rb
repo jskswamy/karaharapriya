@@ -16,4 +16,8 @@ class Song
     Song.first(:conditions => {:id => id})
   end
 
+  def to_param
+    self.name
+  end
+
 end

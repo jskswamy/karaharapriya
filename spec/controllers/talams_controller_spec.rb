@@ -54,7 +54,7 @@ describe TalamsController do
     it "should load the talam" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
 
-      get :edit, :id => talam.id
+      get :edit, :id => talam.name
       actual_talam = assigns[:talam]
       actual_talam.should == talam
     end
@@ -65,7 +65,7 @@ describe TalamsController do
 
     it "should update the talam" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
-      parameters = {:id => talam.id, :talam => {:name => "Roopagam", :avartanam => "1 0", :laghu_length => "3" }}
+      parameters = {:id => talam.name, :talam => {:name => "Roopagam", :avartanam => "1 0", :laghu_length => "3" }}
 
       put :update, parameters
       response.should be_success
@@ -78,7 +78,7 @@ describe TalamsController do
 
     it "should have validationErrors as response type in case of validation errors" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
-      parameters = {:id => talam.id, :talam => {:name => "Roopagam", :avartanam => "1 0 N", :laghu_length => "3" }}
+      parameters = {:id => talam.name, :talam => {:name => "Roopagam", :avartanam => "1 0 N", :laghu_length => "3" }}
       post :update, parameters
 
       response.should_not be_success

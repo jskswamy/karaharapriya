@@ -33,7 +33,7 @@ class SongsController < ApplicationController
   end
 
   def load_song
-    @song = Song.find_by_id(params[:id])
+    @song = Song.first(:conditions => {:name => params[:id]})
   end
 
 end

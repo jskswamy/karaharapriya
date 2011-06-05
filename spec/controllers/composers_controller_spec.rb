@@ -54,7 +54,7 @@ describe ComposersController do
     it "should load the composer" do
       composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
 
-      get :edit, :id => composer.id
+      get :edit, :id => composer.to_param
       actual_composer = assigns[:composer]
       actual_composer.should == composer
     end
@@ -65,7 +65,7 @@ describe ComposersController do
 
     it "should update the composer" do
       composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
-      parameters = {:id => composer.id, :composer => {:name => "Boominathar", :info => "B", :century => "19th" }}
+      parameters = {:id => composer.to_param, :composer => {:name => "Boominathar", :info => "B", :century => "19th" }}
 
       put :update, parameters
       response.should be_success
@@ -78,7 +78,7 @@ describe ComposersController do
 
     it "should have validationErrors as response type in case of validation errors" do
       composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
-      parameters = {:id => composer.id, :composer => {:name => "Boominathar", :century => "19th", :info => nil }}
+      parameters = {:id => composer.to_param, :composer => {:name => "Boominathar", :century => "19th", :info => nil }}
       post :update, parameters
 
       response.should_not be_success

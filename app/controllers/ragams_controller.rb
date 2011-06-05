@@ -32,7 +32,7 @@ class RagamsController < ApplicationController
   end
 
   def load_ragam
-    @ragam = Ragam.first(:conditions => {:id => params[:id]})
+    @ragam = Ragam.first(:conditions => {:name => params[:id]})
   end
 
 end

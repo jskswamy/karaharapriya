@@ -27,7 +27,7 @@ class TalamsController < ApplicationController
   private
 
   def load_talam
-    @talam = Talam.first(:conditions => {:id => params[:id]})
+    @talam = Talam.first(:conditions => {:name => params[:id]})
   end
 
 end

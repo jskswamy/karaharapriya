@@ -21,4 +21,8 @@ class Ragam
     errors.add(:base, "Avarohana should have atleast 5 swaras") if !self.avarohana.blank? && self.avarohana.split(" ").count < 5
   end
 
+  def to_param
+    self.name
+  end
+
 end
