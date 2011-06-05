@@ -15,3 +15,20 @@ Then /^"([^"]*)" field should have error "([^"]*)"$/ do |field_name, error|
   error_div = find(:css, "div.error")
   error_div.text.should == error
 end
+
+When /^I fill in "([^"]*)" wysiwyg editor with "([^"]*)"$/ do |editor_name, html|
+  script = <<-JS
+    var editor = YUILibrary.getEditor("#{editor_name}");
+    editor.setEditorHTML("#{html}");
+    editor.saveHTML("#{html}");
+  JS
+  page.execute_script(script);
+end
+
+Then /^the "([^"]*)" wysiwyg editor should contain "([^"]*)"$/ do |editor_name, html|
+  script = <<-JS
+    YUILibrary.getEditor("#{editor_name}").getEditorHTML();
+  JS
+  editor_html = page.evaluate_script(script);
+  editor_html.should == html
+end

@@ -36,6 +36,46 @@ var AutoComplete = {
   }
 };
 
+var YUILibrary = {
+  _attached: false,
+  Editors: [],
+
+  Editor: Class.create({
+    initialize: function(element) {
+      this.element = $(element);
+      var elementDimension = element.getDimensions();
+      this._editor = new YAHOO.widget.Editor(element, {
+        autoHeight: true,
+        height: elementDimension.height + 'px',
+        width: elementDimension.width + 'px',
+        animate: true //Animates the opening, closing and moving of Editor windows
+      });
+      this._editor.render();
+    },
+    getEditorHandle: function() {
+      return this._editor;
+    }
+
+  }),
+
+
+  isAttached: function() {
+    return YUILibrary._attached;
+  },
+
+  bindEditors: function() {
+    if(YUILibrary.isAttached()) { return; }
+    $$("textarea.rich_editor").each(function(element) {
+      YUILibrary.Editors[element] = new YUILibrary.Editor(element);
+    });
+  },
+
+  getEditor: function(editor_name) {
+    editor = YUILibrary.Editors[$(element)];
+    return editor.getEditorHandle();
+  }
+};
+
 var RemoteForm = {
   _attached: false,
   Responders: [],
@@ -134,5 +174,6 @@ function transLiteration() {
 document.observe("dom:loaded", function() {
   AutoComplete.bindAutoComplete();
   RemoteForm.bindResponders();
+  YUILibrary.bindEditors();
   //transLiteration();
 });

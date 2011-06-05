@@ -29,7 +29,7 @@ Feature: Manage ragams
       | ragam_name | Mohanam |
       | ragam_arohana | sa re ga pa th sa |
       | ragam_avarohana | sa th pa ga re sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I choose "Sankarabharanam" as "ragam_parent" using auto complete
     And I press "Submit"
     Then I should be on the ragams_list page
@@ -43,7 +43,7 @@ Feature: Manage ragams
       | ragam_name | Mohanam |
       | ragam_arohana | sa ri ga pa th sa |
       | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
@@ -59,7 +59,7 @@ Feature: Manage ragams
       | ragam_name | Mohanam |
       | ragam_arohana | sa ri ga pa th sa |
       | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
@@ -71,7 +71,7 @@ Feature: Manage ragams
     When I fill in the following:
       | ragam_arohana | sa ri ga pa th sa |
       | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
@@ -83,7 +83,7 @@ Feature: Manage ragams
     When I fill in the following:
       | ragam_name | Mohanam |
       | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
@@ -95,7 +95,7 @@ Feature: Manage ragams
     When I fill in the following:
       | ragam_name | Mohanam |
       | ragam_arohana | sa ri ga pa th sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
@@ -111,7 +111,6 @@ Feature: Manage ragams
     And I press "Submit"
     Then I should be on the new ragam page
     And I should see "Please review the highlighted fields"
-    And "ragam_description" field should have error "can't be blank"
 
   @javascript
   Scenario: Edit a ragam
@@ -119,11 +118,16 @@ Feature: Manage ragams
     Given I have a ragam "Sankarabharanam"
     When I am on the ragams_list page
     And I follow "Beemplas"
+    Then the "ragam_name" field should contain "Beemplas"
+    And the "ragam_arohana" field should contain "sa re ga ma pa th ni sa"
+    And the "ragam_avarohana" field should contain "sa ni th pa ma ga ri sa"
+    And the "ragam_description" wysiwyg editor should contain "Mohanam"
     Then I fill in the following:
       | ragam_name | Mohanam |
       | ragam_arohana | sa re ga pa th sa |
       | ragam_avarohana | sa th pa ga ri sa |
-      | ragam_description | Renamed to mohanam |
+    And I fill in "ragam_description" wysiwyg editor with "Renamed to mohanam"
     And I choose "Sankarabharanam" as "ragam_parent" using auto complete
+    And I fill in "ragam_description" wysiwyg editor with "Renamed to mohanam"
     And I press "Submit"
     Then the ragam "Mohanam" should be with arohana "sa re ga pa th sa", avarohana "sa th pa ga ri sa", parent ragam "Sankarabharanam" and description "Renamed to mohanam"

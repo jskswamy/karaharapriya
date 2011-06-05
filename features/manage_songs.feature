@@ -64,12 +64,12 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
@@ -84,10 +84,10 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
     And I select "Varnam" from "song_song_type"
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
@@ -103,12 +103,12 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
     And I select "Geetham" from "song_song_type"
     And I choose "Pattamal" as "song_composer" using auto complete
     And I choose "Gowlai" as "song_ragam" using auto complete
     And I choose "Roopagam" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
@@ -124,12 +124,12 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | sa ni th pa pa |
       | song_description | Awesome geetham |
     And I select "Geetham" from "song_song_type"
     And I choose "Pattamal" as "song_composer" using auto complete
     And I choose "Gowlai" as "song_ragam" using auto complete
     And I choose "Roopagam" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "sa ni th pa pa"
     And I press "Submit"
     And "song_name" field should have error "is already taken"
     Then I fill in "song_name" with "Ganapathy"
@@ -146,12 +146,12 @@ Feature: Manage songs
     And I have a talam "Adi"
     When I am on the new song page
     And I fill in the following:
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
@@ -166,11 +166,11 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
@@ -185,11 +185,11 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
@@ -204,11 +204,11 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
@@ -231,7 +231,6 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the new song page
     And I should see "Please review the highlighted fields"
-    And "song_content" field should have error "can't be blank"
 
   @javascript
   Scenario: Edit a song
@@ -243,19 +242,19 @@ Feature: Manage songs
     When I am on the songs_list page
     And I follow "Ninu kori"
     Then the "song_name" field should contain "Ninu kori"
-    And the "song_content" field should contain "sa re ga ma"
     And the "song_composer" field should contain "Thyagarajar"
     And the "song_ragam" field should contain "Mohanam"
     And the "song_talam" field should contain "Adi"
+    And the "song_content" wysiwyg editor should contain "sa re ga ma"
     And "Varnam" should be selected for "song_song_type"
     Then I fill in the following:
       | song_name | Shayamala meenakshi |
-      | song_content | sa re ga ma pa pa |
       | song_description | Master piece |
     And I select "Geetham" from "song_song_type"
     And I choose "Muthuswamy" as "song_composer" using auto complete
     And I choose "Sankarabharanam" as "song_ragam" using auto complete
     And I choose "Rupagam" as "song_talam" using auto complete
+    And I fill in "song_content" wysiwyg editor with "sa re ga ma pa pa"
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Shayamala meenakshi"

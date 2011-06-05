@@ -9,7 +9,7 @@ Feature: Manage composers
     And I fill in the following:
       | composer_name | Thyagarajar |
       | composer_century | 19th |
-      | composer_info | New composer |
+    And I fill in "composer_info" wysiwyg editor with "New composer"
     And I press "Submit"
     Then I should be on the composers_list page
     And the composer "Thyagarajar" should be with century "19th" and info "New composer"
@@ -21,7 +21,7 @@ Feature: Manage composers
     And I fill in the following:
       | composer_name | Thyagarajar |
       | composer_century | 19th |
-      | composer_info | New composer |
+    And I fill in "composer_info" wysiwyg editor with "New composer"
     And I press "Submit"
     Then I should be on the new composer page
     And I should see "Please review the highlighted fields"
@@ -32,7 +32,7 @@ Feature: Manage composers
     Given I am on the new composer page
     And I fill in the following:
       | composer_century | 19th |
-      | composer_info | New composer |
+    And I fill in "composer_info" wysiwyg editor with "New composer"
     And I press "Submit"
     Then I should be on the new composer page
     And I should see "Please review the highlighted fields"
@@ -47,7 +47,6 @@ Feature: Manage composers
     And I press "Submit"
     Then I should be on the new composer page
     And I should see "Please review the highlighted fields"
-    And "composer_info" field should have error "can't be blank"
 
   @javascript
   Scenario: Edit a composer
@@ -57,10 +56,13 @@ Feature: Manage composers
       | Boominathar | 21st | Another Great composer |
     When I am on the composers_list page
     And I follow "Thyagarajar"
+    Then the "composer_name" field should contain "Thyagarajar"
+    And the "composer_century" field should contain "20th"
+    And the "composer_info" wysiwyg editor should contain "Great composer"
     Then I fill in the following:
       | composer_name | Muthuswamy |
       | composer_century | 19th |
-      | composer_info | Updated composer |
+    And I fill in "composer_info" wysiwyg editor with "Updated composer"
     And I press "Submit"
     Then I should be on the composers_list page
     And the composer "Muthuswamy" should be with century "19th" and info "Updated composer"

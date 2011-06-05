@@ -18,7 +18,7 @@ Feature: Integration Tests
       | ragam_name | Sankarabharanam |
       | ragam_arohana | sa re ga pa th sa |
       | ragam_avarohana | sa th pa ga re sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I am on the new song page
     And I fill in "song_ragam" with "A"
@@ -71,7 +71,7 @@ Feature: Integration Tests
       | talam_name | Tisra |
       | talam_avartanam | 1 0 U U U |
       | talam_laghu_length | 2 |
-      | talam_description | Trisa nadai |
+    And I fill in "talam_description" wysiwyg editor with "Tisra nadai"
     And I press "Submit"
     Then I am on the new song page
     And I fill in "song_talam" with "A"
@@ -122,7 +122,7 @@ Feature: Integration Tests
     And I fill in the following:
       | composer_name | Muthuswamy |
       | composer_century | 21st |
-      | composer_info | Newly created composer |
+    And I fill in "composer_info" wysiwyg editor with "Newly created composer"
     And I press "Submit"
     Then I am on the new song page
     And I fill in "song_composer" with "A"
@@ -181,13 +181,13 @@ Feature: Integration Tests
       |ragam_name | Mohanam |
       | ragam_arohana | sa re ga pa th sa |
       | ragam_avarohana | sa th pa ga re sa |
-      | ragam_description | Beautiful ragam |
+    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
@@ -207,13 +207,13 @@ Feature: Integration Tests
       | talam_name | Adi |
       | talam_avartanam | 1 1 1 0 U |
       | talam_laghu_length | 6 |
-      | talam_description | Based on 8 beat count |
+    And I fill in "talam_description" wysiwyg editor with "Based on 8 beat count"
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
@@ -232,13 +232,13 @@ Feature: Integration Tests
     And I fill in the following:
       | composer_name | Thyagarajar |
       | composer_century | 18th |
-      | composer_info | New composer |
+    And I fill in "composer_info" wysiwyg editor with "Greate composer"
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_content | ga ga ri sa sa ri ri |
       | song_description | Awesome mohanam varnam |
+    And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
