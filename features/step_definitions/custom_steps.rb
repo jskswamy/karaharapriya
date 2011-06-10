@@ -20,7 +20,6 @@ When /^I fill in "([^"]*)" wysiwyg editor with "([^"]*)"$/ do |editor_name, html
   script = <<-JS
     var editor = YUILibrary.getEditor("#{editor_name}");
     editor.setEditorHTML("#{html}");
-    editor.saveHTML("#{html}");
   JS
   page.execute_script(script);
 end

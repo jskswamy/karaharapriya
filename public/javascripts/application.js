@@ -50,12 +50,18 @@ var YUILibrary = {
         width: elementDimension.width + 'px',
         animate: true //Animates the opening, closing and moving of Editor windows
       });
+      this.observeFormSubmission();
       this._editor.render();
     },
     getEditorHandle: function() {
       return this._editor;
+    },
+    observeFormSubmission: function() {
+      var form = this.element.up('form');
+      form.observe('submit', function() {
+        this._editor.saveHTML();
+      }.bind(this));
     }
-
   }),
 
 
