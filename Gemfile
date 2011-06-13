@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '~>3.0.8'
 gem 'simple-navigation'
 gem 'webrat'
 gem "mongoid"
 gem "bson_ext"
-gem 'rake', '~> 0.8.7'
+gem 'rake'
 
 group :development, :test do
   gem 'less'
@@ -17,11 +17,15 @@ group :development, :test do
   gem 'simplecov'
   gem 'rails_best_practices'
   gem 'metric_fu'
+  gem 'mongoid-rspec'
+end
+
+group :test, :cucumber do
+  gem 'database_cleaner'
 end
 
 group :cucumber do
   gem 'capybara'
-  gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
   gem 'spork'
