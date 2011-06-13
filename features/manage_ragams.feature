@@ -10,6 +10,7 @@ Feature: Manage ragams
       | Sankarabharanam |
       | Gowli |
       | Kalyani |
+    And I have a signed as a normal user
     When I am on the new ragam page
     And I fill in "ragam_parent" with "A"
     Then I should see the following autocomplete options:
@@ -24,6 +25,7 @@ Feature: Manage ragams
   @javascript
   Scenario: Create new ragam
     Given I have a ragam "Sankarabharanam"
+    And I have a signed as a normal user
     When I am on the new ragam page
     And I fill in the following:
       | ragam_name | Mohanam |
@@ -38,6 +40,7 @@ Feature: Manage ragams
   @javascript
   Scenario: Should not create a ragam with duplicate name
     Given I have a ragam "Mohanam"
+    And I have a signed as a normal user
     When I am on the new ragam page
     And I fill in the following:
       | ragam_name | Mohanam |
@@ -54,6 +57,7 @@ Feature: Manage ragams
     Given the following ragams:
       | name | arohana | avarohana |
       | Kalyani | sa ri ga pa th sa | sa th pa ga ri sa |
+    And I have a signed as a normal user
     When I am on the new ragam page
     And I fill in the following:
       | ragam_name | Mohanam |
@@ -68,6 +72,7 @@ Feature: Manage ragams
   @javascript
   Scenario: Should not create a ragam without name
     Given I am on the new ragam page
+    And I have a signed as a normal user
     When I fill in the following:
       | ragam_arohana | sa ri ga pa th sa |
       | ragam_avarohana | sa th pa ga ri sa |
@@ -80,6 +85,7 @@ Feature: Manage ragams
   @javascript
   Scenario: Should not create a ragam without arohana
     Given I am on the new ragam page
+    And I have a signed as a normal user
     When I fill in the following:
       | ragam_name | Mohanam |
       | ragam_avarohana | sa th pa ga ri sa |
@@ -92,6 +98,7 @@ Feature: Manage ragams
   @javascript
   Scenario: Should not create a ragam without avarohana
     Given I am on the new ragam page
+    And I have a signed as a normal user
     When I fill in the following:
       | ragam_name | Mohanam |
       | ragam_arohana | sa ri ga pa th sa |
@@ -104,6 +111,7 @@ Feature: Manage ragams
   @javascript
   Scenario: Should not create a ragam without description
     Given I am on the new ragam page
+    And I have a signed as a normal user
     When I fill in the following:
       | ragam_name | Mohanam |
       | ragam_arohana | sa ri ga pa th sa |
@@ -116,6 +124,7 @@ Feature: Manage ragams
   Scenario: Edit a ragam
     Given I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "Mohanam"
     Given I have a ragam "Sankarabharanam"
+    And I have a signed as a normal user
     When I am on the ragams_list page
     And I follow "Beemplas"
     Then the "ragam_name" field should contain "Beemplas"

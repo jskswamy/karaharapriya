@@ -31,3 +31,11 @@ Then /^the "([^"]*)" wysiwyg editor should contain "([^"]*)"$/ do |editor_name, 
   editor_html = page.evaluate_script(script);
   editor_html.should == html
 end
+
+Given /^I have a signed as a normal user$/ do
+  Factory(:user, :name => "tom", :email => "tom@disney.com", :password => "password")
+  Given "I am on the sign_in page"
+  And "I fill in \"user_email\" with \"tom@disney.com\""
+  And "I fill in \"user_password\" with \"password\""
+  And "I press \"Sign in\""
+end

@@ -9,6 +9,7 @@ Feature: Integration Tests
       | Mohanam |
       | Keeravani |
       | Shulini |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_ragam" with "A"
     Then I should not see the following autocomplete options:
@@ -35,6 +36,7 @@ Feature: Integration Tests
       | Mohnm |
       | Keeravani |
       | Sankarabharanam |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_ragam" with "A"
     Then I should see the following autocomplete options:
@@ -62,6 +64,7 @@ Feature: Integration Tests
       | name | avartanam | laghu_length |
       | Adi | 1 0 U | 4 |
       | Roopagam | 1 1 1 0 U  | 5 |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_talam" with "A"
     Then I should not see the following autocomplete options:
@@ -88,6 +91,7 @@ Feature: Integration Tests
       | name | avartanam | laghu_length |
       | dai | 1 0 U | 4 |
       | Roopagam | 1 1 1 0 U  | 5 |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_talam" with "A"
     Then I should see the following autocomplete options:
@@ -114,6 +118,7 @@ Feature: Integration Tests
       | name | century | info |
       | Thyagarajar | 19th | Composer  |
       | Boominathar | 20th  | Another Composer |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_composer" with "A"
     Then I should not see the following autocomplete options:
@@ -139,6 +144,7 @@ Feature: Integration Tests
       | name | century | info |
       | Thyagarajar | 19th | Composer  |
       | Boominathar | 20th  | Another Composer |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_composer" with "A"
     Then I should see the following autocomplete options:
@@ -162,6 +168,7 @@ Feature: Integration Tests
   @javascript
   Scenario: Should display the updated ragam name for existing song
     Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohnm", talam "Adi" and by composer "Thyagarajar"
+    And I have a signed as a normal user
     When I am on the ragams_list page
     And I follow "Mohnm"
     And I fill in the following:
@@ -176,6 +183,7 @@ Feature: Integration Tests
     Given I have a song type "Varnam"
     And I have a composer "Thyagarajar"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new ragam page
     And I fill in the following:
       |ragam_name | Mohanam |
@@ -202,6 +210,7 @@ Feature: Integration Tests
     Given I have a song type "Varnam"
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
+    And I have a signed as a normal user
     When I am on the new talam page
     And I fill in the following:
       | talam_name | Adi |
@@ -228,6 +237,7 @@ Feature: Integration Tests
     Given I have a song type "Varnam"
     And I have a talam "Adi"
     And I have a ragam "Mohanam"
+    And I have a signed as a normal user
     When I am on the new composer page
     And I fill in the following:
       | composer_name | Thyagarajar |

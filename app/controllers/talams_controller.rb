@@ -1,4 +1,4 @@
-class TalamsController < ApplicationController
+class TalamsController < AuthenticatableController
 
   before_filter :load_talam, :only => [:edit, :update]
 

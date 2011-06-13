@@ -1,5 +1,7 @@
 Karaharapriya::Application.routes.draw do
 
+  devise_for :users
+
   root :to => "home#index"
 
   resources :ragams, :songs, :talams, :composers, :except => [:destroy]

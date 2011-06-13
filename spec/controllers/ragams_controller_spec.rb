@@ -11,15 +11,24 @@ describe RagamsController do
     actual_ragams.should == ragams
   end
 
-  it "ragam should not be nil for create" do
-    get :new
+  describe "new" do
 
-    assigns[:ragam].should_not be_nil
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
+    it "ragam should not be nil for create" do
+      get :new
+
+      assigns[:ragam].should_not be_nil
+    end
+
   end
 
   describe "create" do
 
     before(:each) do
+      sign_in Factory(:user)
       @parent_ragam = Factory(:ragam, :name => "Sankarabharanam")
     end
 
@@ -58,18 +67,27 @@ describe RagamsController do
 
   end
 
-  it "should load ragam for edit" do
-    ragam = Factory(:ragam)
-    get :edit, {:id => ragam.to_param}
+  describe "edit" do
 
-    expected_ragam = assigns[:ragam]
-    expected_ragam.should_not be_nil
-    expected_ragam.should == ragam
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
+    it "should load ragam for edit" do
+      ragam = Factory(:ragam)
+      get :edit, {:id => ragam.to_param}
+
+      expected_ragam = assigns[:ragam]
+      expected_ragam.should_not be_nil
+      expected_ragam.should == ragam
+    end
+
   end
 
   describe "update" do
 
     before(:each) do
+      sign_in Factory(:user)
       parent_ragam = Factory(:ragam, :name => "Sankarabharanam")
       @another_parent_ragam = Factory(:ragam, :name => "Mayamalava gowlai")
       @ragam = Factory(:ragam, :name => "Mohanam", :parent => parent_ragam)

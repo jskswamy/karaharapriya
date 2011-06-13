@@ -15,6 +15,7 @@ require 'factory_girl'
 require File.expand_path("../factories", __FILE__)
 require 'capybara/rspec'
 require 'database_cleaner'
+require 'devise'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

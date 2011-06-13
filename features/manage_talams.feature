@@ -6,6 +6,7 @@ Feature: Manage talams
   @javascript
   Scenario: Create new talam
     Given I am on the new talam page
+    And I have a signed as a normal user
     And I fill in the following:
       | talam_name | Adi |
       | talam_avartanam | 1 0 U |
@@ -18,6 +19,7 @@ Feature: Manage talams
   @javascript
   Scenario: Should not create a talam with duplicate name
     Given I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new talam page
     And I fill in the following:
       | talam_name | Adi |
@@ -34,6 +36,7 @@ Feature: Manage talams
     Given the following talams:
       | name | avartanam | laghu_length |
       | Adi | 1 0 U | 4 |
+    And I have a signed as a normal user
     When I am on the new talam page
     And I fill in the following:
       | talam_name | Mohanam |
@@ -48,6 +51,7 @@ Feature: Manage talams
   @javascript
   Scenario: Should not create talam without name
     Given I am on the new talam page
+    And I have a signed as a normal user
     And I fill in the following:
       | talam_avartanam | 1 0 U |
       | talam_laghu_length | 4 |
@@ -60,6 +64,7 @@ Feature: Manage talams
   @javascript
   Scenario: Should not create talam without avartanam
     Given I am on the new talam page
+    And I have a signed as a normal user
     And I fill in the following:
       | talam_name | Adi |
       | talam_laghu_length | 4 |
@@ -72,6 +77,7 @@ Feature: Manage talams
   @javascript
   Scenario: Should not create talam without laghu_length
     Given I am on the new talam page
+    And I have a signed as a normal user
     And I fill in the following:
       | talam_name | Adi |
       | talam_avartanam | 1 0 U |
@@ -84,6 +90,7 @@ Feature: Manage talams
   @javascript
   Scenario: Should not create talam without description
     Given I am on the new talam page
+    And I have a signed as a normal user
     And I fill in the following:
       | talam_name | Adi |
       | talam_avartanam | 1 0 U |
@@ -98,6 +105,7 @@ Feature: Manage talams
       | name | avartanam | laghu_length | description |
       | Adi | 1 0 U | 4 | Adi TBD |
       | Roopagam | 1 1 1 0 U  | 5 | Roopagam TBD |
+    And I have a signed as a normal user
     When I am on the talams_list page
     And I follow "Adi"
     Then the "talam_name" field should contain "Adi"

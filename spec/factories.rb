@@ -45,3 +45,9 @@ Factory.define :composer do |f|
   f.sequence(:century) { |n| "178#{n}-188#{n}" }
   f.sequence(:info) { |n| "Additional information for composer #{n}" }
 end
+
+Factory.define :user do |f|
+  f.sequence(:name) {|n| "User#{n}"}
+  f.sequence(:email) { |n| "someone#{n}@someorg.com" }
+  f.sequence(:password) { |n| "password#{n}" }
+end

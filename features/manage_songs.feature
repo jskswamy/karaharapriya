@@ -10,6 +10,7 @@ Feature: Manage songs
       | Bobby |
       | Chandru |
       | Dinesh |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_composer" with "A"
     Then I should see the following autocomplete options:
@@ -28,6 +29,7 @@ Feature: Manage songs
       | Keeravani |
       | Shulini  |
       | Dinesh |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_ragam" with "A"
     Then I should see the following autocomplete options:
@@ -45,6 +47,7 @@ Feature: Manage songs
       | Adi |
       | Roopagam |
       | Tisr  |
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_talam" with "A"
     Then I should see the following autocomplete options:
@@ -61,6 +64,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -81,6 +85,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -100,6 +105,7 @@ Feature: Manage songs
     And I have a composer "Pattamal"
     And I have a ragam "Gowlai"
     And I have a talam "Roopagam"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -121,6 +127,7 @@ Feature: Manage songs
     And I have a composer "Pattamal"
     And I have a ragam "Gowlai"
     And I have a talam "Roopagam"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -144,6 +151,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_description | Awesome mohanam varnam |
@@ -163,6 +171,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -182,6 +191,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -201,6 +211,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -220,6 +231,7 @@ Feature: Manage songs
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
     And I have a talam "Adi"
+    And I have a signed as a normal user
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
@@ -239,6 +251,7 @@ Feature: Manage songs
     And I have a composer "Muthuswamy"
     And I have a ragam "Sankarabharanam"
     And I have a talam "Rupagam"
+    And I have a signed as a normal user
     When I am on the songs_list page
     And I follow "Ninu kori"
     Then the "song_name" field should contain "Ninu kori"

@@ -1,4 +1,4 @@
-class ComposersController < ApplicationController
+class ComposersController < AuthenticatableController
 
   before_filter :load_composer, :only => [:edit, :update]
 

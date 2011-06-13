@@ -1,4 +1,4 @@
-class RagamsController < ApplicationController
+class RagamsController < AuthenticatableController
 
   before_filter :remove_first_class_params, :only => [:create, :update]
   before_filter :load_ragam, :only => [:edit, :update]

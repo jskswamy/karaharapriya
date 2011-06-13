@@ -13,14 +13,26 @@ describe TalamsController do
     talams.each { |talam| actual_talams.include?(talam).should be_true }
   end
 
-  it "should assign talam" do
-    get :new
+  describe "new" do
 
-    talam = assigns[:talam]
-    talam.should_not be_nil
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
+    it "should assign talam" do
+      get :new
+
+      talam = assigns[:talam]
+      talam.should_not be_nil
+    end
+
   end
 
   describe "create" do
+
+    before(:each) do
+      sign_in Factory(:user)
+    end
 
     it "should create new talam" do
       parameters = {:talam => {:name => "Adi", :avartanam => "1 U 0", :laghu_length => "4", :description => "desc" }}
@@ -51,6 +63,10 @@ describe TalamsController do
 
   describe "edit" do
 
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
     it "should load the talam" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
 
@@ -62,6 +78,10 @@ describe TalamsController do
   end
 
   describe "update" do
+
+    before(:each) do
+      sign_in Factory(:user)
+    end
 
     it "should update the talam" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")

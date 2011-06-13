@@ -1,4 +1,4 @@
-class SongsController < ApplicationController
+class SongsController < AuthenticatableController
 
   before_filter :load_song_types, :only => [:new, :edit]
   before_filter :load_song, :only => [:edit, :update]

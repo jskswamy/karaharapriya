@@ -34,6 +34,9 @@ module NavigationHelpers
     when /the composers_list page/
       composers_path
 
+    when /the sign_in page/
+      new_user_session_path
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

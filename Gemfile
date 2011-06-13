@@ -6,6 +6,7 @@ gem 'webrat'
 gem "mongoid"
 gem "bson_ext"
 gem 'rake'
+gem 'devise'
 
 group :development, :test do
   gem 'less'

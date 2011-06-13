@@ -11,20 +11,29 @@ describe SongsController do
     response.should be_success
   end
 
-  it "should assign song type and song for new" do
-    song_types = []
-    2.times { song_types << Factory(:song_type) }
-    get :new
-    response.should be_success
-    response.should render_template(:new)
-    assigns[:song_types].should_not be_nil
-    assigns[:song].should_not be_nil
-    assigns[:song_types].should == song_types
+  describe "new" do
+
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
+    it "should assign song type and song for new" do
+      song_types = []
+      2.times { song_types << Factory(:song_type) }
+      get :new
+      response.should be_success
+      response.should render_template(:new)
+      assigns[:song_types].should_not be_nil
+      assigns[:song].should_not be_nil
+      assigns[:song_types].should == song_types
+    end
+
   end
 
   describe "create" do
 
     before(:each) do
+      sign_in Factory(:user)
       @ragam = Factory(:ragam)
       @talam = Factory(:talam)
       @song_type = Factory(:song_type, :name => "geetham")
@@ -76,24 +85,33 @@ describe SongsController do
 
   end
 
-  it "should assign song type and song for edit" do
-    song_types = []
-    2.times { song_types << Factory(:song_type) }
-    song = Factory(:song, :song_type => song_types.first)
-    get :edit, :id => song.name
+  describe "edit" do
 
-    response.should be_success
-    response.should render_template(:edit)
-    assigns[:song_types].should_not be_nil
-    assigns[:song].should == song
-    song_types = assigns[:song_types]
-    song_types.count.should == 2
-    song_types.should == song_types
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
+    it "should assign song type and song for edit" do
+      song_types = []
+      2.times { song_types << Factory(:song_type) }
+      song = Factory(:song, :song_type => song_types.first)
+      get :edit, :id => song.name
+
+      response.should be_success
+      response.should render_template(:edit)
+      assigns[:song_types].should_not be_nil
+      assigns[:song].should == song
+      song_types = assigns[:song_types]
+      song_types.count.should == 2
+      song_types.should == song_types
+    end
+
   end
 
   describe "update" do
 
     before(:each) do
+      sign_in Factory(:user)
       @ragam = Factory(:ragam)
       @talam = Factory(:talam)
       @song_type = Factory(:song_type, :name => "geetham")

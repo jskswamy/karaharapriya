@@ -13,14 +13,26 @@ describe ComposersController do
     composers.each { |composer| actual_composers.include?(composer).should be_true }
   end
 
-  it "should assign composer" do
-    get :new
+  describe "new" do
 
-    composer = assigns[:composer]
-    composer.should_not be_nil
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
+    it "should assign composer" do
+      get :new
+
+      composer = assigns[:composer]
+      composer.should_not be_nil
+    end
+
   end
 
   describe "create" do
+
+    before(:each) do
+      sign_in Factory(:user)
+    end
 
     it "should create new composer" do
       parameters = {:composer => {:name => "Thyagarajar", :century => "18th", :info => "Great Composer" }}
@@ -51,6 +63,10 @@ describe ComposersController do
 
   describe "edit" do
 
+    before(:each) do
+      sign_in Factory(:user)
+    end
+
     it "should load the composer" do
       composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
 
@@ -62,6 +78,10 @@ describe ComposersController do
   end
 
   describe "update" do
+
+    before(:each) do
+      sign_in Factory(:user)
+    end
 
     it "should update the composer" do
       composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")

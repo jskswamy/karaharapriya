@@ -6,6 +6,7 @@ Feature: Manage composers
   @javascript
   Scenario: Create new composer
     Given I am on the new composer page
+    And I have a signed as a normal user
     And I fill in the following:
       | composer_name | Thyagarajar |
       | composer_century | 19th |
@@ -17,6 +18,7 @@ Feature: Manage composers
   @javascript
   Scenario: Should not create a composer with duplicate name
     Given I have a composer "Thyagarajar"
+    And I have a signed as a normal user
     When I am on the new composer page
     And I fill in the following:
       | composer_name | Thyagarajar |
@@ -30,6 +32,7 @@ Feature: Manage composers
   @javascript
   Scenario: Should not create composer without name
     Given I am on the new composer page
+    And I have a signed as a normal user
     And I fill in the following:
       | composer_century | 19th |
     And I fill in "composer_info" wysiwyg editor with "New composer"
@@ -41,6 +44,7 @@ Feature: Manage composers
   @javascript
   Scenario: Should not create composer without info
     Given I am on the new composer page
+    And I have a signed as a normal user
     And I fill in the following:
       | composer_name | Thyagarajar |
       | composer_century | 19th |
@@ -54,6 +58,7 @@ Feature: Manage composers
       | name | century | info |
       | Thyagarajar | 20th | Great composer |
       | Boominathar | 21st | Another Great composer |
+    And I have a signed as a normal user
     When I am on the composers_list page
     And I follow "Thyagarajar"
     Then the "composer_name" field should contain "Thyagarajar"
