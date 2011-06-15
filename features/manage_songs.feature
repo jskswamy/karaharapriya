@@ -4,6 +4,22 @@ Feature: Manage songs
   I want to add, update and delete the song
 
   @javascript
+  Scenario: Should not be allowed to create song without sign in
+    When I am on the new song page
+    Then I should be on the sign_in page
+
+  @javascript
+  Scenario: Should not be allowed to edit song without sign in
+    Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
+    And I have a song type "Geetham"
+    And I have a composer "Muthuswamy"
+    And I have a ragam "Sankarabharanam"
+    And I have a talam "Rupagam"
+    When I am on the songs_list page
+    And I follow "Ninu kori"
+    Then I should be on the sign_in page
+
+  @javascript
   Scenario: Composer auto suggestion
     Given I have following composers:
       | Ashwin |

@@ -4,6 +4,18 @@ Feature: Manage ragams
   I want to add, update and delete the ragam
 
   @javascript
+  Scenario: Should not be allowed to create ragam without sign in
+    When I am on the new ragam page
+    Then I should be on the sign_in page
+
+  @javascript
+  Scenario: Should not be allowed to edit the ragam without sign in
+    Given I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "Mohanam"
+    When I am on the ragams_list page
+    And I follow "Beemplas"
+    Then I should be on the sign_in page
+
+  @javascript
   Scenario: Parent ragam auto suggestion
     Given I have following ragams:
       | Mohanam |
@@ -123,7 +135,6 @@ Feature: Manage ragams
   @javascript
   Scenario: Edit a ragam
     Given I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "Mohanam"
-    Given I have a ragam "Sankarabharanam"
     And I have a signed as a normal user
     When I am on the ragams_list page
     And I follow "Beemplas"

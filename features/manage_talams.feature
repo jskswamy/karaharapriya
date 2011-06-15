@@ -4,6 +4,21 @@ Feature: Manage talams
   I want to add, update and delete the talam
 
   @javascript
+  Scenario: Should not be allowed to create talam without sign in
+    When I am on the new talam page
+    Then I should be on the sign_in page
+
+  @javascript
+  Scenario: Should not be allowed to edit talam without sign in
+    Given the following talams:
+      | name | avartanam | laghu_length | description |
+      | Adi | 1 0 U | 4 | Adi TBD |
+      | Roopagam | 1 1 1 0 U  | 5 | Roopagam TBD |
+    When I am on the talams_list page
+    And I follow "Adi"
+    Then I should be on the sign_in page
+
+  @javascript
   Scenario: Create new talam
     Given I am on the new talam page
     And I have a signed as a normal user

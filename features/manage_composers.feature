@@ -4,6 +4,21 @@ Feature: Manage composers
   I want to add, update and delete the composer
 
   @javascript
+  Scenario: Should not be allowed to create composer without sign in
+    When I am on the new composer page
+    Then I should be on the sign_in page
+
+  @javascript
+  Scenario: Should not be allowed to edit the composer without sign in
+    Given the following composers:
+      | name | century | info |
+      | Thyagarajar | 20th | Great composer |
+      | Boominathar | 21st | Another Great composer |
+    When I am on the composers_list page
+    And I follow "Thyagarajar"
+    Then I should be on the sign_in page
+
+  @javascript
   Scenario: Create new composer
     Given I am on the new composer page
     And I have a signed as a normal user
