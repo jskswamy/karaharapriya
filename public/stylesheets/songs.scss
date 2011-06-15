@@ -4,18 +4,18 @@
   .body {
 
     label.error {
-      color: @error_color;
+      color: $error_color;
     }
 
     .left {
       float: left;
-      width: @left_content_width;
+      width: $left_content_width;
 
       .header {
-        .basic_background_color;
+        @include basic_background_color;
         height: 20px;
-        .font_heading;
-        .rounded_corners_top(10px);
+        @include font_heading;
+        @include rounded_corners_top(10px);
         margin-top: 0px;
         padding: 10px 10px;
       }
@@ -49,14 +49,14 @@
 
       .footer {
         border: none;
-        .basic_background_color;
+        @include basic_background_color;
         clear: both;
         height: 40px;
-        .rounded_corners_bottom(10px);
+        @include rounded_corners_bottom(10px);
         margin-top: 0px;
 
         .error {
-          color: @error_color;
+          color: $error_color;
           font-weight: bold;
           padding: 10px 5px;
           text-align: center;
@@ -67,12 +67,12 @@
 
     .right {
 
-      margin-left: @left_content_width + 15px;
+      margin-left: $left_content_width + 15px;
       margin-right: 5px;
 
       .flash_notice {
-        background-color: @highlight_color;
-        .rounded_corners(10px);
+        background-color: $highlight_color;
+        @include rounded_corners(10px);
         margin: auto;
         padding: 5px;
         text-align: center;
@@ -80,7 +80,7 @@
       }
 
       .editor_name h1 {
-        .font_heading;
+        @include font_heading;
       }
 
       .section {

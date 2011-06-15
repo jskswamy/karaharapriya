@@ -9,7 +9,7 @@ gem 'rake'
 gem 'devise'
 
 group :development, :test do
-  gem 'less'
+  gem 'sass'
   gem 'factory_girl'
   gem 'rspec'
   gem 'rspec-rails'

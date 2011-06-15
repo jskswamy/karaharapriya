@@ -1,25 +1,25 @@
 @import "common";
 
-.base_font {
+@mixin base_font {
   font-family: verdana, sans-serif;
 }
 
-.base_font_size {
+@mixin base_font_size {
   font-size: 0.8em;
 }
 
-.menu_span {
+@mixin menu_span {
   background: url(/images/menu_span.jpg);
 }
 
-.menu_style {
+@mixin menu_style {
   color: #000;
   font-weight: bold;
   text-decoration: none;
 }
 
-@menu_color: #848181;
-@menu_alternate_color: #e3e3e2;
+$menu_color: #848181;
+$menu_alternate_color: #e3e3e2;
 
 /* End of Less variable declaration */
 
@@ -28,11 +28,11 @@
 }
 
 body, select, input, textarea {
-  .base_font;
+  @include base_font;
 }
 
 body {
-  .base_font_size;
+  @include base_font_size;
 }
 
 body, ul {
@@ -59,8 +59,8 @@ body, ul {
   .body {
     .menu {
       height: 40px;
-      .rounded_corners(10px);
-      .menu_span;
+      @include rounded_corners(10px);
+      @include menu_span;
 
       ul {
         list-style-type: none;
@@ -73,7 +73,7 @@ body, ul {
         }
 
         li a {
-          .menu_style;
+          @include menu_style;
           height: 20px;
           padding: 10px;
           display: inline-block;
@@ -81,27 +81,27 @@ body, ul {
         }
 
         li#home a {
-          background: @menu_color url(/images/home.png) center center no-repeat;
-          .rounded_corners_left(10px);
+          background: $menu_color url(/images/home.png) center center no-repeat;
+          @include rounded_corners_left(10px);
           width: 45px;
         }
 
         li.selected a {
-          background-color: @menu_alternate_color;
+          background-color: $menu_alternate_color;
         }
 
         li a:hover {
-          background-color: @menu_alternate_color;
+          background-color: $menu_alternate_color;
         }
 
         li a.home:hover {
-          background-color: @menu_color;
+          background-color: $menu_color;
         }
       }
     }
 
     .auto_completion {
-      background-color: @auto_complete_background_color;
+      background-color: $auto_complete_background_color;
       border: solid 1px #000;
 
       ul {
@@ -116,13 +116,13 @@ body, ul {
           }
 
           a:hover {
-            background-color: @auto_complete_selected_color;
+            background-color: $auto_complete_selected_color;
           }
         }
 
         li.selected {
           a {
-            background-color: @auto_complete_selected_color;
+            background-color: $auto_complete_selected_color;
           }
         }
       }
