@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe ApplicationHelper do
 
-  it "should render necessary html for auto_complete" do
+  pending "should render necessary html for auto_complete" do
     form_helper = mock
     form_helper.should_receive(:hidden_field).with("song[talam_id]", {"data-auto-complete-hidden"=> "true"})
     form_helper.should_receive(:text_field).with("talam", {"data-auto-complete-input"=> "true",:value => nil})
