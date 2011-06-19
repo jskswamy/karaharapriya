@@ -10,9 +10,13 @@ $menu_gradient_stop: #E3E3E3;
 $menu_color: $border_color;
 $menu_selected_color: #ffffff;
 $menu_alternate_color: #cccccc;
-$min-app-width: 960px;
-$app-width: 960px;
+$min_app_width: 960px;
+$app_width: 960px;
 $table_header_bg_color: #EAEAEA;
+$data_definition_title_color: #333333;
+$input_text_width: 500px;
+$input_select_width: $input_text_width + 15;
+$sidebar_width: $app-width - $input_select_width - 100;
 
 @mixin rounded_corners ($radius: 5px) {
   -moz-border-radius: $radius;
@@ -61,4 +65,10 @@ $table_header_bg_color: #EAEAEA;
   -moz-box-shadow: 3px 3px 5px $shadow_color;
   -webkit-box-shadow: 3px 3px 5px $shadow_color;
   box-shadow: 3px 3px 3px $shadow_color;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: normal;
+  color: #666666;
 }

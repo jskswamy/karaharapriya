@@ -1,58 +1,28 @@
 <%= form_for composer, :remote => true do |f| %>
 
-  <div class="left">
-
-    <div class="header">
-      <%= t :composer %>
-    </div>
-
-    <div class="body">
-
-      <div class="section">
-        <div class="title">
-          <%= f.label :name, t(:name) %>
-        </div>
-        <div class="input">
-          <%= f.text_field :name %>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="title">
-          <%= f.label :century, t(:century) %>
-        </div>
-        <div class="input">
-          <%= f.text_field :century %>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer">
-      <div class="error" data-error-display="true">
-      </div>
-    </div>
-
+  <div class="header">
+    <div class="bread_crumbs"><%= form_title %></div>
   </div>
 
-  <div class="right">
+  <div class="body">
 
-    <div class="flash_notice" data-error-info="true">
+    <div class="sidebar">
+      <div class="flash_notice" data-error-info="true"></div>
+      <div class="error" data-error-display="true"></div>
     </div>
 
-    <div>
-      <div class="section">
-        <h2><%= f.label :info, t(:info) %></h2>
-      </div>
-      <div class="section editor">
-        <%= f.text_area :info, :class => "rich_editor" %>
-      </div>
-    </div>
+    <dl>
+      <dt><%= f.label :name, t(:name) %></dt>
+      <dd><%= f.text_field :name %></dd>
+      <dt><%= f.label :century, t(:century) %></dt>
+      <dd><%= f.text_field :century %></dd>
+      <dt><%= f.label :info, t(:info) %></dt>
+      <dd><%= f.text_area :info, :class => "rich_editor" %></dd>
+    </dl>
 
     <%= submit_tag t(:submit) %>
+    <div class="clear"></div>
 
   </div>
-
-  <div class="clear"></div>
 
 <% end %>

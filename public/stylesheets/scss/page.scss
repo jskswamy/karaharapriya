@@ -12,6 +12,7 @@
     .bread_crumbs {
       font-size: 20px;
     }
+
     .action {
       float: right;
 
@@ -32,6 +33,12 @@
   }
 
   .body {
+
+    .sidebar {
+      float: right;
+      width: $sidebar_width;
+    }
+
     table {
       border: solid 1px $border_color;
       border-top: none;
@@ -53,6 +60,33 @@
 
       tbody tr td {
         border-bottom: solid 1px $border_color;
+      }
+    }
+
+    dl dt {
+      color: $data_definition_title_color;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    dl dd {
+      margin: 0px 0px 15px 0px;
+      line-height: 1.4em;
+
+      input, select {
+        padding: 3px;
+      }
+
+      input {
+        width: $input_text_width;
+      }
+
+      select {
+        width: $input_select_width;
+      }
+
+      textArea {
+        width: 100%;
       }
     }
   }

@@ -5,7 +5,7 @@ var AutoComplete = {
   Wrapper: Class.create({
     initialize: function(element) {
       this.options = {
-        url: element.down("div[data-auto-complete-url]").readAttribute("data-auto-complete-url"),
+        url: element.down("dd[data-auto-complete-url]").readAttribute("data-auto-complete-url"),
         input: element.down("input[data-auto-complete-input]"),
         hidden: element.down("input[data-auto-complete-hidden]"),
         completion: element.down("div[data-auto-complete-completion]")
@@ -29,7 +29,7 @@ var AutoComplete = {
 
   bindAutoComplete: function() {
     if (AutoComplete.isAttached()) { return; }
-    $$("div[data-auto-complete]").each(function(element) {
+    $$("dl[data-auto-complete]").each(function(element) {
       AutoComplete.Wrappers.push(new AutoComplete.Wrapper(element));
     });
     AutoComplete._attached = true;

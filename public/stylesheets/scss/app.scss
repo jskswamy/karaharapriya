@@ -37,8 +37,8 @@ body, ul {
 
 @mixin app_width {
   margin: auto;
-  min-width: $min-app-width;
-  width: $app-width;
+  min-width: $min_app_width;
+  width: $app_width;
 }
 
 .content {

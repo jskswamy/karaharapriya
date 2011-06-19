@@ -1,82 +1,42 @@
 <%= form_for song, :remote => true do |f| %>
 
-  <div class="left">
+  <% song_type = song.song_type.nil? ? nil : song.song_type.id %>
+  <% composer_name = song.composer.nil? ? nil : song.composer.name %>
+  <% ragam_name = song.ragam.nil? ? nil : song.ragam.name %>
+  <% talam_name = song.talam.nil? ? nil : song.talam.name %>
 
-    <div class="header">
-      <%= t :song %>
-    </div>
-
-    <div class="body">
-
-      <div class="section">
-        <div class="title">
-          <%= f.label :name, t(:name) %>
-        </div>
-        <div class="input">
-          <%= f.text_field :name %>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="title">
-          <%= f.label :song_type, t(:song_type) %>
-        </div>
-        <div class="input">
-          <% song_type = song.song_type.nil? ? nil : song.song_type.id %>
-          <%= f.select :song_type , options_for_select(song_types.collect{ |type| [type.name, type.id] }, song_type), :include_blank => "-#{t :select}-" %>
-        </div>
-      </div>
-
-      <div class="section">
-        <% composer_name = song.composer.nil? ? nil : song.composer.name %>
-        <%= auto_complete :label => t(:composer), :field_name => "composer", :name => "composer_id", :url => suggest_composer_path, :value => composer_name, :form_helper => f %>
-      </div>
-
-      <div class="section">
-        <% ragam_name = song.ragam.nil? ? nil : song.ragam.name %>
-        <%= auto_complete :label => t(:ragam), :field_name => "ragam", :name => "ragam_id", :url => suggest_ragam_path, :value => ragam_name, :form_helper => f %>
-      </div>
-
-      <div class="section">
-        <% talam_name = song.talam.nil? ? nil : song.talam.name %>
-        <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path, :value => talam_name, :form_helper => f %>
-      </div>
-
-      <div class="section">
-        <div class="title">
-          <%= f.label :description, t(:description) %>
-        </div>
-        <div class="input">
-          <%= f.text_area :description %>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer">
-      <div class="error" data-error-display="true">
-      </div>
-    </div>
-
+  <div class="header">
+    <div class="bread_crumbs"><%= form_title %></div>
   </div>
 
-  <div class="right">
+  <div class="body">
 
-    <div class="flash_notice" data-error-info="true">
+    <div class="sidebar">
+      <div class="flash_notice" data-error-info="true"></div>
+      <div class="error" data-error-display="true"></div>
     </div>
 
-    <div>
-      <div class="section">
-        <h2><%= f.label :content, t(:content) %></h2>
-      </div>
-      <div class="section editor">
-        <%= f.text_area "content", :class => "rich_editor" %>
-      </div>
-    </div>
+    <dl>
+      <dt><%= f.label :name, t(:name) %></dt>
+      <dd><%= f.text_field :name %></dd>
+      <dt><%= f.label :song_type, t(:song_type) %></dt>
+      <dd><%= f.select :song_type , options_for_select(song_types.collect{ |type| [type.name, type.id] }, song_type), :include_blank => "-#{t :select}-" %></dd>
+    </dl>
+
+    <%= auto_complete :label => t(:composer), :field_name => "composer", :name => "composer_id", :url => suggest_composer_path, :value => composer_name, :form_helper => f %>
+    <%= auto_complete :label => t(:ragam), :field_name => "ragam", :name => "ragam_id", :url => suggest_ragam_path, :value => ragam_name, :form_helper => f %>
+    <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path, :value => talam_name, :form_helper => f %>
+
+    <dl>
+      <dt><%= f.label :description, t(:description) %></dt>
+      <dd><%= f.text_field :description %></dd>
+      <dt><%= f.label :content, t(:content) %></dt>
+      <dd><%= f.text_area "content", :class => "rich_editor" %></dd>
+    </dl>
 
     <%= submit_tag t(:submit) %>
+    <div class="clear"></div>
 
   </div>
-
-  <div class="clear"></div>
 
 <% end %>
