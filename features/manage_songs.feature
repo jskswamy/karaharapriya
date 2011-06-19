@@ -91,9 +91,9 @@ Feature: Manage songs
     And I choose "Adi" as "song_talam" using auto complete
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
-    Then I should be on the songs_list page
+    Then the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
+    And I should be on the songs_list page
     And I should see "Ninu kori"
-    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
 
   @javascript
   Scenario: Should create a song without description and composer
@@ -110,9 +110,9 @@ Feature: Manage songs
     And I choose "Adi" as "song_talam" using auto complete
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
-    Then I should be on the songs_list page
+    Then the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "" and by composer ""
+    And I should be on the songs_list page
     And I should see "Ninu kori"
-    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "" and by composer ""
 
   @javascript
   Scenario: Should not create a song if the name is already taken

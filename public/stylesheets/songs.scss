@@ -1,127 +1,59 @@
 @import "common";
 
-.content {
+.page_content {
   .body {
-
     label.error {
       color: $error_color;
     }
+  }
+  .header {
+    margin-bottom: 15px;
 
-    .left {
-      float: left;
-      width: $left_content_width;
+    .bread_crumbs {
+      font-size: 20px;
+    }
+    .action {
+      float: right;
 
-      .header {
-        @include basic_background_color;
-        height: 20px;
-        @include font_heading;
-        @include rounded_corners_top(10px);
-        margin-top: 0px;
-        padding: 10px 10px;
-      }
-
-      .body {
-        border-right: solid 1px #ccc;
-        border-left: solid 1px #ccc;
+      a {
+        @include rounded_corners;
+        background-color: $border_color;
+        border: solid 1px $border_color;
+        color: #000;
+        display: inline-block;
         padding: 5px 10px;
-
-        .section {
-          margin: 10px 0px 0px 0px;
-          line-height: 2.0em;
-
-
-          .input {
-            input, textarea {
-              width: 97%;
-            }
-
-            select {
-              width: 100%;
-            }
-
-            textarea {
-              height: 60px;
-            }
-
-          }
-        }
+        text-decoration: none;
       }
 
-      .footer {
-        border: none;
-        @include basic_background_color;
-        clear: both;
-        height: 40px;
-        @include rounded_corners_bottom(10px);
-        margin-top: 0px;
-
-        .error {
-          color: $error_color;
-          font-weight: bold;
-          padding: 10px 5px;
-          text-align: center;
-        }
-      }
-
-    }
-
-    .right {
-
-      margin-left: $left_content_width + 15px;
-      margin-right: 5px;
-
-      .flash_notice {
-        background-color: $highlight_color;
-        @include rounded_corners(10px);
-        margin: auto;
-        padding: 5px;
-        text-align: center;
-        width: 500px;
-      }
-
-      .editor_name h1 {
-        @include font_heading;
-      }
-
-      .section {
-        margin-bottom: 10px;
-      }
-
-      .action {
-        float: right;
-      }
-
-      .editor {
-        margin-bottom: 20px;
-
-        .title {
-          text-align: center;
-
-          input {
-            text-align: center;
-            text-transform: capitalize;
-          }
-        }
-
-        input {
-          border: none;
-          border-bottom: solid 2px #C8E2E1;
-          background: url(/images/paper_bg.jpg) top left repeat;
-          width: 300px;
-        }
-
-        textarea {
-          border: none;
-          height: 400px;
-          width: 100%;
-        }
-
-        .default {
-          background: url(/images/arrow_left.jpg) bottom left no-repeat;
-          padding: 85px 0px 0px 40px;
-        }
+      a:hover {
+        background-color: $menu_alternate_color;
       }
     }
+  }
 
+  .body {
+    table {
+      border: solid 1px $border_color;
+      border-top: none;
+      border-bottom: none;
+      width: 100%;
+
+      tr td, tr th {
+        padding: 7px 20px;
+        text-transform: lowercase;
+      }
+
+      thead tr {
+        background-color: $table_header_bg_color;
+        th {
+          font-weight: normal;
+          text-align: left;
+        }
+      }
+
+      tbody tr td {
+        border-bottom: solid 1px $border_color;
+      }
+    }
   }
 }

@@ -1,20 +1,26 @@
-<div class="left">
-  <div class="header">
-    <%= t(:composer) %>
+<div class="header">
+  <div class="action">
+    <%= link_to t(:new_composer), new_song_path %>
   </div>
-
-  <div class="body">
-    <ul>
-      <% @composers.each do |composer| %>
-        <li><%= link_to composer.name, edit_composer_path(composer) %></li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="footer">
-  </div>
+  <div class="bread_crumbs"><%= t(:composer) %></div>
+  <div class="clear"></div>
 </div>
 
-<div class="right">
-  <%= link_to t(:new_composer), new_composer_path %>
+<div class="body">
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Century</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @composers.each do |composer| %>
+        <tr>
+          <td><%= link_to composer.name, edit_composer_path(composer) %></td>
+          <td><%= composer.century %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

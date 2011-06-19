@@ -134,14 +134,15 @@ Feature: Manage ragams
 
   @javascript
   Scenario: Edit a ragam
-    Given I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "Mohanam"
+    Given I have a ragam "Sankarabharanam" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th ga ri sa", parent ragam "" and description "TBD"
+    And I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "TBD"
     And I have a signed as a normal user
     When I am on the ragams_list page
     And I follow "Beemplas"
     Then the "ragam_name" field should contain "Beemplas"
     And the "ragam_arohana" field should contain "sa re ga ma pa th ni sa"
     And the "ragam_avarohana" field should contain "sa ni th pa ma ga ri sa"
-    And the "ragam_description" wysiwyg editor should contain "Mohanam"
+    And the "ragam_description" wysiwyg editor should contain "TBD"
     Then I fill in the following:
       | ragam_name | Mohanam |
       | ragam_arohana | sa re ga pa th sa |

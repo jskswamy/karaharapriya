@@ -1,20 +1,28 @@
-<div class="left">
-  <div class="header">
-    <%= t(:talam) %>
+<div class="header">
+  <div class="action">
+    <%= link_to t(:new_talam), new_song_path %>
   </div>
-
-  <div class="body">
-    <ul>
-      <% @talams.each do |talam| %>
-        <li><%= link_to talam.name, edit_talam_path(talam) %></li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="footer">
-  </div>
+  <div class="bread_crumbs"><%= t(:talam) %></div>
+  <div class="clear"></div>
 </div>
 
-<div class="right">
-  <%= link_to t(:new_talam), new_talam_path %>
+<div class="body">
+  <table cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Avartanam</th>
+        <th>Laghu Length</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @talams.each do |talam| %>
+        <tr>
+          <td><%= link_to talam.name, edit_talam_path(talam) %></td>
+          <td><%= talam.avartanam %></td>
+          <td><%= talam.laghu_length %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
