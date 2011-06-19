@@ -5,7 +5,7 @@ class SongsController < AuthenticatableController
   before_filter :remove_first_class_params, :only => [:create, :update]
 
   def index
-    @songs = Song.all
+    @songs = Song.includes(:ragam, :talam, :composer).all
   end
 
   def new

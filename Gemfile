@@ -4,6 +4,7 @@ gem 'rails', '~>3.0.8'
 gem 'simple-navigation'
 gem 'webrat'
 gem "mongoid"
+gem "mongoid-eager-loading"
 gem "bson_ext"
 gem 'rake'
 gem 'devise'

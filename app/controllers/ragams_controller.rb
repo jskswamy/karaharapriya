@@ -4,7 +4,7 @@ class RagamsController < AuthenticatableController
   before_filter :load_ragam, :only => [:edit, :update]
 
   def index
-    @ragams = Ragam.all
+    @ragams = Ragam.includes(:parent).all
   end
 
   def new

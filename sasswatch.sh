@@ -1,1 +1,1 @@
-sass --watch public/stylesheets:public/stylesheets
+sass --watch public/stylesheets/scss:public/stylesheets
