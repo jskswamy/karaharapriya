@@ -54,7 +54,7 @@ describe TalamsController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.header["Errors"]
+      errors = response.header["X-Json"]
       errors.should_not be_blank
       errors.should == {:model_name => "talam", :errors => [{:field => :avartanam, :errors => ["has invalid character"]}]}.to_json
     end
@@ -103,7 +103,7 @@ describe TalamsController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.header["Errors"]
+      errors = response.header["X-Json"]
       errors.should_not be_blank
       errors.should == {:model_name => "talam", :errors => [{:field => :avartanam, :errors => ["has invalid character"]}]}.to_json
     end

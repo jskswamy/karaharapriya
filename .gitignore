@@ -7,3 +7,4 @@ tmp
 coverage
 .sass-cache
 *.css
+.rvmrc

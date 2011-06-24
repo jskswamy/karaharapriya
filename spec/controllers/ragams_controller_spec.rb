@@ -60,7 +60,7 @@ describe RagamsController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.headers["Errors"]
+      errors = response.headers["X-Json"]
       errors.should_not be_blank
       errors.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
@@ -122,7 +122,7 @@ describe RagamsController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.headers["Errors"]
+      errors = response.headers["X-Json"]
       errors.should_not be_blank
       errors.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
       Ragam.all.count.should == 3

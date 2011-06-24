@@ -95,15 +95,14 @@ var RemoteForm = {
       this.reset();
     },
 
-    ajaxComplete: function(data) {
-      response = data.memo;
+    ajaxComplete: function(transport) {
+      response = transport.memo;
       this.reset();
       if (response.status == 200) {
         success_data = response.responseJSON;
         this.redirect(success_data.redirect_url);
       } else {
-        errors = data.memo.getResponseHeader("Errors").evalJSON(true);
-        this.processError(errors);
+        this.processError(response.headerJSON);
       }
     },
 
