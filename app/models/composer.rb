@@ -2,7 +2,7 @@ class Composer
   include Mongoid::Document
   include Suggest
 
-  field :name
+  field :name, :type => Hash
   field :century
   field :info
 
