@@ -27,12 +27,16 @@ describe Mongoid::Globalize do
     end
   end
 
+  it "should respond to find_by_translated_field" do
+    DummyGlobalizeModuleIncludedClass.respond_to?(:find_by_translated_field).should be_true
+  end
+
   it "should add translation to the underlying field" do
     globalize = DummyGlobalizeModuleIncludedClass.new
     globalize.name = "tom"
     field_value = globalize.attributes["name"]
     field_value.should_not be_nil
-    field_value.should == {:en => "tom"}
+    field_value.should == {"en" => "tom"}
   end
 
   it "should retrive the translation value from the underlying field" do
@@ -46,7 +50,7 @@ describe Mongoid::Globalize do
     globalize.name = "jerry"
     field_value = globalize.attributes["name"]
     field_value.should_not be_nil
-    field_value.should == {:en => "jerry"}
+    field_value.should == {"en" => "jerry"}
   end
 
   describe "add translation" do
@@ -56,7 +60,7 @@ describe Mongoid::Globalize do
       globalize.add_translation("name", "jerry", "ta")
       field_value = globalize.attributes["name"]
       field_value.should_not be_nil
-      field_value.should == {:ta => "jerry"}
+      field_value.should == {"ta" => "jerry"}
     end
 
     it "should not add text if the field is not set for translation" do
@@ -64,6 +68,12 @@ describe Mongoid::Globalize do
       globalize.add_translation("age", 21)
       field_value = globalize.attributes["age"]
       field_value.should be_nil
+    end
+
+    pending "should retain the old value" do
+      globalize = DummyGlobalizeModuleIncludedClass.create(:name => "tom", :age => 45, :std => "fourth", :school => "SMMS")
+      globalize.name = "jerry"
+      globalize.name_was.should == "tom"
     end
 
   end
@@ -80,6 +90,18 @@ describe Mongoid::Globalize do
     it "should be nil if the translation is not enabled for the field" do
       globalize = DummyGlobalizeModuleIncludedClass.new(:name => "tom", :age => 45)
       globalize.get_translation("age").should be_nil
+    end
+
+  end
+
+  describe "find by translation" do
+
+    it "should find the documnet by translation field" do
+      globalize = DummyGlobalizeModuleIncludedClass.create(:name => "tom", :age => 45, :std => "fourth", :school => "SMMS")
+      globalize = DummyGlobalizeModuleIncludedClass.create(:name => "jerry", :age => 44, :std => "fifth", :school => "School")
+      actual_globalize = DummyGlobalizeModuleIncludedClass.find_by_translated_field("name", "jerry")
+      actual_globalize.should_not be_nil
+      actual_globalize.should == globalize
     end
 
   end
@@ -108,6 +130,8 @@ describe Mongoid::Globalize do
       globalize.save.should be_true
       globalize.valid?.should be_true
       globalize.errors.should be_blank
+      actual_globalize = DummyGlobalizeModuleIncludedClass.find_by_translated_field("name","tom")
+      actual_globalize.age.should == 50
     end
 
   end

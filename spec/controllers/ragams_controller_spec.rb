@@ -43,7 +43,7 @@ describe RagamsController do
       response.should be_success
       response.body.should == {:redirect_url => "/ragams"}.to_json
       Ragam.all.count.should == 2
-      ragam = Ragam.first(:conditions => {:name => "Mohanam"})
+      ragam = Ragam.find_by_translated_field("name","Mohanam")
       ragam.should_not be_nil
       ragam.name.should == "Mohanam"
       ragam.arohana.should == "sa ri ga pa th sa"
@@ -106,9 +106,9 @@ describe RagamsController do
       Ragam.all.count.should == 3
       ragam = Ragam.first(:conditions => {:id => @ragam.id})
       ragam.should_not be_nil
-      ragam.name.should == "Gowlai"
       ragam.arohana.should == "sa ri ga ma pa th ni sa"
       ragam.avarohana.should == "sa ni th pa ma ga ri sa"
+      ragam.name.should == "Gowlai"
       ragam.parent.should == @another_parent_ragam
     end
 
@@ -126,7 +126,7 @@ describe RagamsController do
       errors.should_not be_blank
       errors.should == {:model_name => "ragam", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
       Ragam.all.count.should == 3
-      ragam = Ragam.first(:conditions => {:name => @ragam.name})
+      ragam = Ragam.find_by_translated_field("name",@ragam.name)
       ragam.should_not be_nil
       ragam.name.should_not == "Gowlai"
       ragam.arohana.should_not == "sa ri ga ma pa th ni sa"

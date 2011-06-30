@@ -32,7 +32,7 @@ class RagamsController < AuthenticatableController
   end
 
   def load_ragam
-    @ragam = Ragam.first(:conditions => {:name => params[:id]})
+    @ragam = Ragam.find_by_translated_field("name", params[:id])
   end
 
 end

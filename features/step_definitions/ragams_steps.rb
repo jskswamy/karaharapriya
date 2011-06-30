@@ -14,8 +14,8 @@ Then /^I should see the following ragams:$/ do |expected_ragams_table|
 end
 
 Then /^the ragam "([^"]*)" should be with arohana "([^"]*)", avarohana "([^"]*)", parent ragam "([^"]*)" and description "([^"]*)"$/ do |name, arohana, avarohana, parent_ragam_name, description|
-  parent_ragam = Ragam.first(:conditions => {:name => parent_ragam_name })
-  ragam = Ragam.first(:conditions => {:name => name})
+  parent_ragam = Ragam.find_by_translated_field("name", parent_ragam_name)
+  ragam = Ragam.find_by_translated_field("name", name)
   ragam.should_not be_nil
   ragam.arohana.should == arohana
   ragam.avarohana.should == avarohana
@@ -24,6 +24,6 @@ Then /^the ragam "([^"]*)" should be with arohana "([^"]*)", avarohana "([^"]*)"
 end
 
 Given /^I have a ragam "([^"]*)" with arohana "([^"]*)", avarohana "([^"]*)", parent ragam "([^"]*)" and description "([^"]*)"$/ do |name, arohana, avarohana, parent_ragam_name, description|
-  parent_ragam = Ragam.first(:conditions => {:name => parent_ragam_name })
+  parent_ragam = Ragam.find_by_translated_field("name", parent_ragam_name)
   Factory(:ragam, :name => name, :arohana => arohana, :avarohana => avarohana, :parent => parent_ragam, :description => description)
 end
