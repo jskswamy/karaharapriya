@@ -14,7 +14,7 @@ Then /^I should see the following composers:$/ do |expected_composers_table|
 end
 
 Then /^the composer "([^"]*)" should be with century "([^"]*)" and info "([^"]*)"$/ do |name, century, info|
-  composer = Composer.first(:conditions => {:name => name})
+  composer = Composer.find_by_translated_field("name", name)
   composer.should_not be_blank
   composer.century.should == century
   composer.info.should == info

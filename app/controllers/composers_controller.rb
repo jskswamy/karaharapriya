@@ -27,7 +27,7 @@ class ComposersController < AuthenticatableController
   private
 
   def load_composer
-    @composer = Composer.first(:conditions => {:name => params[:id]})
+    @composer = Composer.find_by_translated_field("name", params[:id])
   end
 
 end

@@ -23,3 +23,6 @@ SongType.create(:name => "Geetham", :description => "Beginner Lesson")
 SongType.create(:name => "Swarajathi", :description => "Beginner Lesson")
 SongType.create(:name => "Varnam", :description => "Beginner Lesson")
 SongType.create(:name => "Keerthanai", :description => "Beginner Lesson")
+
+#create user
+User.create(:name => "Admin", :email => "admin@admin.com", :password => "password")

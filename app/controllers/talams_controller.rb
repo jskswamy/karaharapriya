@@ -27,7 +27,7 @@ class TalamsController < AuthenticatableController
   private
 
   def load_talam
-    @talam = Talam.first(:conditions => {:name => params[:id]})
+    @talam = Talam.find_by_translated_field("name", params[:id])
   end
 
 end

@@ -1,17 +1,19 @@
 class Talam
   include Mongoid::Document
+  include Mongoid::Globalize
   include Suggest
 
-  field :name
+  field :name, :type => Hash
   field :avartanam
   field :laghu_length, :type => Integer
-  field :description
+  field :description, :type => Hash
 
   validates_presence_of :name, :avartanam, :laghu_length, :description
   validates_uniqueness_of :name
   validates_uniqueness_of :laghu_length, :through => :avartanam
 
   validate :validate_avartanam
+  translate :name, :description
 
   def akshram_length_map
     @akshram_length_map ||= {"1" => self.laghu_length, "0" => 2, "U" => 1}

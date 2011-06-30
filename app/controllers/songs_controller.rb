@@ -33,7 +33,7 @@ class SongsController < AuthenticatableController
   end
 
   def load_song
-    @song = Song.first(:conditions => {:name => params[:id]})
+    @song = Song.find_by_translated_field("name", params[:id])
   end
 
 end

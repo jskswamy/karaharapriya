@@ -36,10 +36,10 @@ end
 
 Given /^the song "([^"]*)" should be with content "([^"]*)", song_type "([^"]*)", ragam "([^"]*)", talam "([^"]*)", description "([^"]*)" and by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, description, composer_name|
   song_type = SongType.first(:conditions => {:name => song_type_name})
-  composer = Composer.first(:conditions => {:name => composer_name})
+  composer = Composer.find_by_translated_field("name", composer_name)
   ragam = Ragam.find_by_translated_field("name", ragam_name)
-  talam = Talam.first(:conditions => {:name => talam_name})
-  song = Song.first(:conditions => {:name => name})
+  talam = Talam.find_by_translated_field("name", talam_name)
+  song = Song.find_by_translated_field("name", name)
 
   song.song_type.should == song_type
   song.composer.should == composer

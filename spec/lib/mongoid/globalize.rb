@@ -70,10 +70,15 @@ describe Mongoid::Globalize do
       field_value.should be_nil
     end
 
-    pending "should retain the old value" do
+    it "should retain the old value" do
       globalize = DummyGlobalizeModuleIncludedClass.create(:name => "tom", :age => 45, :std => "fourth", :school => "SMMS")
       globalize.name = "jerry"
       globalize.name_was.should == "tom"
+      globalize.changes.should == {"name"=>[{"en"=>"tom"}, {"en"=>"jerry"}]}
+      globalize.save
+      globalize.changes.should == {}
+      globalize.name = "james bond"
+      globalize.name_was.should == "jerry"
     end
 
   end

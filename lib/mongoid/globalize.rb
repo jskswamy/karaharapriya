@@ -45,6 +45,9 @@ module Mongoid
             define_method "#{field_name}=" do |value|
               self.send(:add_translation, field_name, value)
             end
+            define_method "#{field_name}_was" do
+              self.send(:get_old_translated_field_value, field_name)
+            end
           end
         end
 
@@ -66,7 +69,7 @@ module Mongoid
 
     def add_translation field, value, language = DEFAULT_LANGUAGE
       return if self.class.translated_field(field).nil?
-      old_value = self.send("#{field}_was")
+      old_value = {"#{language}" => self.send("#{field}_was")}
       attribute = self.attributes[field] || {}
       attribute.merge!({language.to_s => value})
       self.changes.merge!({field.to_s => [old_value.nil? ? nil : old_value.clone, attribute]})
@@ -74,6 +77,13 @@ module Mongoid
     end
 
     private
+
+    def get_old_translated_field_value field, language = DEFAULT_LANGUAGE
+      return if self.class.translated_field(field).nil?
+      field_name = field.to_s
+      changes = self.changes[field_name]
+      changes.nil? ? self.send("#{field}") : changes.first["#{language}"]
+    end
 
     def validate_translated_field_uniqueness
       self.class.translated_fields.each do |translated_field|
