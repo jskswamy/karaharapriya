@@ -14,15 +14,17 @@
         <th>Composer</th>
         <th>Ragam</th>
         <th>Talam</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @songs.each do |song| %>
         <tr>
-          <td><%= link_to song.name, edit_song_path(song) %></td>
+          <td><%= song.name %></td>
           <td><%= song.composer.nil? ? "" : song.composer.name %></td>
           <td><%= song.ragam.nil? ? "" : song.ragam.name %></td>
           <td><%= song.talam.nil? ? "" : song.talam.name %></td>
+          <td>[<%= link_to :edit, edit_song_path(song)%>]</td>
         </tr>
       <% end %>
     </tbody>

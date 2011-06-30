@@ -12,7 +12,7 @@ Feature: Manage ragams
   Scenario: Should not be allowed to edit the ragam without sign in
     Given I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "Mohanam"
     When I am on the ragams_list page
-    And I follow "Beemplas"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     Then I should be on the sign_in page
 
   @javascript
@@ -138,7 +138,7 @@ Feature: Manage ragams
     And I have a ragam "Beemplas" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "TBD"
     And I have a signed as a normal user
     When I am on the ragams_list page
-    And I follow "Beemplas"
+    And I follow "edit" within "tbody > tr:nth-child(2)"
     Then the "ragam_name" field should contain "Beemplas"
     And the "ragam_arohana" field should contain "sa re ga ma pa th ni sa"
     And the "ragam_avarohana" field should contain "sa ni th pa ma ga ri sa"

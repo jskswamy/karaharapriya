@@ -15,7 +15,7 @@ Feature: Manage composers
       | Thyagarajar | 20th | Great composer |
       | Boominathar | 21st | Another Great composer |
     When I am on the composers_list page
-    And I follow "Thyagarajar"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     Then I should be on the sign_in page
 
   @javascript
@@ -75,7 +75,7 @@ Feature: Manage composers
       | Boominathar | 21st | Another Great composer |
     And I have a signed as a normal user
     When I am on the composers_list page
-    And I follow "Thyagarajar"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     Then the "composer_name" field should contain "Thyagarajar"
     And the "composer_century" field should contain "20th"
     And the "composer_info" wysiwyg editor should contain "Great composer"

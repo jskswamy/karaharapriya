@@ -16,7 +16,7 @@ Feature: Manage songs
     And I have a ragam "Sankarabharanam"
     And I have a talam "Rupagam"
     When I am on the songs_list page
-    And I follow "Ninu kori"
+    And I follow "edit"
     Then I should be on the sign_in page
 
   @javascript
@@ -269,7 +269,7 @@ Feature: Manage songs
     And I have a talam "Rupagam"
     And I have a signed as a normal user
     When I am on the songs_list page
-    And I follow "Ninu kori"
+    And I follow "edit"
     Then the "song_name" field should contain "Ninu kori"
     And the "song_composer" field should contain "Thyagarajar"
     And the "song_ragam" field should contain "Mohanam"

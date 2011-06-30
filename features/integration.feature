@@ -45,7 +45,7 @@ Feature: Integration Tests
     Then I should not see the following autocomplete options:
       | Mohnm |
     When I am on the ragams_list page
-    And I follow "Mohnm"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     And I fill in the following:
       | ragam_name | Mohanam |
     And I press "Submit"
@@ -98,7 +98,7 @@ Feature: Integration Tests
       | dai |
       | Roopagam |
     When I am on the talams_list page
-    And I follow "dai"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     And I fill in the following:
       | talam_name | Tisra |
     And I press "Submit"
@@ -151,7 +151,7 @@ Feature: Integration Tests
       | Thyagarajar |
       | Boominathar |
     When I am on the composers_list page
-    And I follow "Thyagarajar"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     And I fill in the following:
       | composer_name | Muthuswamy |
     And I press "Submit"
@@ -170,12 +170,12 @@ Feature: Integration Tests
     Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohnm", talam "Adi" and by composer "Thyagarajar"
     And I have a signed as a normal user
     When I am on the ragams_list page
-    And I follow "Mohnm"
+    And I follow "edit"
     And I fill in the following:
       |ragam_name | Mohanam |
     And I press "Submit"
     Then I am on the songs_list page
-    And I follow "Ninu kori"
+    And I follow "edit"
     And the "song_ragam" field should contain "Mohanam"
 
   @javascript

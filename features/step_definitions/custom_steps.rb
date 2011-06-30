@@ -39,3 +39,9 @@ Given /^I have a signed as a normal user$/ do
   And "I fill in \"user_password\" with \"password\""
   And "I press \"Sign in\""
 end
+
+When /^I follow "([^"]*)" within "([^"]*)"$/ do |link, parent|
+  within parent do
+    click_link(link)
+  end
+end

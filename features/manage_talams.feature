@@ -15,7 +15,7 @@ Feature: Manage talams
       | Adi | 1 0 U | 4 | Adi TBD |
       | Roopagam | 1 1 1 0 U  | 5 | Roopagam TBD |
     When I am on the talams_list page
-    And I follow "Adi"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     Then I should be on the sign_in page
 
   @javascript
@@ -122,7 +122,7 @@ Feature: Manage talams
       | Roopagam | 1 1 1 0 U  | 5 | Roopagam TBD |
     And I have a signed as a normal user
     When I am on the talams_list page
-    And I follow "Adi"
+    And I follow "edit" within "tbody > tr:nth-child(1)"
     Then the "talam_name" field should contain "Adi"
     And the "talam_avartanam" field should contain "1 0 U"
     And the "talam_laghu_length" field should contain "4"

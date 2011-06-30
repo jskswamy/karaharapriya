@@ -13,14 +13,16 @@
         <th>Name</th>
         <th>Avartanam</th>
         <th>Laghu Length</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @talams.each do |talam| %>
         <tr>
-          <td><%= link_to talam.name, edit_talam_path(talam) %></td>
+          <td><%= talam.name %></td>
           <td><%= talam.avartanam %></td>
           <td><%= talam.laghu_length %></td>
+          <td>[<%= link_to :edit, edit_talam_path(talam)%>]</td>
         </tr>
       <% end %>
     </tbody>

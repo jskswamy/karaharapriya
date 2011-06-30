@@ -14,15 +14,17 @@
         <th>Arohana</th>
         <th>Avarohana</th>
         <th>Parent</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @ragams.each do |ragam| %>
         <tr>
-          <td><%= link_to ragam.name, edit_ragam_path(ragam) %></td>
+          <td><%= ragam.name %></td>
           <td><%= ragam.arohana %></td>
           <td><%= ragam.avarohana %></td>
           <td><%= ragam.parent.nil? ? "" : ragam.parent.name %></td>
+          <td>[<%= link_to :edit, edit_ragam_path(ragam)%>]</td>
         </tr>
       <% end %>
     </tbody>

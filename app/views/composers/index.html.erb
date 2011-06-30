@@ -12,13 +12,15 @@
       <tr>
         <th>Name</th>
         <th>Century</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @composers.each do |composer| %>
         <tr>
-          <td><%= link_to composer.name, edit_composer_path(composer) %></td>
+          <td><%= composer.name %></td>
           <td><%= composer.century %></td>
+          <td>[<%= link_to :edit, edit_composer_path(composer) %>]</td>
         </tr>
       <% end %>
     </tbody>
