@@ -152,3 +152,21 @@ Feature: Manage ragams
     And I fill in "ragam_description" wysiwyg editor with "Renamed to mohanam"
     And I press "Submit"
     Then the ragam "Mohanam" should be with arohana "sa re ga pa th sa", avarohana "sa th pa ga ri sa", parent ragam "Sankarabharanam" and description "Renamed to mohanam"
+
+  Scenario: Show a ragam
+    Given I have a ragam "Sankarabharanam" with arohana "sa re ga ma pa th ni sa", avarohana "sa ni th pa ma ga ri sa", parent ragam "" and description "TBD"
+    And I have a ragam "Mohanam" with arohana "sa re ga pa th sa", avarohana "sa th pa ga ri sa", parent ragam "Sankarabharanam" and description "TBD"
+    And I am on the ragams_list page
+    When I follow "Mohanam"
+    Then I should be on ragam Mohanam's show page
+    And I should see "Ragam Mohanam"
+    And I should see "Name"
+    And I should see "Mohanam"
+    And I should see "Arohana"
+    And I should see "sa re ga pa th sa"
+    And I should see "Avarohana"
+    And I should see "sa th pa ga ri sa"
+    And I should see "Parent"
+    And I should see "Sankarabharanam"
+    And I should see "Description"
+    And I should see "TBD"

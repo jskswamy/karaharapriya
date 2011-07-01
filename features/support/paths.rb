@@ -37,6 +37,9 @@ module NavigationHelpers
     when /the sign_in page/
       new_user_session_path
 
+    when /^ragam (.*)'s show page$/i
+      ragam_path(Ragam.find_by_translated_field("name", $1))
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

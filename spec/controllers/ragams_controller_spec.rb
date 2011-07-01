@@ -94,7 +94,7 @@ describe RagamsController do
     end
 
     it "should create ragam" do
-      put :update, {:id => @ragam.name, :ragam =>{:name => "Gowlai",
+      put :update, {:id => @ragam.to_param, :ragam =>{:name => "Gowlai",
                                                 :arohana => "sa ri ga ma pa th ni sa",
                                                 :avarohana => "sa ni th pa ma ga ri sa",
                                                 :description => "Gowlao ragam",
@@ -113,7 +113,7 @@ describe RagamsController do
     end
 
     it "should have validationErrors as response type in case of validation errors" do
-      put :update, {:id => @ragam.name, :ragam =>{:name => nil,
+      put :update, {:id => @ragam.to_param, :ragam =>{:name => nil,
                                                 :arohana => "sa ri ga ma pa th ni sa",
                                                 :avarohana => "sa ni th pa ma ga ri sa",
                                                 :description => "Gowlao ragam",
@@ -132,6 +132,18 @@ describe RagamsController do
       ragam.arohana.should_not == "sa ri ga ma pa th ni sa"
       ragam.avarohana.should_not == "sa ni th pa ma ga ri sa"
       ragam.parent.should_not == @another_parent_ragam
+    end
+
+  end
+
+  describe "show" do
+
+    it "should assign the ragam" do
+      ragam = Factory(:ragam)
+      get :show, :id => ragam.to_param
+      actual_ragam = assigns(:ragam)
+      actual_ragam.should_not be_nil
+      actual_ragam.should == ragam
     end
 
   end

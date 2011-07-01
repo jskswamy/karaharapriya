@@ -20,7 +20,7 @@
     <tbody>
       <% @ragams.each do |ragam| %>
         <tr>
-          <td><%= ragam.name %></td>
+          <td><%= link_to ragam.name, ragam_path(ragam) %></td>
           <td><%= ragam.arohana %></td>
           <td><%= ragam.avarohana %></td>
           <td><%= ragam.parent.nil? ? "" : ragam.parent.name %></td>
