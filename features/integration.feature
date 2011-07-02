@@ -19,7 +19,6 @@ Feature: Integration Tests
       | ragam_name | Sankarabharanam |
       | ragam_arohana | sa re ga pa th sa |
       | ragam_avarohana | sa th pa ga re sa |
-    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     Then I am on the new song page
     And I fill in "song_ragam" with "A"
@@ -74,7 +73,6 @@ Feature: Integration Tests
       | talam_name | Tisra |
       | talam_avartanam | 1 0 U U U |
       | talam_laghu_length | 2 |
-    And I fill in "talam_description" wysiwyg editor with "Tisra nadai"
     And I press "Submit"
     Then I am on the new song page
     And I fill in "song_talam" with "A"
@@ -115,9 +113,9 @@ Feature: Integration Tests
   @javascript
   Scenario: Should display the newly create composer in auto suggestion
     Given the following composers:
-      | name | century | info |
-      | Thyagarajar | 19th | Composer  |
-      | Boominathar | 20th  | Another Composer |
+      | name | century |
+      | Thyagarajar | 19th |
+      | Boominathar | 20th  |
     And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_composer" with "A"
@@ -127,7 +125,6 @@ Feature: Integration Tests
     And I fill in the following:
       | composer_name | Muthuswamy |
       | composer_century | 21st |
-    And I fill in "composer_info" wysiwyg editor with "Newly created composer"
     And I press "Submit"
     Then I am on the new song page
     And I fill in "song_composer" with "A"
@@ -141,9 +138,9 @@ Feature: Integration Tests
   @javascript
   Scenario: Should display the updated composer name in auto suggestion
     Given the following composers:
-      | name | century | info |
-      | Thyagarajar | 19th | Composer  |
-      | Boominathar | 20th  | Another Composer |
+      | name | century |
+      | Thyagarajar | 19th |
+      | Boominathar | 20th  |
     And I have a signed as a normal user
     When I am on the new song page
     And I fill in "song_composer" with "A"
@@ -189,12 +186,10 @@ Feature: Integration Tests
       |ragam_name | Mohanam |
       | ragam_arohana | sa re ga pa th sa |
       | ragam_avarohana | sa th pa ga re sa |
-    And I fill in "ragam_description" wysiwyg editor with "Beautiful ragam"
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
@@ -203,7 +198,7 @@ Feature: Integration Tests
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
-    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
+    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
 
   @javascript
   Scenario: Should be able to use the newly created talam for creating a song
@@ -216,12 +211,10 @@ Feature: Integration Tests
       | talam_name | Adi |
       | talam_avartanam | 1 1 1 0 U |
       | talam_laghu_length | 6 |
-    And I fill in "talam_description" wysiwyg editor with "Based on 8 beat count"
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
@@ -230,7 +223,7 @@ Feature: Integration Tests
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
-    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
+    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
 
   @javascript
   Scenario: Should be able to use the newly created composer for creating a song
@@ -242,12 +235,10 @@ Feature: Integration Tests
     And I fill in the following:
       | composer_name | Thyagarajar |
       | composer_century | 18th |
-    And I fill in "composer_info" wysiwyg editor with "Greate composer"
     And I press "Submit"
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
@@ -256,4 +247,4 @@ Feature: Integration Tests
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ninu kori"
-    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
+    And the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"

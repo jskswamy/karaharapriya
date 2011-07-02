@@ -17,12 +17,6 @@ describe Composer do
       duplicate_some_composer.errors.full_messages.to_sentence.should == "Name is already taken"
     end
 
-    it "should not create composer without info" do
-      some_composer = Factory.build(:composer, :info => nil)
-      some_composer.valid?.should == false
-      some_composer.errors.full_messages.to_sentence.should == "Info can't be blank"
-    end
-
   end
 
   it "to_param should return name" do

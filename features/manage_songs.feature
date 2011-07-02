@@ -84,19 +84,18 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
-    Then the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "Awesome mohanam varnam" and by composer "Thyagarajar"
+    Then the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
     And I should be on the songs_list page
     And I should see "Ninu kori"
 
   @javascript
-  Scenario: Should create a song without description and composer
+  Scenario: Should create a song without composer
     Given I have a song type "Varnam"
     And I have a composer "Thyagarajar"
     And I have a ragam "Mohanam"
@@ -110,7 +109,7 @@ Feature: Manage songs
     And I choose "Adi" as "song_talam" using auto complete
     And I fill in "song_content" wysiwyg editor with "ga ga ri sa sa ri ri"
     And I press "Submit"
-    Then the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi", description "" and by composer ""
+    Then the song "Ninu kori" should be with content "ga ga ri sa sa ri ri", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer ""
     And I should be on the songs_list page
     And I should see "Ninu kori"
 
@@ -125,7 +124,6 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I select "Geetham" from "song_song_type"
     And I choose "Pattamal" as "song_composer" using auto complete
     And I choose "Gowlai" as "song_ragam" using auto complete
@@ -147,7 +145,6 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome geetham |
     And I select "Geetham" from "song_song_type"
     And I choose "Pattamal" as "song_composer" using auto complete
     And I choose "Gowlai" as "song_ragam" using auto complete
@@ -159,7 +156,7 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Ganapathy"
-    And the song "Ganapathy" should be with content "sa ni th pa pa", song_type "Geetham", ragam "Gowlai", talam "Roopagam", description "Awesome geetham" and by composer "Pattamal"
+    And the song "Ganapathy" should be with content "sa ni th pa pa", song_type "Geetham", ragam "Gowlai", talam "Roopagam" and by composer "Pattamal"
 
   @javascript
   Scenario: Should not create a song without name
@@ -169,8 +166,6 @@ Feature: Manage songs
     And I have a talam "Adi"
     And I have a signed as a normal user
     When I am on the new song page
-    And I fill in the following:
-      | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
@@ -191,7 +186,6 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
@@ -211,7 +205,6 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Adi" as "song_talam" using auto complete
@@ -231,7 +224,6 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
@@ -251,7 +243,6 @@ Feature: Manage songs
     When I am on the new song page
     And I fill in the following:
       | song_name | Ninu kori |
-      | song_description | Awesome mohanam varnam |
     And I select "Varnam" from "song_song_type"
     And I choose "Thyagarajar" as "song_composer" using auto complete
     And I choose "Mohanam" as "song_ragam" using auto complete
@@ -278,7 +269,6 @@ Feature: Manage songs
     And "Varnam" should be selected for "song_song_type"
     Then I fill in the following:
       | song_name | Shayamala meenakshi |
-      | song_description | Master piece |
     And I select "Geetham" from "song_song_type"
     And I choose "Muthuswamy" as "song_composer" using auto complete
     And I choose "Sankarabharanam" as "song_ragam" using auto complete
@@ -287,7 +277,7 @@ Feature: Manage songs
     And I press "Submit"
     Then I should be on the songs_list page
     And I should see "Shayamala meenakshi"
-    And the song "Shayamala meenakshi" should be with content "sa re ga ma pa pa", song_type "Geetham", ragam "Sankarabharanam", talam "Rupagam", description "Master piece" and by composer "Muthuswamy"
+    And the song "Shayamala meenakshi" should be with content "sa re ga ma pa pa", song_type "Geetham", ragam "Sankarabharanam", talam "Rupagam" and by composer "Muthuswamy"
 
   Scenario: Show a song
     Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"

@@ -4,7 +4,6 @@ class Song
 
   field :name, :type => Hash
   field :content, :type => Hash
-  field :description, :type => Hash
   referenced_in :song_type
   referenced_in :ragam
   referenced_in :talam
@@ -12,7 +11,7 @@ class Song
 
   validates_presence_of :name, :content, :ragam, :talam, :song_type
   validates_uniqueness_of :name
-  translate :name, :content, :description
+  translate :name, :content
 
   def self.find_by_id id
     Song.first(:conditions => {:id => id})

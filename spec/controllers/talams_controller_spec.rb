@@ -35,7 +35,7 @@ describe TalamsController do
     end
 
     it "should create new talam" do
-      parameters = {:talam => {:name => "Adi", :avartanam => "1 U 0", :laghu_length => "4", :description => "desc" }}
+      parameters = {:talam => {:name => "Adi", :avartanam => "1 U 0", :laghu_length => "4"}}
       post :create, parameters
 
       response.should be_success
@@ -49,7 +49,7 @@ describe TalamsController do
     end
 
     it "should have validationErrors as response type in case of validation errors" do
-      parameters = {:talam => {:name => "Adi", :avartanam => "1 U N 0", :laghu_length => "4", :description => "desc" }}
+      parameters = {:talam => {:name => "Adi", :avartanam => "1 U N 0", :laghu_length => "4"}}
       post :create, parameters
 
       response.should_not be_success
@@ -109,7 +109,6 @@ describe TalamsController do
     end
 
   end
-
 
   describe "show" do
 

@@ -43,7 +43,6 @@ describe SongsController do
     it "should create song and its contents" do
       post :create, {:song =>{:name => "song",
                               :song_type => @song_type.id.to_s,
-                              :description => "song description",
                               :content => "sa re ga ma",
                               :talam_id => @talam.id.to_s,
                               :ragam_id => @ragam.id.to_s,
@@ -61,13 +60,11 @@ describe SongsController do
       song.composer.should == @composer
       song.ragam.should == @ragam
       song.talam.should == @talam
-      song.description.should == "song description"
       song.content.should == "sa re ga ma"
     end
 
     it "should have validationErrors as response type in case of validation errors" do
       post :create, {:song =>{:song_type => @song_type.id.to_s,
-                              :description => "song description",
                               :content => "sa re ga ma",
                               :talam_id => @talam.id.to_s,
                               :ragam_id => @ragam.id.to_s,
@@ -123,7 +120,6 @@ describe SongsController do
       put :update, {:id => song.to_param,
                      :song =>{:name => "song",
                               :song_type => @song_type.id.to_s,
-                              :description => "song description",
                               :content => "sa re ga ma",
                               :talam_id => @talam.id.to_s,
                               :ragam_id => @ragam.id.to_s,
@@ -141,7 +137,6 @@ describe SongsController do
       song.composer.should == @composer
       song.ragam.should == @ragam
       song.talam.should == @talam
-      song.description.should == "song description"
       song.content.should == "sa re ga ma"
     end
 
@@ -150,7 +145,6 @@ describe SongsController do
       put :update, {:id => song.to_param,
                      :song =>{:name => nil,
                               :song_type => @song_type.id.to_s,
-                              :description => "song description",
                               :content => "sa re ga ma",
                               :talam_id => @talam.id.to_s,
                               :ragam_id => @ragam.id.to_s,
@@ -170,7 +164,6 @@ describe SongsController do
       song.composer.should_not == @composer
       song.ragam.should_not == @ragam
       song.talam.should_not == @talam
-      song.description.should_not == "song description"
       song.content.should_not == "sa re ga ma"
     end
 

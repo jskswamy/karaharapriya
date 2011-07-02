@@ -34,7 +34,7 @@ Given /^I have a song "([^"]*)" with content "([^"]*)", song_type "([^"]*)", rag
   Factory(:song, :name => name, :song_type => song_type, :ragam => ragam, :talam => talam, :composer => composer, :content => content)
 end
 
-Given /^the song "([^"]*)" should be with content "([^"]*)", song_type "([^"]*)", ragam "([^"]*)", talam "([^"]*)", description "([^"]*)" and by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, description, composer_name|
+Given /^the song "([^"]*)" should be with content "([^"]*)", song_type "([^"]*)", ragam "([^"]*)", talam "([^"]*)" and by composer "([^"]*)"$/ do |name, content, song_type_name, ragam_name, talam_name, composer_name|
   song_type = SongType.first(:conditions => {:name => song_type_name})
   composer = Composer.find_by_translated_field("name", composer_name)
   ragam = Ragam.find_by_translated_field("name", ragam_name)
@@ -45,7 +45,6 @@ Given /^the song "([^"]*)" should be with content "([^"]*)", song_type "([^"]*)"
   song.composer.should == composer
   song.ragam.should == ragam
   song.talam.should == talam
-  song.description.should == description
   song.content.should == content
 end
 

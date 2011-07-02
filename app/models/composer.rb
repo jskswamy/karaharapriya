@@ -5,11 +5,10 @@ class Composer
 
   field :name, :type => Hash
   field :century, :type => Hash
-  field :info, :type => Hash
 
-  validates_presence_of :name, :info
+  validates_presence_of :name
   validates_uniqueness_of :name
-  translate :name, :century, :info
+  translate :name, :century
 
   def to_param
     self.name

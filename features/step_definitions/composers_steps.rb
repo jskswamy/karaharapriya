@@ -13,9 +13,8 @@ Then /^I should see the following composers:$/ do |expected_composers_table|
   expected_composers_table.diff!(tableish('table tr', 'td,th'))
 end
 
-Then /^the composer "([^"]*)" should be with century "([^"]*)" and info "([^"]*)"$/ do |name, century, info|
+Then /^the composer "([^"]*)" should be with century "([^"]*)"$/ do |name, century|
   composer = Composer.find_by_translated_field("name", name)
   composer.should_not be_blank
   composer.century.should == century
-  composer.info.should == info
 end

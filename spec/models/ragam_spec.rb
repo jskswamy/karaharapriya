@@ -17,12 +17,6 @@ describe Ragam do
       random_ragam.errors.full_messages.to_sentence.should == "Name can't be blank"
     end
 
-    it "should not create a ragam without a description" do
-      random_ragam = Factory.build(:ragam, :description => nil)
-      random_ragam.valid?.should be_false
-      random_ragam.errors.full_messages.to_sentence.should == "Description can't be blank"
-    end
-
     it "should not create a ragam with out arohana" do
       mohana_ragam = Factory.build(:ragam, :name => "Mohanam", :arohana => nil)
       mohana_ragam.valid?.should be_false

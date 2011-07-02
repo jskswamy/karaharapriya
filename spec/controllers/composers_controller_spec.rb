@@ -49,14 +49,14 @@ describe ComposersController do
     end
 
     it "should have validationErrors as response type in case of validation errors" do
-      parameters = {:composer => {:name => "Thyagarajar", :century => "18th", :info => nil }}
+      parameters = {:composer => {:century => "18th"}}
       post :create, parameters
 
       response.should_not be_success
       response.response_code.should == 400
       errors = response.header["X-Json"]
       errors.should_not be_blank
-      errors.should == {:model_name => "composer", :errors => [{:field => :info, :errors => ["can't be blank"]}]}.to_json
+      errors.should == {:model_name => "composer", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
 
   end
@@ -68,7 +68,7 @@ describe ComposersController do
     end
 
     it "should load the composer" do
-      composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
+      composer = Factory(:composer, :name => "Thyagarajar", :century => "19")
 
       get :edit, :id => composer.to_param
       actual_composer = assigns[:composer]
@@ -84,8 +84,8 @@ describe ComposersController do
     end
 
     it "should update the composer" do
-      composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
-      parameters = {:id => composer.to_param, :composer => {:name => "Boominathar", :info => "B", :century => "19th" }}
+      composer = Factory(:composer, :name => "Thyagarajar", :century => "19")
+      parameters = {:id => composer.to_param, :composer => {:name => "Boominathar", :century => "19th" }}
 
       put :update, parameters
       response.should be_success
@@ -93,19 +93,18 @@ describe ComposersController do
       composer = Composer.first
       composer.name.should == "Boominathar"
       composer.century.should == "19th"
-      composer.info.should == "B"
     end
 
     it "should have validationErrors as response type in case of validation errors" do
-      composer = Factory(:composer, :name => "Thyagarajar", :century => "19", :info => "A")
-      parameters = {:id => composer.to_param, :composer => {:name => "Boominathar", :century => "19th", :info => nil }}
+      composer = Factory(:composer, :name => "Thyagarajar", :century => "19")
+      parameters = {:id => composer.to_param, :composer => {:name => nil, :century => "19th"}}
       post :update, parameters
 
       response.should_not be_success
       response.response_code.should == 400
       errors = response.header["X-Json"]
       errors.should_not be_blank
-      errors.should == {:model_name => "composer", :errors => [{:field => :info, :errors => ["can't be blank"]}]}.to_json
+      errors.should == {:model_name => "composer", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
 
   end

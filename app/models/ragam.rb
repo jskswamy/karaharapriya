@@ -6,15 +6,14 @@ class Ragam
   field :name, :type => Hash
   field :arohana
   field :avarohana
-  field :description, :type => Hash
   referenced_in :parent, :class_name => "Ragam"
   attr_protected :_id
 
-  validates_presence_of :name, :arohana, :avarohana, :description
+  validates_presence_of :name, :arohana, :avarohana
   validates_uniqueness_of :name
   validates_uniqueness_of :arohana, :scope => :avarohana
   validate :minimum_length
-  translate :name, :description
+  translate :name
 
   scope :find_by_name, lambda { |name| where(:name => name) }
 

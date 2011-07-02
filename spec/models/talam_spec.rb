@@ -30,13 +30,6 @@ describe Talam do
       talam.errors.full_messages.to_sentence.should == "Laghu length can't be blank"
     end
 
-    it "should not create talam without description" do
-      talam = Factory.build(:talam, :description => nil)
-      talam.save
-      talam.valid?.should be_false
-      talam.errors.full_messages.to_sentence.should == "Description can't be blank"
-    end
-
     it "should not create if the talam name already exists" do
       random_talam = Factory(:talam, :name => "some talam")
       another_talam = Factory.build(:talam, :name => "some talam")

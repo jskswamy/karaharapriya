@@ -28,8 +28,6 @@
     <%= auto_complete :label => t(:talam), :field_name => "talam", :name => "talam_id", :url => suggest_talam_path, :value => talam_name, :form_helper => f %>
 
     <dl>
-      <dt><%= f.label :description, t(:description) %></dt>
-      <dd><%= f.text_field :description %></dd>
       <dt><%= f.label :content, t(:content) %></dt>
       <dd><%= f.text_area "content", :class => "rich_editor" %></dd>
     </dl>

@@ -24,11 +24,6 @@
 
     <%= auto_complete :label => t(:parent), :field_name => "parent", :name => "parent_id", :url => suggest_ragam_path, :value => parent_ragam_name, :form_helper => f %>
 
-    <dl>
-      <dt><%= f.label :description, t(:description) %></dt>
-      <dd><%= f.text_area :description, :class => "rich_editor" %></dd>
-    </dl>
-
     <%= submit_tag t(:submit) %>
     <div class="clear"></div>
 
