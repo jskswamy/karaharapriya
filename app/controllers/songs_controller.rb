@@ -1,7 +1,7 @@
 class SongsController < AuthenticatableController
 
   before_filter :load_song_types, :only => [:new, :edit]
-  before_filter :load_song, :only => [:edit, :update]
+  before_filter :load_song, :only => [:edit, :update, :show]
   before_filter :remove_first_class_params, :only => [:create, :update]
 
   def index

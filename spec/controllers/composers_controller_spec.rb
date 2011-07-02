@@ -110,4 +110,18 @@ describe ComposersController do
 
   end
 
+  describe "show" do
+
+    it "should load composer" do
+      composer = Factory(:composer)
+      get :show, :id => composer.to_param
+
+      response.should be_success
+      expected_composer = assigns[:composer]
+      expected_composer.should_not be_nil
+      expected_composer.should == composer
+    end
+
+  end
+
 end

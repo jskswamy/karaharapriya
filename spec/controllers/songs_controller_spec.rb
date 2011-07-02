@@ -95,7 +95,7 @@ describe SongsController do
       song_types = []
       2.times { song_types << Factory(:song_type) }
       song = Factory(:song, :song_type => song_types.first)
-      get :edit, :id => song.name
+      get :edit, :id => song.to_param
 
       response.should be_success
       response.should render_template(:edit)
@@ -120,7 +120,7 @@ describe SongsController do
 
     it "should update song and its contents" do
       song = Factory(:song)
-      put :update, {:id => song.name,
+      put :update, {:id => song.to_param,
                      :song =>{:name => "song",
                               :song_type => @song_type.id.to_s,
                               :description => "song description",
@@ -147,7 +147,7 @@ describe SongsController do
 
     it "should have validationErrors as response type in case of validation errors" do
       song = Factory(:song)
-      put :update, {:id => song.name,
+      put :update, {:id => song.to_param,
                      :song =>{:name => nil,
                               :song_type => @song_type.id.to_s,
                               :description => "song description",
@@ -172,6 +172,20 @@ describe SongsController do
       song.talam.should_not == @talam
       song.description.should_not == "song description"
       song.content.should_not == "sa re ga ma"
+    end
+
+  end
+
+  describe "show" do
+
+    it "should load the song" do
+      song = Factory(:song)
+      get :show, :id => song.to_param
+
+      response.should be_true
+      expected_song = assigns[:song]
+      expected_song.should_not be_nil
+      expected_song.should == song
     end
 
   end

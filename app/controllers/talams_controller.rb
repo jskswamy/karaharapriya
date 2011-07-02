@@ -1,6 +1,6 @@
 class TalamsController < AuthenticatableController
 
-  before_filter :load_talam, :only => [:edit, :update]
+  before_filter :load_talam, :only => [:edit, :update, :show]
 
   def index
     @talams = Talam.all

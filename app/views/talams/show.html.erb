@@ -1,0 +1,23 @@
+<div class="header">
+  <div class="bread_crumbs"><%="#{t(:talam)} #{@talam.name}"%></div>
+</div>
+
+<div class="body">
+
+  <div class="sidebar">
+    <div class="flash_notice" data-error-info="true"></div>
+    <div class="error" data-error-display="true"></div>
+  </div>
+
+  <dl>
+    <dt><%= t(:name) %></dt>
+    <dd><%= @talam.name %></dd>
+    <dt><%= t(:avartanam) %></dt>
+    <dd><%= @talam.avartanam %></dd>
+    <dt><%= t(:laghu_length) %></dt>
+    <dd><%= @talam.laghu_length %></dd>
+    <dt><%= t(:description) %></dt>
+    <dd><%= @talam.description %></dd>
+  </dl>
+
+</div>

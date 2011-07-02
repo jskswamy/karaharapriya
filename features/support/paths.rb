@@ -40,6 +40,15 @@ module NavigationHelpers
     when /^ragam (.*)'s show page$/i
       ragam_path(Ragam.find_by_translated_field("name", $1))
 
+    when /^talam (.*)'s show page$/i
+      talam_path(Talam.find_by_translated_field("name", $1))
+
+    when /^composer (.*)'s show page$/i
+      composer_path(Composer.find_by_translated_field("name", $1))
+
+    when /^song (.*)'s show page$/i
+      song_path(Song.find_by_translated_field("name", $1))
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

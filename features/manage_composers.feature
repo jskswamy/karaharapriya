@@ -86,3 +86,19 @@ Feature: Manage composers
     And I press "Submit"
     Then I should be on the composers_list page
     And the composer "Muthuswamy" should be with century "19th" and info "Updated composer"
+
+  Scenario: Show a composer
+    Given the following composers:
+      | name | century | info |
+      | Thyagarajar | 20th | Great composer |
+      | Boominathar | 21st | Another Great composer |
+    And I am on the composers_list page
+    When I follow "Thyagarajar"
+    Then I should be on composer Thyagarajar's show page
+    And I should see "Composer Thyagarajar"
+    And I should see "Name"
+    And I should see "Thyagarajar"
+    And I should see "Century"
+    And I should see "20th"
+    And I should see "Info"
+    And I should see "Great composer"

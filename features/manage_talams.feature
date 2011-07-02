@@ -135,3 +135,20 @@ Feature: Manage talams
     And I press "Submit"
     Then I should be on the talams_list page
     And the talam "New Adi" should be with avartanam "1 1 0 U", laghu_length 6 and description "Updated Talam"
+
+  Scenario: Show a talam
+    Given the following talams:
+      | name | avartanam | laghu_length | description |
+      | Adi | 1 0 U | 4 | Adi TBD |
+    And I am on the talams_list page
+    When I follow "Adi"
+    Then I should be on talam Adi's show page
+    And I should see "Talam Adi"
+    And I should see "Name"
+    And I should see "Adi"
+    And I should see "Avartanam"
+    And I should see "1 0 U"
+    And I should see "Laghu Length"
+    And I should see "4"
+    And I should see "Description"
+    And I should see "Adi TBD"

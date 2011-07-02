@@ -22,4 +22,8 @@ describe "ragam routes" do
      {:put => "/ragams/1"}.should route_to(:controller => "ragams", :action => "update", :id => "1")
   end
 
+  it "should route to show" do
+    {:get => "/ragams/1"}.should route_to(:controller => "ragams", :action => "show", :id => "1")
+  end
+
 end

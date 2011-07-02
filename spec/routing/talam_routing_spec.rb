@@ -22,4 +22,8 @@ describe "talam routes" do
      {:put => "/talams/1"}.should route_to(:controller => "talams", :action => "update", :id => "1")
   end
 
+  it "should route to show" do
+    {:get => "/talams/1"}.should route_to(:controller => "talams", :action => "show", :id => "1")
+  end
+
 end

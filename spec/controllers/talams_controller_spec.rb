@@ -70,7 +70,7 @@ describe TalamsController do
     it "should load the talam" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
 
-      get :edit, :id => talam.name
+      get :edit, :id => talam.to_param
       actual_talam = assigns[:talam]
       actual_talam.should == talam
     end
@@ -85,7 +85,7 @@ describe TalamsController do
 
     it "should update the talam" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
-      parameters = {:id => talam.name, :talam => {:name => "Roopagam", :avartanam => "1 0", :laghu_length => "3" }}
+      parameters = {:id => talam.to_param, :talam => {:name => "Roopagam", :avartanam => "1 0", :laghu_length => "3" }}
 
       put :update, parameters
       response.should be_success
@@ -98,7 +98,7 @@ describe TalamsController do
 
     it "should have validationErrors as response type in case of validation errors" do
       talam = Factory(:talam, :name => "Adi", :avartanam => "1 U 0", :laghu_length => "4")
-      parameters = {:id => talam.name, :talam => {:name => "Roopagam", :avartanam => "1 0 N", :laghu_length => "3" }}
+      parameters = {:id => talam.to_param, :talam => {:name => "Roopagam", :avartanam => "1 0 N", :laghu_length => "3" }}
       post :update, parameters
 
       response.should_not be_success
@@ -106,6 +106,20 @@ describe TalamsController do
       errors = response.header["X-Json"]
       errors.should_not be_blank
       errors.should == {:model_name => "talam", :errors => [{:field => :avartanam, :errors => ["has invalid character"]}]}.to_json
+    end
+
+  end
+
+
+  describe "show" do
+
+    it "should load the talam" do
+      talam = Factory(:talam)
+      get :show, :id => talam.to_param
+      response.should be_success
+      expected_talam = assigns[:talam]
+      expected_talam.should_not be_nil
+      expected_talam.should == talam
     end
 
   end

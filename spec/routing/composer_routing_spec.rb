@@ -22,4 +22,8 @@ describe "composer routes" do
      {:put => "/composers/1"}.should route_to(:controller => "composers", :action => "update", :id => "1")
   end
 
+  it "should route to show" do
+    {:get => "/composers/1"}.should route_to(:controller => "composers", :action => "show", :id => "1")
+  end
+
 end

@@ -288,3 +288,22 @@ Feature: Manage songs
     Then I should be on the songs_list page
     And I should see "Shayamala meenakshi"
     And the song "Shayamala meenakshi" should be with content "sa re ga ma pa pa", song_type "Geetham", ragam "Sankarabharanam", talam "Rupagam", description "Master piece" and by composer "Muthuswamy"
+
+  Scenario: Show a song
+    Given I have a song "Ninu kori" with content "sa re ga ma", song_type "Varnam", ragam "Mohanam", talam "Adi" and by composer "Thyagarajar"
+    And I am on the songs_list page
+    When I follow "Ninu kori"
+    Then I should be on song Ninu kori's show page
+    And I should see "Song Ninu kori"
+    And I should see "Name"
+    And I should see "Ninu kori"
+    And I should see "Song Type"
+    And I should see "Varnam"
+    And I should see "Ragam"
+    And I should see "Mohanam"
+    And I should see "Talam"
+    And I should see "Adi"
+    And I should see "Composer"
+    And I should see "Thyagarajar"
+    And I should see "Content"
+    And I should see "sa re ga ma"

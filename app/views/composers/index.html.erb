@@ -18,7 +18,7 @@
     <tbody>
       <% @composers.each do |composer| %>
         <tr>
-          <td><%= composer.name %></td>
+          <td><%= link_to composer.name, composer_path(composer) %></td>
           <td><%= composer.century %></td>
           <td>[<%= link_to :edit, edit_composer_path(composer) %>]</td>
         </tr>

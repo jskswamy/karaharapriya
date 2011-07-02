@@ -1,6 +1,6 @@
 class ComposersController < AuthenticatableController
 
-  before_filter :load_composer, :only => [:edit, :update]
+  before_filter :load_composer, :only => [:edit, :update, :show]
 
   def index
     @composers = Composer.all

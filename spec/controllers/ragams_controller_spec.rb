@@ -6,9 +6,9 @@ describe RagamsController do
     ragams = []
     2.times { ragams << Factory(:ragam) }
     get :index
-    actual_ragams = assigns[:ragams]
-    actual_ragams.count.should == 2
-    actual_ragams.should == ragams
+    expected_ragams = assigns[:ragams]
+    expected_ragams.count.should == 2
+    expected_ragams.should == ragams
   end
 
   describe "new" do
@@ -141,9 +141,10 @@ describe RagamsController do
     it "should assign the ragam" do
       ragam = Factory(:ragam)
       get :show, :id => ragam.to_param
-      actual_ragam = assigns(:ragam)
-      actual_ragam.should_not be_nil
-      actual_ragam.should == ragam
+      response.should be_true
+      expected_ragam = assigns(:ragam)
+      expected_ragam.should_not be_nil
+      expected_ragam.should == ragam
     end
 
   end

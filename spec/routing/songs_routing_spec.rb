@@ -22,4 +22,8 @@ describe "song routes" do
      {:put => "/songs/1"}.should route_to(:controller => "songs", :action => "update", :id => "1")
   end
 
+  it "should route to show" do
+    {:get => "/songs/1"}.should route_to(:controller => "songs", :action => "show", :id => "1")
+  end
+
 end

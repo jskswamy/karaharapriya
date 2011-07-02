@@ -1,0 +1,29 @@
+<div class="header">
+  <div class="bread_crumbs"><%="#{t(:song)} #{@song.name}"%></div>
+</div>
+
+<div class="body">
+
+  <div class="sidebar">
+    <div class="flash_notice" data-error-info="true"></div>
+    <div class="error" data-error-display="true"></div>
+  </div>
+
+  <dl>
+    <dt><%= t(:name) %></dt>
+    <dd><%= @song.name %></dd>
+    <dt><%= t(:song_type) %></dt>
+    <dd><%= @song.song_type.name %></dd>
+    <dt><%= t(:ragam) %></dt>
+    <dd><%= @song.ragam.name %></dd>
+    <dt><%= t(:talam) %></dt>
+    <dd><%= @song.talam.name %></dd>
+    <dt><%= t(:composer) %></dt>
+    <dd><%= @song.composer.name %></dd>
+    <dt><%= t(:description) %></dt>
+    <dd><%= @song.description %></dd>
+    <dt><%= t(:content) %></dt>
+    <dd><%= @song.content %></dd>
+  </dl>
+
+</div>
