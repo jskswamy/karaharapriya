@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title Karaharapriya
+    =stylesheet_link_tag :all
+    =javascript_include_tag :all
+    =stylesheet_link_tag "yui/sam/skin.css"
+    =javascript_include_tag "yui/yahoo-dom-event/yahoo-dom-event.js"
+    =javascript_include_tag "yui/element/element-min.js"
+    =javascript_include_tag "yui/container/container_core-min.js"
+    =javascript_include_tag "yui/menu/menu-min.js"
+    =javascript_include_tag "yui/button/button-min.js"
+    =javascript_include_tag "yui/editor/editor-min.js"
+    =csrf_meta_tag
+  %body{:class => "yui-skin-sam"}
+    .content
+      .page_header
+        .content
+          %a.logo{:href => root_path}
+            %span Karaharapriya
+            %span.tag social carnatic score
+      .page_body
+        .menu= render_navigation
+        .page_content
+          %p.notice= notice
+          %p.alert= alert
+          = yield
+        .clear
+      .page_footer

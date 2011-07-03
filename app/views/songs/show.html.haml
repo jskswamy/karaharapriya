@@ -1,0 +1,19 @@
+.header
+  .bread_crumbs="#{t(:song)} #{@song.name}"
+.body
+  .sidebar
+    .flas_notice
+    .error
+  %dl
+    %dt= t(:name)
+    %dd= @song.name
+    %dt= t(:song_type)
+    %dd= @song.song_type.name
+    %dt= t(:ragam)
+    %dd= @song.ragam.name
+    %dt= t(:talam)
+    %dd= @song.talam.name
+    %dt= t(:composer)
+    %dd= @song.composer.name
+    %dt= t(:content)
+    %dd= @song.content

@@ -1,0 +1,26 @@
+.header
+  .action
+    =link_to t(:new_song), new_song_path
+  .bread_crumbs= t(:song)
+  .clear
+
+.body
+  %table{:cellpadding => "0", :cellspacing => "0"}
+    %thead
+      %tr
+        %th Name
+        %th Composer
+        %th Ragam
+        %th Talam
+        %th
+    %tbody
+      - @songs.each do |song|
+        %tr
+          %td= link_to song.name, song_path(song)
+          %td= song.composer.nil? ? "" : song.composer.name
+          %td= song.ragam.nil? ? "" : song.ragam.name
+          %td= song.talam.nil? ? "" : song.talam.name
+          %td
+            [
+            =link_to :edit, edit_song_path(song)
+            ]
