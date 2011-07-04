@@ -1,0 +1,11 @@
+.header
+  .bread_crumbs="#{t(:composer)} #{@composer.name}"
+.body
+  .sidebar
+    .flash_notice
+    .error
+  %dl
+    %dt= t(:name)
+    %dd= @composer.name
+    %dt= t(:century)
+    %dd= @composer.century

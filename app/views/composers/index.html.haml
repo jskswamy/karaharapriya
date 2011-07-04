@@ -1,0 +1,21 @@
+.header
+  .action
+    = link_to t(:new_composer), new_composer_path
+  .bread_crumbs= t(:composer)
+  .clear
+.body
+  %table{:cellspacing => "0", :cellpadding => "0"}
+    %thead
+      %tr
+        %th Name
+        %th Century
+        %th
+    %tbody
+      -@composers.each do |composer|
+        %tr
+          %td= link_to composer.name, composer_path(composer)
+          %td= composer.century
+          %td
+            [
+            = link_to :edit, edit_composer_path(composer)
+            ]

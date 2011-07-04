@@ -1,0 +1,14 @@
+= form_for composer, :remote => true do |f|
+  .header
+    .bread_crumbs= form_title
+  .body
+    .sidebar
+      .flash_notice{"data-error-info" => "true"}
+      .error{"data-error-display" => "true"}
+    %dl
+      %dt= f.label :name, t(:name)
+      %dd= f.text_field :name
+      %dt= f.label :century, t(:century)
+      %dd= f.text_field :century
+    = submit_tag t(:submit)
+    .clear
