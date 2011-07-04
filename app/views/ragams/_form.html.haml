@@ -1,0 +1,21 @@
+= form_for ragam, :remote => true do |f|
+  - parent_ragam_name = ragam.parent.nil? ? nil : ragam.parent.name
+
+  .header
+    .bread_crumbs= form_title
+
+  .body
+    .sidebar
+      .flash_notice{"data-error-info" => "true"}
+      .error{"data-error-display" => "true"}
+
+    %dl
+      %dt= f.label :name, t(:name)
+      %dd= f.text_field :name
+      %dt= f.label :arohana, t(:arohana)
+      %dd= f.text_field :arohana
+      %dt= f.label :avarohana, t(:avarohana)
+      %dd= f.text_field :avarohana
+    = auto_complete :label => t(:parent), :field_name => "parent", :name => "parent_id", :url => suggest_ragam_path, :value => parent_ragam_name, :form_helper => f
+    = submit_tag t(:submit)
+    .clear

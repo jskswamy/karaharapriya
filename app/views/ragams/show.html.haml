@@ -1,0 +1,18 @@
+- parent_ragam_name = @ragam.parent.nil? ? nil : @ragam.parent.name
+
+.header
+  .bread_crumbs="#{t :ragam} #{@ragam.name}"
+
+.body
+  .sidebar
+    .flash_notice
+    .error
+  %dl
+    %dt= t(:name)
+    %dd= @ragam.name
+    %dt= t(:arohana)
+    %dd= @ragam.arohana
+    %dt= t(:avarohana)
+    %dd= @ragam.avarohana
+    %dt= t(:parent)
+    %dd= parent_ragam_name

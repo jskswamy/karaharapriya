@@ -1,0 +1,24 @@
+.header
+  .action
+    = link_to t(:new_talam), new_talam_path
+  .bread_crumbs= t(:talam)
+  .clear
+
+.body
+  %table{:cellspacing => "0", :cellpadding => "0"}
+    %thead
+      %tr
+        %th Name
+        %th Avartanam
+        %th Laghu Length
+        %th
+    %tbody
+      - @talams.each do |talam|
+        %tr>
+          %td= link_to talam.name, talam_path(talam)
+          %td= talam.avartanam
+          %td= talam.laghu_length
+          %td>
+            [
+            = link_to :edit, edit_talam_path(talam)
+            ]

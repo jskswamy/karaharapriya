@@ -1,0 +1,15 @@
+.header
+  .bread_crumbs="#{t(:talam)} #{@talam.name}"
+
+.body
+  .sidebar
+    .flash_notice
+    .error
+
+  %dl
+    %dt= t(:name)
+    %dd= @talam.name
+    %dt= t(:avartanam)
+    %dd= @talam.avartanam
+    %dt= t(:laghu_length)
+    %dd= @talam.laghu_length

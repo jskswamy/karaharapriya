@@ -1,0 +1,24 @@
+.header
+  .action
+    = link_to t(:new_ragam), new_ragam_path
+  .bread_crumbs
+  .clear
+
+.body
+  %table{:cellspacing => "0", :cellpadding => "0"}
+    %thead
+      %tr
+        %th Name
+        %th Arohana
+        %th Avarohana
+        %th Parent
+        %th
+    %tbody
+      - @ragams.each do |ragam|
+        %tr
+          %td= link_to ragam.name, ragam_path(ragam)
+          %td= ragam.arohana
+          %td= ragam.avarohana
+          %td= ragam.parent.nil? ? "" : ragam.parent.name
+          %td
+            = link_to :edit, edit_ragam_path(ragam)

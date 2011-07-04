@@ -1,0 +1,18 @@
+= form_for talam, :remote => true do |f|
+  .header
+    .bread_crumbs= form_title
+
+  .body
+    .sidebar
+      .flash_notice{"data-error-info" => "true"}
+      .error{"data-error-display" => "true"}
+    %dl
+      %dt= f.label :name, t(:name)
+      %dd= f.text_field :name
+      %dt= f.label :avartanam, t(:avartanam)
+      %dd= f.text_field :avartanam
+      %dt= f.label :laghu_length, t(:laghu_length)
+      %dd= f.text_field :laghu_length
+
+    =submit_tag t(:submit)
+    .clear
