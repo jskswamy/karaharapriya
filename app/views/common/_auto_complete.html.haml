@@ -1,0 +1,8 @@
+- value ||= nil
+%dl{"data-auto-complete" => "true"}
+  %dt
+    = form_helper.label field_name.downcase, label.capitalize
+  %dd{"data-auto-complete-url" => url}
+    = form_helper.hidden_field(name, "data-auto-complete-hidden" => "true")
+    = form_helper.text_field "#{field_name.downcase}", {"data-auto-complete-input" => "true", :value => value}
+    .auto_completion{"data-auto-complete-completion" => "true", :style => "display: none"}

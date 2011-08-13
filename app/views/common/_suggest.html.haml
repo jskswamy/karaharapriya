@@ -1,0 +1,4 @@
+%ul{:class => "auto-suggest #{name}"}
+  - suggestions.each do |suggestion|
+    <li id=#{suggestion.id}>
+    %a{:href => "javascript:void(0)"}= suggestion.name
