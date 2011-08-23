@@ -163,18 +163,6 @@ var RemoteForm = {
   }
 };
 
-function transLiteration() {
-  var options = {
-    sourceLanguage: 'en',
-    destinationLanguage: ['ta'],
-    shortcutKey: 'ctrl+g',
-    transliterationEnabled: true
-  };
-  var inputElements = $$("input","textarea");
-  var control = new google.elements.transliteration.TransliterationControl(options);
-  control.makeTransliteratable(inputElements);
-}
-
 //Unobtrusive
 document.observe("dom:loaded", function() {
   AutoComplete.bindAutoComplete();
