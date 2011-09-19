@@ -74,8 +74,9 @@ describe Mongoid::Globalize do
       globalize = DummyGlobalizeModuleIncludedClass.create(:name => "tom", :age => 45, :std => "fourth", :school => "SMMS")
       globalize.name = "jerry"
       globalize.name_was.should == "tom"
-      globalize.changes.should == {"name"=>[{"en"=>"tom"}, {"en"=>"jerry"}]}
+      globalize.changes.should == {"name"=>["tom", {"en"=>"jerry"}]}
       globalize.save
+      globalize.name.should == "jerry"
       globalize.changes.should == {}
       globalize.name = "james bond"
       globalize.name_was.should == "jerry"

@@ -21,6 +21,7 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'metric_fu'
   gem 'mongoid-rspec'
+  gem 'thin'
 end
 
 group :test, :cucumber do
