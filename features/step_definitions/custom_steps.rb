@@ -13,6 +13,7 @@ Then /^"([^"]*)" field should have error "([^"]*)"$/ do |field_name, error|
   field_label.should_not be_nil
   field.click
   error_div = find(:css, "div.error")
+  error_div.should_not be_nil
   error_div.text.should == error
 end
 
