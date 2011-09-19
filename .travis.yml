@@ -1,3 +1,1 @@
-require 'mongo'
-Mongo::Connection.new('localhost').db('karaharapriya')
 rvm: 1.9.2
