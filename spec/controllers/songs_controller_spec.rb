@@ -75,7 +75,7 @@ describe SongsController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.headers["X-Json"]
+      errors = response.headers["X-JSON"]
       errors.should_not be_blank
       errors.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
@@ -155,7 +155,7 @@ describe SongsController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.headers["X-Json"]
+      errors = response.headers["X-JSON"]
       errors.should_not be_blank
       errors.should == {:model_name => "song", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
       song = Song.first(:conditions => {:id => song.id})

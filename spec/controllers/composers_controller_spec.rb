@@ -54,7 +54,7 @@ describe ComposersController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.header["X-Json"]
+      errors = response.header["X-JSON"]
       errors.should_not be_blank
       errors.should == {:model_name => "composer", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
@@ -102,7 +102,7 @@ describe ComposersController do
 
       response.should_not be_success
       response.response_code.should == 400
-      errors = response.header["X-Json"]
+      errors = response.header["X-JSON"]
       errors.should_not be_blank
       errors.should == {:model_name => "composer", :errors => [{:field => :name, :errors => ["can't be blank"]}]}.to_json
     end
