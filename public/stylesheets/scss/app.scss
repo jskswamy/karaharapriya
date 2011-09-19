@@ -1,7 +1,7 @@
 @import "common";
 
 @mixin base_font {
-  font-family: verdana, sans-serif;
+  font-family: helvetica,arial,freesans,clean,sans-serif;
 }
 
 @mixin base_font_size {
@@ -65,6 +65,39 @@ body, ul {
           padding: 2px;
           text-transform: uppercase;
           text-align: right;
+        }
+      }
+
+      .user_info {
+        float: right;
+        margin-right: 10px;
+        padding: 5px;
+        @include rounded_corners_bottom(10px);
+        @include shadow(0px, 2px, 3px);
+
+        ul {
+          list-style-type: none;
+          padding: 3px;
+
+          li {
+            display: inline-block;
+            font-weight: bold;
+            padding: 5px 0px;
+
+            a.selected {
+              color: #000;
+            }
+          }
+
+          li:after {
+            content: ' |';
+            padding: 0px 5px;
+            color: gray;
+          }
+
+          li.last:after {
+            content: '';
+          }
         }
       }
     }

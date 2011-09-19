@@ -49,6 +49,9 @@ module NavigationHelpers
     when /^song (.*)'s show page$/i
       song_path(Song.find_by_translated_field("name", $1))
 
+    when /the manage accounts page/
+      edit_user_registration_path
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

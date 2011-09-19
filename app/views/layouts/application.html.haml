@@ -19,6 +19,9 @@
           %a.logo{:href => root_path}
             %span Karaharapriya
             %span.tag social carnatic score
+          =render "common/user_info", :user_menu_items => @user_menu_items
+          .clear
+
       .page_body
         .menu= render_navigation
         .page_content
